@@ -1,2 +1,5 @@
 [manager]
-ratio = [4, 9, 9]
+ratio = [5, 7, 12]
+sort_by = "size"
+linemode = "size"
+
