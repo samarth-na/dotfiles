@@ -22,6 +22,7 @@ export MANPATH=/usr/local/man:$MANPATH
 export FZF_ALT_C_OPTS="--preview 'exa -lah --icons {}'"
 export ARCHFLAGS="-arch x86_64"
 export LANG="en_US.UTF-8"
+export FUNCNEST=100
 
 alias run='run.py'
 
