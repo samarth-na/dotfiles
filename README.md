@@ -32,7 +32,7 @@ sudo dnf update
 
 ---
 
-### neovim installation
+### neovim
 
 -   dependencies -
 
@@ -52,7 +52,7 @@ sudo dnf neovim
 
 ```bash
 sudo dnf install zsh
-# check the installation
+# check the installation and source
 zsh --version
 which zsh
 ```
@@ -85,19 +85,17 @@ sudo dnf install  starship btop lazygit lazydocker eza fzf bat htop vlc zoxide m
 
 ---
 
-# some package managers
+# important package managers
 
 ## javascript package manager
 
----
-
-### bun install
+### bun
 
 ```bash
-curl -fsSL https://bun.sh/installation | bash # for macOS, Linux, and WSL
+curl -fsSL https://bun.sh/install | bash# for macOS, Linux, and WSL
 ```
 
-### npm/node install
+### npm & node
 
 ```bash
 sudo dnf install  nodejs npm
@@ -106,7 +104,7 @@ sudo dnf install  nodejs npm
 ### pnpm install
 
 ```bash
-npm installation -g pnpm
+npm instal -g pnpm
 ```
 
 ### nvm install
