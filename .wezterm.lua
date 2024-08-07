@@ -6,7 +6,7 @@ local config = {
 	window_decorations = "NONE",
 	hide_tab_bar_if_only_one_tab = true,
 	font_size = 16,
-	window_padding = { left = 0, right = 0, top = 2, bottom = 0 },
+	window_padding = { left = 5, right = 0, top = 3, bottom = 0 },
 	force_reverse_video_cursor = true,
 	foreground_text_hsb = {
 		hue = 1.0,

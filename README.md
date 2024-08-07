@@ -1,74 +1,164 @@
+---
+noteID: 3dec6a81-057f-466d-b65f-f14a9f808438
+---
+
+first update all packages
+
+```bash
+sudo dnf update
+```
+
 # main apps
 
--   nvim
--   wezterm
--   tmux
--   zsh
+-   neovim - terminal code editor
+-   wezterm - terminal emulator
+-   tmux - terminal multiplexer
+-   zsh - shell
 
-# other apps
+## other apps
 
--   yazi
--   btop
--   lazygit
--   lazydocker
--   fzf
+-   yazi powerful file manager
+-   btop - system monitor
+-   lazygit - git client
+-   lazydocker - docker client
+-   fzf - fuzzy finder
 
-# tools
+## tools
 
--   starship
--   htop
--   bun
--   zoxide
--   eza
--   bat
--   procs
--   gdu
--   mpv
--   vlc
+-   starship - status line prompt
+-   htop - system monitor
+-   zoxide - better cd alternative
+-   eza - better ls alternative
+-   bat - better cat alternative
+-   procs - better ps alternative
+-   mpv - terminal audio player
+-   vlc - video player
 
-## for nvim
+---
 
-```bash
-sudo dnf install neovim cmake gcc-c++ libtool libuv libvterm msgpack-devel unibilium gettext-devel lua-devel
-```
+### neovim installation
 
-## other available on dnf
+-   dependencies -
 
 ```bash
-sudo dnf install  btop lazygit lazydocker eza fzf bat htop tmux vlc zoxide
+sudo dnf install  cmake gcc-c++ libtool libuv libvterm msgpack-devel unibilium gettext-devel lua-devel
 ```
 
-## for zsh and ohmyzsh
+-   install nvim -
+
+```bash
+sudo dnf neovim
+```
+
+### install zsh and set it as default shell
+
+-   installation
 
 ```bash
 sudo dnf install zsh
+```
+
+-   install oh-my-zsh package manager for zsh
+
+```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+-   set zsh as default shell
+
+```bash
 chsh -s $(which zsh)
 ```
 
-some package managers
+### install tmux
 
 ```bash
-curl -fsSL https://bun.sh/install | bash
+sudo dnf install tmux
+```
+
+---
+
+basic setup is complete time to install other apps and tools
+
+### other available apps on dnf
+
+```bash
+sudo dnf install starship btop lazygit lazydocker eza fzf bat htop tmux vlc zoxide mpv
+```
+
+---
+
+# some package managers
+
+## javascript package manager
+
+---
+
+### bun install
+
+```bash
+curl -fsSL https://bun.sh/installation | bash # for macOS, Linux, and WSL
+```
+
+### npm/node install
+
+```bash
+sudo dnf install  nodejs npm
+```
+
+### pnpm install
+
+```bash
+npm installation -g pnpm
+```
+
+### nvm install
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+```
+
+---
+
+## rust
+
+-   rustup/cargo installation
+
+```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-## for yazi
-
-### the dependencies
+## linuxbrew installation
 
 ```bash
-sudo dnf install ffmpegthumbnailer p7zip p7zip-plugins jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick xclip xsel wl-clipboard
+test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
 ```
 
-### yazi install from cargo
-
 ```bash
-cargo install --locked --git https://github.com/sxyazi/yazi.git yazi-fm yazi-cli
+# test the installation
+brew install hello
 ```
 
-## for starship
+## go install
 
 ```bash
-dnf install starship
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.6.linux-amd64.tar.gz
+```
+
+---
+
+## yazi installation
+
+the dependencies
+
+```bash
+sudo dnf install  ffmpegthumbnailer p7zip p7zip-plugins jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick xclip xsel wl-clipboard
+```
+
+### yazi installation from cargo
+
+```bash
+cargo installation --locked --git https://github.com/sxyazi/yazi.git yazi-fm yazi-cli
 ```
