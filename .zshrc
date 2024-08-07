@@ -173,6 +173,8 @@ export PATH="/path/to/google-cloud-sdk/bin:$PATH"
  eval "$(starship init zsh)"
  eval "$(zoxide init zsh)"
 
+alias cd='z'
+
 # bun completions
 
 export NVM_DIR="$HOME/.nvm"

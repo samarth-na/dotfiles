@@ -4,22 +4,21 @@ first update all packages
 sudo dnf update
 ```
 
-# main apps
+# main applications
 
--   neovim - terminal code editor
+-   neovim - terminal/modal/fast code editor
 -   wezterm - terminal emulator
 -   tmux - terminal multiplexer
 -   zsh - shell
 
-## other apps
+### other apps
 
--   yazi powerful file manager
+-   yazi - powerful file manager
 -   btop - system monitor
 -   lazygit - git client
--   lazydocker - docker client
 -   fzf - fuzzy finder
 
-## tools
+### tools
 
 -   starship - status line prompt
 -   htop - system monitor
@@ -80,7 +79,7 @@ basic setup is complete time to install other apps and tools
 ### other available apps on dnf
 
 ```bash
-sudo dnf install  starship btop lazygit lazydocker eza fzf bat htop vlc zoxide mpv
+sudo dnf install  starship btop lazygit eza fzf bat htop vlc zoxide mpv
 ```
 
 ---
@@ -92,7 +91,7 @@ sudo dnf install  starship btop lazygit lazydocker eza fzf bat htop vlc zoxide m
 ### bun
 
 ```bash
-curl -fsSL https://bun.sh/install | bash# for macOS, Linux, and WSL
+curl -fsSL https://bun.sh/install | bash # for macOS, Linux, and WSL
 ```
 
 ### npm & node
@@ -104,7 +103,7 @@ sudo dnf install  nodejs npm
 ### pnpm install
 
 ```bash
-npm instal -g pnpm
+sudo npm i -g pnpm
 ```
 
 ### nvm install
@@ -128,9 +127,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 -   install build tools
 
 ```bash
-
 sudo yum install procps-ng
-curl file git
 ```
 
 -   install linuxbrew
@@ -160,7 +157,7 @@ rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.6.linux-amd64.tar.gz
 -   the dependencies
 
 ```bash
-sudo dnf install  ffmpegthumbnailer p7zip p7zip-plugins jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick xclip xsel wl-clipboard
+sudo dnf install ffmpegthumbnailer p7zip p7zip-plugins jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick xclip xsel wl-clipboard
 ```
 
 -   yazi installation from cargo
