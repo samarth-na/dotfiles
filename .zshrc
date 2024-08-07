@@ -152,9 +152,9 @@ function web_search() {
 # Compilation flags
 
 
-source ~/.zsh/aliases/alias.sh
-source ~/.zsh/aliases/gitlias.sh
-source ~/.zsh/aliases/commands.sh
+source ~/.zsh/others/alias.sh
+source ~/.zsh/others/gitlias.sh
+source ~/.zsh/others/commands.sh
 source ~/godpin.sh
 
 # The next line updates PATH for the Google Cloud SDK.
