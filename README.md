@@ -1,7 +1,3 @@
----
-noteID: 3dec6a81-057f-466d-b65f-f14a9f808438
----
-
 first update all packages
 
 ```bash
@@ -56,9 +52,12 @@ sudo dnf neovim
 
 ```bash
 sudo dnf install zsh
+# check the installation
+zsh --version
+which zsh
 ```
 
--   install oh-my-zsh package manager for zsh
+-   install oh-my-zsh package manager
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -76,14 +75,12 @@ chsh -s $(which zsh)
 sudo dnf install tmux
 ```
 
----
-
 basic setup is complete time to install other apps and tools
 
 ### other available apps on dnf
 
 ```bash
-sudo dnf install starship btop lazygit lazydocker eza fzf bat htop tmux vlc zoxide mpv
+sudo dnf install  starship btop lazygit lazydocker eza fzf bat htop vlc zoxide mpv
 ```
 
 ---
@@ -128,11 +125,22 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-## linuxbrew installation
+## linuxbrew
+
+-   install build tools
+
+```bash
+
+sudo yum install procps-ng
+curl file git
+```
+
+-   install linuxbrew
 
 ```bash
 test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
 test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
 ```
 
@@ -141,7 +149,7 @@ echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
 brew install hello
 ```
 
-## go install
+## golang
 
 ```bash
 rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.6.linux-amd64.tar.gz
@@ -149,15 +157,15 @@ rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.6.linux-amd64.tar.gz
 
 ---
 
-## yazi installation
+## yazi
 
-the dependencies
+-   the dependencies
 
 ```bash
 sudo dnf install  ffmpegthumbnailer p7zip p7zip-plugins jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick xclip xsel wl-clipboard
 ```
 
-### yazi installation from cargo
+-   yazi installation from cargo
 
 ```bash
 cargo installation --locked --git https://github.com/sxyazi/yazi.git yazi-fm yazi-cli
