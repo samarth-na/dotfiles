@@ -128,7 +128,7 @@ format = '[[($all_status$ahead_behind )](fg:base bg:green)]($style)'
 symbol = " "
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
-detect_files = ['package.json', '.node-version']
+detect_files = [ '.node-version']
 detect_folders = []
 detect_extensions = ['js', 'mjs', 'cjs', 'ts', 'mts', 'cts']
 
