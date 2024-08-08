@@ -1,33 +1,52 @@
-first update all packages
+> repository for all my dotfiles, End all be all for all my linux system and app configurations
+
+> first update all packages
 
 ```bash
 sudo dnf update
 ```
 
-# main applications
+## main applications
 
--   neovim - terminal/modal/fast code editor
--   wezterm - terminal emulator
--   tmux - terminal multiplexer
--   zsh - shell
+-   neovim - fast/cli/modal code editor (dnf)
+-   wezterm - beautiful terminal emulator (flatpak)
+-   tmux - powerful/peristing terminal multiplexer (dnd)
+-   zsh - modern shell with plugin support (dnf)
 
 ### other apps
 
--   yazi - powerful file manager
--   btop - system monitor
--   lazygit - git client
--   fzf - fuzzy finder
+-   yazi - amazing file manager (linuxbrew/cargo)
+-   btop - beautiful system monitor (dnf)
+-   lazygit - cli git client (dnf)
+-   fzf - fuzzy finder utility (dnf)
 
 ### tools
 
--   starship - status line prompt
--   htop - system monitor
--   zoxide - better cd alternative
--   eza - better ls alternative
--   bat - better cat alternative
--   procs - better ps alternative
--   mpv - terminal audio player
--   vlc - video player
+-   zoxide - better cd alternative (dnf)
+-   starship - status line prompt (dnf)
+-   eza - better ls alternative (dnf)
+-   vlc - video player (flatpack)
+-   mpv - terminal audio player (dnf)
+-   htop - system monitor (dnf)
+-   procs - better ps alternative (dnf)
+-   gdu - disk usage analyzer (dnf)
+-   bat - better cat alternative (dnf)
+-   ripgrep - better grep alternative (dnf)
+-   fd - better find alternative (dnf)
+-   hyperfine - benchmarking tool (dnf)
+-   duf - better df alternative (dnf)
+-   dust - better du alternative (linuxbrew)
+-   tabiew - viewer for csv and tsv files (linuxbrew)
+-   atuin - magical shell history search (linuxbrew)
+-   dua - disk usage analyzer (linuxbrew)
+-   topgrade - upgrade all packages (linuxbrew)
+
+### fonts
+
+##### jetbrains mono nerd font
+
+-   semi bold for interface and window titles
+-   regular for documents and code
 
 ---
 
@@ -39,7 +58,7 @@ sudo dnf update
 sudo dnf install  cmake gcc-c++ libtool libuv libvterm msgpack-devel unibilium gettext-devel lua-devel
 ```
 
--   install nvim -
+-   install the package -
 
 ```bash
 sudo dnf neovim
@@ -56,7 +75,7 @@ zsh --version
 which zsh
 ```
 
--   install oh-my-zsh package manager
+-   install oh-my-zsh package manager of my choice
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -79,14 +98,57 @@ basic setup is complete time to install other apps and tools
 ### other available apps on dnf
 
 ```bash
-sudo dnf install  starship btop lazygit eza fzf bat htop vlc zoxide mpv
+sudo dnf install  btop lazygit fzf zoxide eza mpv htop procs gdu bat fd hyperfine
 ```
 
 ---
 
-# important package managers
+## linuxbrew
 
-## javascript package manager
+-   install build tools
+
+```bash
+sudo dnf groupinstall "Development Tools"
+sudo dnf install curl file git
+```
+
+-   install linuxbrew from source
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+-   test linuxbrew installation
+
+```bash
+test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+brew --version
+# test the installation
+brew install hello
+```
+
+Ensure Homebrew is up-to-date:
+
+```bash
+brew update
+brew upgrade
+```
+
+> ##### linuxbrew is an fork of Homebrew, the package manager for macOS. this lets us install all apps we macos have but dnf doesnt
+
+packages available on linuxbrew
+
+```bash
+brew install tabiew duf dua atuin topgrade
+```
+
+---
+
+# important package managers/languages
+
+## JS/TS package managers
 
 ### bun
 
@@ -122,32 +184,22 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-## linuxbrew
-
--   install build tools
-
-```bash
-sudo yum install procps-ng
-```
-
--   install linuxbrew
-
-```bash
-test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
-```
-
-```bash
-# test the installation
-brew install hello
-```
-
 ## golang
 
 ```bash
 rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.6.linux-amd64.tar.gz
+```
+
+## c++
+
+```bash
+sudo dnf install g++ gcc-c++
+```
+
+## python3/pip
+
+```bash
+sudo dnf install python3-pip
 ```
 
 ---
@@ -160,8 +212,14 @@ rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.6.linux-amd64.tar.gz
 sudo dnf install ffmpegthumbnailer p7zip p7zip-plugins jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick xclip xsel wl-clipboard
 ```
 
--   yazi installation from cargo
+-   yazi installation from cargo _(you need to have rust installed)_
 
 ```bash
-cargo installation --locked --git https://github.com/sxyazi/yazi.git yazi-fm yazi-cli
+cargo install --locked --git https://github.com/sxyazi/yazi.git yazi-fm yazi-cli
+```
+
+-   yazi installation with linuxbrew
+
+```bash
+brew install yazi
 ```
