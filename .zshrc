@@ -174,7 +174,10 @@ export PATH="/path/to/google-cloud-sdk/bin:$PATH"
  eval "$(starship init zsh)"
  eval "$(zoxide init zsh)"
 
-alias cd='z'
+
+alias cd='z' #WARN: DISABLE THIS IF YOURE NOT USING ZOXIDE 
+
+
 
 # bun completions
 
