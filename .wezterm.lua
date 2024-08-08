@@ -17,7 +17,7 @@ local config = {
 }
 
 config.colors = { foreground = "#abb2bf" }
-config.font = wezterm.font("JetBrains Mono", { weight = "Regular", italic = false })
+-- config.font = wezterm.font("JetBrains Mono", { weight = "Regular", italic = false })
 
 config.window_background_image = '~/marek-piwnicki-wgsu3WzFZ5c-unsplash.jpg'
 
