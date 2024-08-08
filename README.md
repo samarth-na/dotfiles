@@ -15,31 +15,31 @@ sudo dnf update
 
 ### other apps
 
--   yazi - amazing file manager (linuxbrew/cargo)
--   btop - beautiful system monitor (dnf)
--   lazygit - cli git client (dnf)
--   fzf - fuzzy finder utility (dnf)
+-   **yazi** - amazing file manager (linuxbrew/cargo)
+-   **btop** - beautiful system monitor (dnf)
+-   **lazygit** - cli git client (dnf)
+-   **fzf** - fuzzy finder utility (dnf)
 
 ### tools
 
--   zoxide - better cd alternative (dnf)
--   starship - status line prompt (dnf)
--   eza - better ls alternative (dnf)
--   vlc - video player (flatpack)
--   mpv - terminal audio player (dnf)
--   htop - system monitor (dnf)
--   procs - better ps alternative (dnf)
--   gdu - disk usage analyzer (dnf)
--   bat - better cat alternative (dnf)
--   ripgrep - better grep alternative (dnf)
--   fd - better find alternative (dnf)
--   hyperfine - benchmarking tool (dnf)
--   duf - better df alternative (dnf)
--   dust - better du alternative (linuxbrew)
--   tabiew - viewer for csv and tsv files (linuxbrew)
--   atuin - magical shell history search (linuxbrew)
--   dua - disk usage analyzer (linuxbrew)
--   topgrade - upgrade all packages (linuxbrew)
+-   **zoxide** - better cd alternative (dnf)
+-   **starship** - status line prompt (dnf)
+-   **eza** - better ls alternative (dnf)
+-   **vlc** - video player (flatpack)
+-   **mpv** - terminal audio player (dnf)
+-   **htop** - system monitor (dnf)
+-   **procs** - better ps alternative (dnf)
+-   **gdu** - disk usage analyzer (dnf)
+-   **bat** - better cat alternative (dnf)
+-   **ripgrep** - better grep alternative (dnf)
+-   **fd** - better find alternative (dnf)
+-   **hyperfine** - benchmarking tool (dnf)
+-   **duf** - better df alternative (dnf)
+-   **dust** - better du alternative (linuxbrew)
+-   **tabiew** - viewer for csv and tsv files (linuxbrew)
+-   **atuin** - magical shell history search (linuxbrew)
+-   **dua** - disk usage analyzer (linuxbrew)
+-   **topgrade** - upgrade all packages (linuxbrew)
 
 ### fonts
 
