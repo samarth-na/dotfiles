@@ -1,17 +1,17 @@
-> repository for all my dotfiles, End all be all for all my linux system and app configurations
+#### repository for all my dotfiles, End all be all for all my linux system and app configurations
 
-> first update all packages
-
-```bash
-sudo dnf update
-```
+> ### first update all packages
+>
+> ```bash
+> sudo dnf update
+> ```
 
 ## main applications
 
--   neovim - fast/cli/modal code editor (dnf)
--   wezterm - beautiful terminal emulator (flatpak)
--   tmux - powerful/peristing terminal multiplexer (dnd)
--   zsh - modern shell with plugin support (dnf)
+-   **neovim** - fast/cli/modal code editor (dnf)
+-   **wezterm** - beautiful terminal emulator (flatpak)
+-   **tmux** - powerful/peristing terminal multiplexer (dnd)
+-   **zsh** - modern shell with plugin support (dnf)
 
 ### other apps
 

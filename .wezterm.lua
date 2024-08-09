@@ -2,10 +2,10 @@ local wezterm = require("wezterm")
 
 local config = {
 	color_scheme = "One Dark (Gogh)",
-	window_background_opacity = .90,
+	window_background_opacity = 0.90,
 	window_decorations = "NONE",
 	hide_tab_bar_if_only_one_tab = true,
-	font_size = 16,
+	font_size = 17.2,
 	window_padding = { left = 5, right = 0, top = 3, bottom = 0 },
 	force_reverse_video_cursor = true,
 	foreground_text_hsb = {
@@ -19,7 +19,8 @@ local config = {
 config.colors = { foreground = "#abb2bf" }
 -- config.font = wezterm.font("JetBrains Mono", { weight = "Regular", italic = false })
 
-config.window_background_image = '~/marek-piwnicki-wgsu3WzFZ5c-unsplash.jpg'
+-- things below dont work
+-- config.window_background_image = '~/marek-piwnicki-wgsu3WzFZ5c-unsplash.jpg'
 
 config.window_background_image_hsb = {
 	-- Darken the background image by reducing it to 1/3rd
