@@ -40,6 +40,7 @@
 -   **atuin** - magical shell history search (linuxbrew)
 -   **dua** - disk usage analyzer (linuxbrew)
 -   **topgrade** - upgrade all packages (linuxbrew)
+-   **age** - file encryption tool (dnf)
 
 ### fonts
 
