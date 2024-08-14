@@ -15,6 +15,7 @@ function tmuxswitch() {
 };
 zle -N tmuxswitch
 bindkey '^[d' tmuxswitch
+
 function paneswitch() {
     changeTmuxPane
 };
@@ -22,9 +23,3 @@ zle -N paneswitch
 bindkey '^[t' paneswitch
 
 
-pop()
-{
-    tmux popup
-};
-zle -N pop
-bindkey '^\' pop

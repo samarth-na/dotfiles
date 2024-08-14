@@ -17,11 +17,12 @@
 
 -   **yazi** - amazing file manager (linuxbrew/cargo)
 -   **btop** - beautiful system monitor (dnf)
--   **lazygit** - cli git client (dnf)
--   **fzf** - fuzzy finder utility (dnf)
+-   **lazygit** - tui git client (dnf)
+-   **atuin** - shell history manager/search (linuxbrew)
 
 ### tools
 
+-   **fzf** - fuzzy finder utility (dnf)
 -   **zoxide** - better cd alternative (dnf)
 -   **starship** - status line prompt (dnf)
 -   **eza** - better ls alternative (dnf)
@@ -37,7 +38,6 @@
 -   **duf** - better df alternative (dnf)
 -   **dust** - better du alternative (linuxbrew)
 -   **tabiew** - viewer for csv and tsv files (linuxbrew)
--   **atuin** - magical shell history search (linuxbrew)
 -   **dua** - disk usage analyzer (linuxbrew)
 -   **topgrade** - upgrade all packages (linuxbrew)
 -   **age** - file encryption tool (dnf)
