@@ -174,9 +174,9 @@ export PATH="/path/to/google-cloud-sdk/bin:$PATH"
  eval "$(starship init zsh)"
  eval "$(zoxide init zsh)"
 
- export ATUIN_NOBIND="true"
- eval "$(atuin init zsh)"
- bindkey '^k' atuin-search
+ # export ATUIN_NOBIND="true"
+ # eval "$(atuin init zsh)"
+ # bindkey '^k' atuin-search
 
 
 alias cd='z' #WARN: DISABLE THIS IF YOURE NOT USING ZOXIDE 
@@ -189,6 +189,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-. "$HOME/.atuin/bin/env"
+# . "$HOME/.atuin/bin/env"
 
-eval "$(atuin init zsh)"
+# eval "$(atuin init zsh)"

@@ -70,13 +70,11 @@ alias obs="cd ~/obsidian/ && nvim "
 
 
 alias editfileinneovim='fd --type f --max-depth=1 | fzf  --reverse | xargs -o nvim'
-alias openDirInNewTmuxWindow='fd --type=d |fzf-tmux -p  | xargs -I {} tmux new-window -c {}'
-alias Enewtmux='fd --type f --max-depth=1 |fzf-tmux -p | xargs -I {} tmux new-window nvim {}'
 
 
 alias play='find ~/Music -type f \( -name "*.mp3" -or -name "*.m4a" -or -name "*.webm" \)| fzf-tmux --reverse -p |xargs -I {} vlc "{}"
 '
-alias changeTmuxPane="
+alias ChangeTmuxPane="
  tmux list-panes -a -F '#{session_name}:#{window_index}.#{pane_index}.#{window_name}-#{pane_current_path}' | fzf-tmux -p | cut -d "." -f 1 |xargs tmux switch-client -t
  "
 alias ct='

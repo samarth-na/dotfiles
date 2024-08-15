@@ -18,12 +18,12 @@
 -   **yazi** - amazing file manager (linuxbrew/cargo)
 -   **btop** - beautiful system monitor (dnf)
 -   **lazygit** - tui git client (dnf)
--   **atuin** - shell history manager/search (linuxbrew)
+-   **zoxide** - better cd alternative (dnf)
 
 ### tools
 
 -   **fzf** - fuzzy finder utility (dnf)
--   **zoxide** - better cd alternative (dnf)
+-   **atuin** - shell history manager/search (linuxbrew)
 -   **starship** - status line prompt (dnf)
 -   **eza** - better ls alternative (dnf)
 -   **vlc** - video player (flatpack)

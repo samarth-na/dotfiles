@@ -1,7 +1,7 @@
 ## where to store your database, default is your system data directory
 ## linux/mac: ~/.local/share/atuin/history.db
 ## windows: %USERPROFILE%/.local/share/atuin/history.db
-db_path = "~/.history.db"
+# db_path = "~/.history.db"
 
 ## where to store your encryption key, default is your system data directory
 ## linux/mac: ~/.local/share/atuin/key
@@ -60,14 +60,14 @@ db_path = "~/.history.db"
 
 ## which style to use
 ## possible values: auto, full, compact
-# style = "auto"
+style = "auto"
 
 ## the maximum number of lines the interface should take up
 ## set it to 0 to always go full screen
 # inline_height = 0
 
 ## Invert the UI - put the search bar at the top , Default to `false`
-# invert = false
+invert = true
 
 ## enable or disable showing a preview of the selected command
 ## useful when the command is longer than the terminal width and is cut off
@@ -98,10 +98,18 @@ db_path = "~/.history.db"
 ## with ^ or end with $, they'll match anywhere in the command.
 ## For details on the supported regular expression syntax, see
 ## https://docs.rs/regex/latest/regex/#syntax
-# history_filter = [
-#   "^secret-cmd",
-#   "^innocuous-cmd .*--secret=.+",
-# ]
+ history_filter = [
+   "^l$",
+   "^L$",
+   "^la$",
+   "^ls$",
+   "^c$",
+   "^cd$",
+   "^e$",
+   "^zi$",
+   "^b$",
+   "^innocuous-cmd .*--secret=.+",
+ ]
 
 ## prevent commands run with cwd matching any of these regexes from being written
 ## to history. Note that these regular expressions are unanchored, i.e. if they don't
@@ -192,17 +200,21 @@ ignored_commands = [
   "cd",
   "ls",
   "e",
+  "nvim",
   "b",
   "fm",
   "y",
   "l",
-  "L"
+  "L",
+  "eza",
+  "clear",
+  "z"
 
 ]
 
 [keys]
 # Defaults to true. If disabled, using the up/down key won't exit the TUI when scrolled past the first/last entry.
-scroll_exits = false
+scroll_exits = true 
 
 [sync]
 # Enable sync v2 by default

@@ -1,25 +1,14 @@
-function my_command() {
-    Enewtmux
-}
-zle -N my_command
-bindkey '^[E' my_command
 
-function OpenFileInNvim() {
-    editfileinneovim
-}
-zle -N OpenFileInNvim
-bindkey '^[e' OpenFileInNvim
-
-function tmuxswitch() {
-    openDirInNewTmuxWindow
+function ChangeTmuxPane() {
+    ChangeTmuxPane
 };
-zle -N tmuxswitch
-bindkey '^[d' tmuxswitch
+zle -N ChangeTmuxPane 
+bindkey '^[t' ChangeTmuxPane
 
-function paneswitch() {
-    changeTmuxPane
+
+
+function zoxide-cmd() {
+   zi 
 };
-zle -N paneswitch 
-bindkey '^[t' paneswitch
-
-
+zle -N zoxide-cmd 
+bindkey '^[d' zoxide-cmd 
