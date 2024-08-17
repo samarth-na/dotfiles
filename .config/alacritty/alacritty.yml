@@ -8,7 +8,7 @@ window:
    swap_interval: 2
     # Enable VSync
     vsync: false 
-   opacity: .95
+   opacity: .99
 font:
   size: 14
   normal:
