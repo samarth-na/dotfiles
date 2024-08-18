@@ -5,7 +5,7 @@ local config = {
 	window_background_opacity = 0.99,
 	window_decorations = "NONE",
 	hide_tab_bar_if_only_one_tab = true,
-	font_size = 17.2,
+	font_size = 17,
 	window_padding = { left = 0, right = 0, top = 2, bottom = 0 },
 	force_reverse_video_cursor = true,
 	foreground_text_hsb = {

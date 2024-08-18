@@ -1,7 +1,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.zsh:$PATH
 
-setxkbmap -layout us -option ctrl:nocaps
+gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 
 export VISUAL=nvim
 export EDITOR=nvim
@@ -174,9 +174,9 @@ export PATH="/path/to/google-cloud-sdk/bin:$PATH"
  eval "$(starship init zsh)"
  eval "$(zoxide init zsh)"
 
- # export ATUIN_NOBIND="true"
- # eval "$(atuin init zsh)"
- # bindkey '^k' atuin-search
+ export ATUIN_NOBIND="true"
+ eval "$(atuin init zsh)"
+ bindkey '^k' atuin-search
 
 
 alias cd='z' #WARN: DISABLE THIS IF YOURE NOT USING ZOXIDE 
