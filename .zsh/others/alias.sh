@@ -1,6 +1,11 @@
-#-----------------------commands---------------------------
+#-----------------------utils---------------------------
 alias info='info --vi-key'
+alias rpath='realpath'
 
+
+alias c='clear'
+alias cl='clear'
+alias cls='clear'
 #--------------------nvim----------------------------------
 
 alias v='nvim'
@@ -11,11 +16,7 @@ alias kn='killall nvim '
 
 
 alias so='source ~/.zshrc'
-#-----------------------------clear--------------------------
 
-alias c='clear'
-alias cl='clear'
-alias cls='clear'
 
 #--------------------------apps------------------------------
 alias fm='yazi'
@@ -24,6 +25,7 @@ alias b='btop'
 
 #------------------------dnf---------------------------------
 alias sdi='sudo dnf install'
+alias sdr='sudo dnf remove'
 alias upd='sudo dnf update'
 alias ref='sudo dnf upgrade --refresh'
 alias upg='sudo dnf upgrade '
@@ -45,6 +47,7 @@ alias ttop='tmux set -g status-position top'
 alias tbot='tmux set -g status-position bottom'
 
 #-------------------------liveserverhost-----------------------------
+alias vcreate= 'bun create vite@latest'
 alias host='bun run dev'
 alias livehost='bun run dev -- -H 192.168.1.8'
 alias zshs='source ~/.zshrc'
@@ -60,7 +63,7 @@ alias pd="web_search phind "
 alias px="web_search px"
 alias gpt="web_search gpt "
 alias stack="stackoverflow"
-#-----------------------------scripts-------------------------
+#-----------------------------mk and cd-------------------------
 alias mdc='mcd() { mkdir "$@" && cd "$@" }; mcd'
 
 #---------------------------navigation-----------------------------
@@ -68,6 +71,7 @@ alias obs="cd ~/obsidian/ && nvim "
 
 
 
+#-----------------------------big stuff-------------------------
 
 alias editfileinneovim='fd --type f --max-depth=1 | fzf  --reverse | xargs -o nvim'
 
@@ -82,13 +86,6 @@ tmux list-windows -a -F "#S:#I-#W" | fzf-tmux -p | cut -d "-" -f 1 | xargs tmux 
 '
 
 
-# fdd() {
-#   cd $(fd -H --type=d "$@" |fzf --preview " eza -laBb  --no-permissions --no-time --no-user {}")
-# };
-
-# fdz() {
-#   fd -H --type=d "$!" | fzf --preview "eza -laBb  --no-permissions --no-time --no-user {}"
-# }
 
 fld() {
     cd $(fd -H --type=d "$1" | fzf --preview "eza -labB {}")

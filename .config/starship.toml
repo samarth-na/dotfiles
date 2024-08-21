@@ -86,7 +86,7 @@ Macos = ""
 Manjaro = ""
 Linux = "󰌽"
 Gentoo = "󰣨"
-Fedora = " "
+Fedora = ""
 Alpine = ""
 Amazon = ""
 Android = ""
@@ -107,7 +107,7 @@ format = '[ $user ]($style)'
 style = "fg:mantle bg:peach"
 format = "[ $path ]($style)"
 truncation_length = 0
-truncation_symbol = "./"
+truncation_symbol = " "
 
 [directory.substitutions]
  # "Documents" = "󰈙 "
@@ -117,7 +117,7 @@ truncation_symbol = "./"
  # "Developer" = "󰲋 "
 
 [git_branch]
-symbol = " "
+symbol = ""
 style = "bg:teal"
 format = '[[ $symbol $branch ](fg:base bg:green)]($style)'
 

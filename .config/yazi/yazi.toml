@@ -1,5 +1,5 @@
 [manager]
 ratio = [4, 10, 10]
-sort_by = "size"
-# linemode = "size"
+# sort_by = "size"
+linemode = "size"
 
