@@ -107,7 +107,7 @@ format = '[ $user ]($style)'
 style = "fg:mantle bg:peach"
 format = "[ $path ]($style)"
 truncation_length = 0
-truncation_symbol = " "
+truncation_symbol = "󰪶 "
 
 [directory.substitutions]
  # "Documents" = "󰈙 "

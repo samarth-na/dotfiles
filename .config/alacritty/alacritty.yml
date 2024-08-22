@@ -3,16 +3,13 @@ window:
    decorations: none
    padding:
      x: 0
-     y: 10 
-   dynamic_padding: true 
+     y: 4 
    swap_interval: 2
-    # Enable VSync
-    vsync: false 
-   opacity: .99
+    vsync: true 
 font:
-  size: 14
+  size: 18
   normal:
-    family: JetBrainsMono Nerd font      
+    family: JetBrainsMono Nerd font mono 
 
 colors:
   # Default colors
