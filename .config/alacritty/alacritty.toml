@@ -41,7 +41,8 @@ TERM = "xterm-256color"
 
 [font]
 size = 14
-
+offset.x = 0  # For letter spacing (default: 0)
+offset.y = 0  # For line spacing (default: 0)
 [font.normal]
 family = "JetBrainsMono Nerd font"
 
@@ -51,5 +52,6 @@ opacity = 0.95
 startup_mode = "Maximized"
 
 [window.padding]
-x = 5
+x = 0
 y = 3
+
