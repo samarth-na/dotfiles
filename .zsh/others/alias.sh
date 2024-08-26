@@ -1,6 +1,7 @@
 #-----------------------utils---------------------------
 alias info='info --vi-key'
 alias rpath='realpath'
+alias lg='lazygit'
 
 
 alias c='clear'
@@ -52,6 +53,7 @@ alias host='bun run dev'
 alias livehost='bun run dev -- -H 192.168.1.8'
 alias zshs='source ~/.zshrc'
 
+alias tgit='tmux popup -w 100% -h 100% -E lazygit'
 #-------------------runners--------------------------
 alias gp='g++'
 alias pp='g++'

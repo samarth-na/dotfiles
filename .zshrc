@@ -153,7 +153,6 @@ function web_search() {
 
  # sourcing other files 
 source ~/.zsh/others/alias.sh
-source ~/.zsh/others/gitlias.sh
 source ~/.zsh/others/commands.sh
 source ~/pins.sh #NOTE: setup your private keys here
 

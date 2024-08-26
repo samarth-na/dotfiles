@@ -40,7 +40,7 @@ shape = "beam"
 TERM = "xterm-256color"
 
 [font]
-size = 14
+size = 20
 offset.x = 0  # For letter spacing (default: 0)
 offset.y = 0  # For line spacing (default: 0)
 [font.normal]
@@ -48,7 +48,7 @@ family = "JetBrainsMono Nerd font"
 
 [window]
 decorations = "none"
-opacity = 0.98
+opacity = 0.99
 startup_mode = "Maximized"
 
 [window.padding]
