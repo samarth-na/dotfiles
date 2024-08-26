@@ -32,12 +32,15 @@ yellow = "0xd19a66"
 background = "0x1e2127"
 dim_foreground = "0x9a9a9a"
 foreground = "0xabb2bf"
-
-[cursor.style]
-shape = "beam"
-
+# import = [
+#     "~/.config/alacritty/one_dark.toml"
+# ]
 [env]
 TERM = "xterm-256color"
+
+
+[mouse]
+  hide_when_typing= true
 
 [font]
 size = 20
