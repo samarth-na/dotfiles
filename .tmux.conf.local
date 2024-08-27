@@ -32,10 +32,6 @@ bind-key -n M-v split-window -h
 
 # Bind Alt + S to split the window horizontally
 bind-key -n M-s split-window -v
-# Add this line to your ~/.tmux.conf
-bind-key P run "tmux popup -d 30 -w 100 -h 26"
-# This binds the key combination PREFIX + P to run the specified command.
-# Adjust the options in the 'tmux popup' command to fit your preferences.
 
 
 # Bind Alt + W to kill (close) the current pane
