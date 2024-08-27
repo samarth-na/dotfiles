@@ -1,33 +1,44 @@
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$HOME/.zsh:$PATH
 
-gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+# IMP: most important paths do not edit
+
+ export PATH=$HOME/bin:/usr/local/bin:$PATH
+ export PATH=$HOME/.zsh:$PATH
+
+
+# NOTICE: language paths 
+
+ export PATH=$PATH:$GOPATH/bin 
+ export PATH=$PATH:$HOME/.local/bin
+ export PATH=$HOME/.cargo/bin:$PATH
+ export PATH=$PATH:/usr/bin
+ export PATH=$PATH:/usr/local/go/bin
+
+
+# NOTICE: setup path for linuxbrew
+
+ export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+ export PATH=/usr/local/bin:$PATH
+
+
+# NOTICE: other paths
+
+ export PATH=$PATH:$HOME/dotfiles/.zsh/scripts
+ export PATH=$PATH:/opt/nvim/ 
+ export NVM_DIR="$HOME/.nvm"
+ export ZSH=$HOME/.oh-my-zsh
+ export GOPATH=$HOME/go
+ export MANPATH=/usr/local/man:$MANPATH
+ export FZF_ALT_C_OPTS="--preview 'exa -lah --icons {}'"
+ export ARCHFLAGS="-arch x86_64"
+ export LANG="en_US.UTF-8"
+# export FUNCNEST=100
+
 
 export VISUAL=nvim
 export EDITOR=nvim
 
-export PATH=$PATH:$GOPATH/bin 
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/dotfiles/.zsh/scripts
-export PATH=$PATH:/usr/bin
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:/opt/nvim/
-
-export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
-export PATH=/usr/local/bin:$PATH
-
-export ZSH=$HOME/.oh-my-zsh
-export GOPATH=$HOME/go
-export MANPATH=/usr/local/man:$MANPATH
-export FZF_ALT_C_OPTS="--preview 'exa -lah --icons {}'"
-export ARCHFLAGS="-arch x86_64"
-export LANG="en_US.UTF-8"
-export FUNCNEST=100
-
-alias run='run.py'
-
-
-# Run the command when Alt+E is pressed
+# IMP: this binds capslock to ctrl for wayland 
+ gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 
 
  CASE_SENSITIVE="false"
@@ -59,7 +70,7 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
- COMPLETION_WAITING_DOTS="false"
+ COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -138,11 +149,6 @@ function web_search() {
 
   open_command "$url"
 }
-# User configuration
-
-
-# You may need to manually set your language environment
-
 # Preferred editor for local and remote sessions
  if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
@@ -151,22 +157,23 @@ function web_search() {
  fi
 
 
- # sourcing other files 
+
+ #IMP: sourcing other files 
 source ~/.zsh/others/alias.sh
 source ~/.zsh/others/commands.sh
-source ~/pins.sh #NOTE: setup your private keys here
+source ~/.zsh/others/completions.sh #NOTE: completions for third party tools
+source ~/pins.sh #TODO: setup your private keys here
 
-#NOTE: The next line updates PATH for the Google Cloud SDK.
+
+#X!: The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/samna/google-cloud-sdk/path.zsh.inc' ]; then . '/home/samna/google-cloud-sdk/path.zsh.inc'; fi
 
-#NOTE: The next line enables shell command completion for gcloud.
+#X!: The next line enables shell command completion for gcloud.
 if [ -f '/home/samna/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/samna/google-cloud-sdk/completion.zsh.inc'; fi
 
 export PATH="/path/to/google-cloud-sdk/bin:$PATH"
 
 
-[ -s "/home/samna/.bun/_bun" ] && source "/home/samna/.bun/_bun"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
  eval "$(starship init zsh)" #NOTE: 
@@ -181,10 +188,5 @@ alias cd='z' #WARN: DISABLE THIS IF YOURE NOT USING ZOXIDE
 
 
 
-# bun completions
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# . "$HOME/.atuin/bin/env"

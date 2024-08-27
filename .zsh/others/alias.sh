@@ -14,6 +14,7 @@ alias e='nvim'
 alias e.='nvim .'
 alias kn='killall nvim '
 
+alias run='run.py'
 
 
 alias so='source ~/.zshrc'
@@ -46,7 +47,7 @@ alias ta='tmux attach-session'
 
 alias ttop='tmux set -g status-position top'
 alias tbot='tmux set -g status-position bottom'
-alias tgit="tmux popup -w 100% -h 100% -d $(pwd) -E lazygit"
+alias tg="tmux popup -w 100% -h 100% -d $(pwd) -E lazygit"
 
 
 #-------------------------liveserverhost-----------------------------
