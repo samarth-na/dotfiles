@@ -37,6 +37,12 @@
 export VISUAL=nvim
 export EDITOR=nvim
 
+ if [[ -n $SSH_CONNECTION ]]; then # INFO: Preferred editor for local and remote sessions
+   export EDITOR='vim'
+ else
+   export EDITOR='nvim'
+ fi
+
 # IMP: this binds capslock to ctrl for wayland 
  gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 
@@ -98,67 +104,62 @@ plugins=(sudo history web-search encode64 copypath zsh-syntax-highlighting zsh-a
 source $ZSH/oh-my-zsh.sh
 # web_search from terminal
 
-function web_search() {
-  emulate -L zsh
+  function web_search() {
+    emulate -L zsh
 
-  # define search engine URLS
-  typeset -A urls
-  urls=(
-    $ZSH_WEB_SEARCH_ENGINES
-    google          "https://www.google.com/search?q="
-    bing            "https://www.bing.com/search?q="
-    brave           "https://search.brave.com/search?q="
-    yahoo           "https://search.yahoo.com/search?p="
-    dckduckgo      "https://www.duckduckgo.com/?q="
-    startpage       "https://www.startpage.com/do/search?q="
-    yandex          "https://yandex.ru/yandsearch?text="
-    github          "https://github.com/search?q="
-    baidu           "https://www.baidu.com/s?wd="
-    ecosia          "https://www.ecosia.org/search?q="
-    goodreads       "https://www.goodreads.com/search?q="
-    qwant           "https://www.qwant.com/?q="
-    givero          "https://www.givero.com/search?q="
-    stackoverflow   "https://stackoverflow.com/search?q="
-    wolframalpha    "https://www.wolframalpha.com/input/?i="
-    archive         "https://web.archive.org/web/*/"
-    scholar         "https://scholar.google.com/scholar?q="
-    ask             "https://www.ask.com/web?q="
-    youtube         "https://www.youtube.com/results?search_query="
-    phind           "https://www.phind.com/search?q="
-    mdn             "https://developer.mozilla.org/en-US/search?q="
-    gpt             "https://chat.openai.com/"
-    px              "https://www.perplexity.ai/search?q="
-  )
+    # define search engine URLS
+    typeset -A urls
+    urls=(
+      $ZSH_WEB_SEARCH_ENGINES
+      google          "https://www.google.com/search?q="
+      bing            "https://www.bing.com/search?q="
+      brave           "https://search.brave.com/search?q="
+      yahoo           "https://search.yahoo.com/search?p="
+      dckduckgo      "https://www.duckduckgo.com/?q="
+      startpage       "https://www.startpage.com/do/search?q="
+      yandex          "https://yandex.ru/yandsearch?text="
+      github          "https://github.com/search?q="
+      baidu           "https://www.baidu.com/s?wd="
+      ecosia          "https://www.ecosia.org/search?q="
+      goodreads       "https://www.goodreads.com/search?q="
+      qwant           "https://www.qwant.com/?q="
+      givero          "https://www.givero.com/search?q="
+      stackoverflow   "https://stackoverflow.com/search?q="
+      wolframalpha    "https://www.wolframalpha.com/input/?i="
+      archive         "https://web.archive.org/web/*/"
+      scholar         "https://scholar.google.com/scholar?q="
+      ask             "https://www.ask.com/web?q="
+      youtube         "https://www.youtube.com/results?search_query="
+      phind           "https://www.phind.com/search?q="
+      mdn             "https://developer.mozilla.org/en-US/search?q="
+      gpt             "https://chat.openai.com/"
+      px              "https://www.perplexity.ai/search?q="
+    )
 
-  # check whether the search engine is supported
-  if [[ -z "$urls[$1]" ]]; then
-    echo "Search engine '$1' not supported."
-    return 1
-  fi
+    # check whether the search engine is supported
+    if [[ -z "$urls[$1]" ]]; then
+      echo "Search engine '$1' not supported."
+      return 1
+    fi
 
-  # search or go to main page depending on number of arguments passed
-  if [[ $# -gt 1 ]]; then
-    # build search url:
-    # join arguments passed with '+', then append to search engine URL
-    url="${urls[$1]}$(omz_urlencode ${@[2,-1]})"
-  else
-    # build main page url:
-    # split by '/', then rejoin protocol (1) and domain (2) parts with '//'
-    url="${(j://:)${(s:/:)urls[$1]}[1,2]}"
-  fi
+    # search or go to main page depending on number of arguments passed
+    if [[ $# -gt 1 ]]; then
+      # build search url:
+      # join arguments passed with '+', then append to search engine URL
+      url="${urls[$1]}$(omz_urlencode ${@[2,-1]})"
+    else
+      # build main page url:
+      # split by '/', then rejoin protocol (1) and domain (2) parts with '//'
+      url="${(j://:)${(s:/:)urls[$1]}[1,2]}"
+    fi
 
-  open_command "$url"
-}
-# Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
- else
-   export EDITOR='nvim'
- fi
+    open_command "$url"
+  }
 
 
 
- #IMP: sourcing other files 
+
+#IMP: sourcing other files 
 source ~/.zsh/others/alias.sh
 source ~/.zsh/others/commands.sh
 source ~/.zsh/others/completions.sh #NOTE: completions for third party tools
@@ -185,8 +186,3 @@ export PATH="/path/to/google-cloud-sdk/bin:$PATH"
 
 
 alias cd='z' #WARN: DISABLE THIS IF YOURE NOT USING ZOXIDE 
-
-
-
-
-
