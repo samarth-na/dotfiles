@@ -1,17 +1,17 @@
-
 # IMP: most important paths do not edit
 
  export PATH=$HOME/bin:/usr/local/bin:$PATH
- export PATH=$HOME/.zsh:$PATH
+ export PATH=$HOME/.zsh:$PATH.zsh
 
 
-# NOTICE: language paths 
+# NOTICE: setup paths 
 
  export PATH=$PATH:$GOPATH/bin 
  export PATH=$PATH:$HOME/.local/bin
- export PATH=$HOME/.cargo/bin:$PATH
+ export PATH="$HOME/.cargo/bin:$PATH"
  export PATH=$PATH:/usr/bin
  export PATH=$PATH:/usr/local/go/bin
+ export PATH=$PATH:~/go/bin
 
 
 # NOTICE: setup path for linuxbrew
@@ -24,7 +24,7 @@
 
  export PATH=$PATH:$HOME/dotfiles/.zsh/scripts
  export PATH=$PATH:/opt/nvim/ 
- export NVM_DIR="$HOME/.nvm"
+ export NVM_DIR="$HOME/.nvm"  
  export ZSH=$HOME/.oh-my-zsh
  export GOPATH=$HOME/go
  export MANPATH=/usr/local/man:$MANPATH
@@ -76,7 +76,7 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
- COMPLETION_WAITING_DOTS="true"
+ COMPLETION_WAITING_DOTS="false"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories

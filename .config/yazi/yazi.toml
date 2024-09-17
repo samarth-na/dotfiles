@@ -3,3 +3,6 @@ ratio = [4, 10, 10]
 # sort_by = "size"
 linemode = "size"
 
+
+[mime]
+  audio = "vlc"
