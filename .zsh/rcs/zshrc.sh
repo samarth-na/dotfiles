@@ -23,7 +23,6 @@ export FZF_ALT_C_OPTS="--preview 'exa -lah --icons {}'"
 export ARCHFLAGS="-arch x86_64"
 export LANG="en_US.UTF-8"
 
-alias run='run.py'
 
 
 # Run the command when Alt+E is pressed

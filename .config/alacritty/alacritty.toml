@@ -55,6 +55,8 @@ decorations = "none"
 opacity = 0.95
 startup_mode = "Maximized"
 blur = true
+[scrolling]
+history = 0
 # dynamic_padding = true
 
 [window.padding]

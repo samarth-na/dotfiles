@@ -14,7 +14,7 @@ alias e='nvim'
 alias e.='nvim .'
 alias kn='killall nvim '
 
-alias run='run.py'
+alias run='run.sh'
 
 
 alias so='source ~/.zshrc'

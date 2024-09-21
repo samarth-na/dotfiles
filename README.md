@@ -49,6 +49,7 @@
 -   semi bold for interface and window titles
 -   regular for documents and code
 
+
 ---
 
 ### neovim
