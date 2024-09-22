@@ -11,8 +11,8 @@
 # set -g default-terminal "xterm-256color"
 # set-option -ga terminal-overrides ",xterm*:Tc"
 
-set-option -g terminal-overrides '*:independent-colors:XT'
-set-option -g default-terminal "screen-256color"
+set -g default-terminal "xterm-256color"
+set-option -ga terminal-overrides ",xterm-256color:Tc
 # Bind Alt + arrow keys to switch panes
 bind -n M-Left select-pane -L
 bind -n M-Right select-pane -R
