@@ -186,3 +186,10 @@ export PATH="/path/to/google-cloud-sdk/bin:$PATH"
 
 
 alias cd='z' #WARN: DISABLE THIS IF YOURE NOT USING ZOXIDE 
+
+# bun completions
+[ -s "/home/samarth/.bun/_bun" ] && source "/home/samarth/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
