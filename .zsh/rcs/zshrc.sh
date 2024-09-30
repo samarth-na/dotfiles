@@ -25,9 +25,6 @@ export LANG="en_US.UTF-8"
 
 
 
-# Run the command when Alt+E is pressed
-
-
  CASE_SENSITIVE="false"
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
