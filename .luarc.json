@@ -1,5 +1,8 @@
 {
     "diagnostics.globals": [
         "ui"
+    ],
+    "diagnostics.disable": [
+        "undefined-doc-name"
     ]
 }

@@ -31,7 +31,7 @@
  export FZF_ALT_C_OPTS="--preview 'exa -lah --icons {}'"
  export ARCHFLAGS="-arch x86_64"
  export LANG="en_US.UTF-8"
-# export FUNCNEST=100
+# export FUNCNEST=100 #IMP: this stops the recurstion limit to 100
 
 
 export VISUAL=nvim
@@ -164,6 +164,8 @@ source ~/.zsh/others/alias.sh
 source ~/.zsh/others/commands.sh
 source ~/.zsh/others/completions.sh #NOTE: completions for third party tools
 source ~/pins.sh #TODO: setup your private keys here
+source /usr/share/fzf/shell/key-bindings.zsh
+
 
 
 #X!: The next line updates PATH for the Google Cloud SDK.
@@ -171,8 +173,6 @@ if [ -f '/home/samna/google-cloud-sdk/path.zsh.inc' ]; then . '/home/samna/googl
 
 #X!: The next line enables shell command completion for gcloud.
 if [ -f '/home/samna/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/samna/google-cloud-sdk/completion.zsh.inc'; fi
-
-export PATH="/path/to/google-cloud-sdk/bin:$PATH"
 
 
 
@@ -193,3 +193,4 @@ alias cd='z' #WARN: DISABLE THIS IF YOURE NOT USING ZOXIDE
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+. "/home/samarth/.deno/env"

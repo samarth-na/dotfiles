@@ -2,13 +2,15 @@ local wezterm = require("wezterm")
 
 local config = {
 	color_scheme = "One Dark (Gogh)",
-	window_background_opacity = 0.96,
+	-- color_scheme = 'Tokyo Night Moon',
+
+	window_background_opacity = 0.90,
 	window_decorations = "NONE",
 	hide_tab_bar_if_only_one_tab = true,
 	font_size = 20,
 	line_height = 1.0,
-	initial_rows = 42,
-	initial_cols = 144,
+	-- initial_rows = 42,
+	-- initial_cols = 144,
 	window_padding = { left = 0, right = 0, top = 3, bottom = 0 },
 	force_reverse_video_cursor = true,
 	foreground_text_hsb = {

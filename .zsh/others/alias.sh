@@ -1,5 +1,4 @@
 #-----------------------utils---------------------------
-alias info='info --vi-key'
 alias rpath='realpath'
 alias lg='lazygit'
 
@@ -52,8 +51,8 @@ alias tg="tmux popup -w 100% -h 100% -d $(pwd) -E lazygit"
 
 #-------------------------liveserverhost-----------------------------
 alias vcreate= 'bun create vite@latest'
-alias host='bun run dev'
-alias livehost='bun run dev -- -H 192.168.1.8'
+# alias host='bun run dev'
+# alias livehost='bun run dev -- -H 192.168.1.8'
 alias zshs='source ~/.zshrc'
 
 #-------------------runners--------------------------
