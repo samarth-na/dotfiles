@@ -23,6 +23,7 @@ alias so='source ~/.zshrc'
 alias fm='yazi'
 alias y='yazi'
 alias b='btop'
+alias ld='lazydocker'
 
 #------------------------dnf---------------------------------
 alias sdi='sudo dnf install'
@@ -67,7 +68,11 @@ alias px="web_search px"
 alias gpt="web_search gpt "
 alias stack="stackoverflow"
 #-----------------------------mk and cd-------------------------
-alias mdc='mcd() { mkdir "$@" && cd "$@" }; mcd'
+
+function mdc(){
+    mkdir "$@" 
+    cd "$@" || cd ..
+}
 
 #---------------------------navigation-----------------------------
 alias obs="cd ~/obsidian/ && nvim "
