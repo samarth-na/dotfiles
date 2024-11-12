@@ -161,6 +161,7 @@ source $ZSH/oh-my-zsh.sh
 
 #IMP: sourcing other files 
 source ~/.zsh/others/alias.sh
+# source ~/.zsh/scripts/run.sh
 source ~/.zsh/others/commands.sh
 source ~/.zsh/others/completions.sh #NOTE: completions for third party tools
 source ~/pins.sh #TODO: setup your private keys here

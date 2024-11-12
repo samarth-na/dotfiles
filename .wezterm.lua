@@ -15,14 +15,14 @@ local config = {
 	force_reverse_video_cursor = true,
 	foreground_text_hsb = {
 		hue = 1.0,
-		saturation = 1.05,
+		saturation = 1.00,
 		brightness = 1.00,
 	},
 	audible_bell = "Disabled",
 }
 
 config.colors = { foreground = "#abb2bf" }
--- config.font = wezterm.font("JetBrains Mono", { weight = "Regular", italic = false })
+config.font = wezterm.font("GeistMono Nerd Font")
 
 -- things below dont work
 -- config.window_background_image = '~/marek-piwnicki-wgsu3WzFZ5c-unsplash.jpg'
