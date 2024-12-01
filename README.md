@@ -9,7 +9,7 @@
 ## main applications
 
 -   **neovim** - fast/cli/modal code editor (dnf)
--   **wezterm** - beautiful terminal emulator (flatpak)
+-   **alacritty** - fast/beautiful terminal emulator (flatpak)
 -   **tmux** - powerful/peristing terminal multiplexer (dnd)
 -   **zsh** - modern shell with plugin support (dnf)
 
@@ -48,7 +48,6 @@
 
 -   semi bold for interface and window titles
 -   regular for documents and code
-
 
 ---
 

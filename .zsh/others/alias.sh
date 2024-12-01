@@ -1,5 +1,4 @@
 #-----------------------utils---------------------------
-alias rpath='realpath'
 alias lg='lazygit'
 
 
