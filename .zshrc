@@ -31,7 +31,7 @@
  export FZF_ALT_C_OPTS="--preview 'exa -lah --icons {}'"
  export ARCHFLAGS="-arch x86_64"
  export LANG="en_US.UTF-8"
-# export FUNCNEST=100 #IMP: this stops the recurstion limit to 100
+# export FUNCNEST=100 # IMP: this stops the recurstion limit to 100
 
 
 export VISUAL=nvim
@@ -194,4 +194,15 @@ alias cd='z' #WARN: DISABLE THIS IF YOURE NOT USING ZOXIDE
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-. "/home/samarth/.deno/env"
+# . "/home/samarth/.deno/env"
+
+# zsh fzf setup
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# pnpm
+export PNPM_HOME="/home/samarth/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

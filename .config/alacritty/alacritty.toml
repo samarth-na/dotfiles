@@ -67,7 +67,7 @@ TERM = "xterm-256color"
   hide_when_typing= true
 
 [font]
-size = 20
+size = 16
 offset.x = 0  # For letter spacing (default: 0)
 offset.y = 0  # For line spacing (default: 0)
 [font.normal]
