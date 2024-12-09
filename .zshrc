@@ -24,6 +24,7 @@
 
  export PATH=$PATH:$HOME/dotfiles/.zsh/scripts
  export PATH=$PATH:/opt/nvim/ 
+ export PATH="$BUN_INSTALL/bin:$PATH"
  export NVM_DIR="$HOME/.nvm"  
  export ZSH=$HOME/.oh-my-zsh
  export GOPATH=$HOME/go
@@ -31,7 +32,10 @@
  export FZF_ALT_C_OPTS="--preview 'exa -lah --icons {}'"
  export ARCHFLAGS="-arch x86_64"
  export LANG="en_US.UTF-8"
+ export BUN_INSTALL="$HOME/.bun"
+ export PNPM_HOME="/home/samarth/.local/share/pnpm"
 # export FUNCNEST=100 # IMP: this stops the recurstion limit to 100
+
 
 
 export VISUAL=nvim
@@ -161,7 +165,6 @@ source $ZSH/oh-my-zsh.sh
 
 #IMP: sourcing other files 
 source ~/.zsh/others/alias.sh
-# source ~/.zsh/scripts/run.sh
 source ~/.zsh/others/commands.sh
 source ~/.zsh/others/completions.sh #NOTE: completions for third party tools
 source ~/pins.sh #TODO: setup your private keys here
@@ -177,30 +180,21 @@ if [ -f '/home/samna/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/samna
 
 
 
- eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
- eval "$(starship init zsh)" #NOTE: 
- eval "$(zoxide init zsh)"
+ 
 
- export ATUIN_NOBIND="true"
- eval "$(atuin init zsh)"
- bindkey '^k' atuin-search
-
+ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" 
+ eval "$(starship init zsh)" # from prompt
+ eval "$(zoxide init zsh)"   # for better cd
+ eval "$(atuin init zsh)"    # for better history
 
 alias cd='z' #WARN: DISABLE THIS IF YOURE NOT USING ZOXIDE 
-
-# bun completions
-[ -s "/home/samarth/.bun/_bun" ] && source "/home/samarth/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-# . "/home/samarth/.deno/env"
+export ATUIN_NOBIND="true"
+bindkey '^k' atuin-search
 
 # zsh fzf setup
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # pnpm
-export PNPM_HOME="/home/samarth/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;

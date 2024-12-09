@@ -6,6 +6,7 @@ if type brew &>/dev/null; then
   compinit
 fi
 
+# bun completions
 [ -s "/home/samna/.bun/_bun" ] && source "/home/samna/.bun/_bun"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
