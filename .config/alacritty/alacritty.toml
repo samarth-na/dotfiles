@@ -34,7 +34,7 @@ background = "#1e2127"
 dim_foreground = "#919191"
 foreground = "#bec5d1"
 
-
+#
 # [colors.bright]
 # black = "#444b6a"
 # blue = "#7da6ff"
@@ -58,7 +58,7 @@ foreground = "#bec5d1"
 # [colors.primary]
 # background = "#24283b"
 # foreground = "#c0caf5"
-
+#
 [env]
 TERM = "xterm-256color"
 

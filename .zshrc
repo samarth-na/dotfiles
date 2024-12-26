@@ -2,6 +2,7 @@
 
  export PATH=$HOME/bin:/usr/local/bin:$PATH
  export PATH=$HOME/.zsh:$PATH.zsh
+ export PATH=$PATH:/usr/sbin
 
 
 # NOTICE: setup paths 
@@ -36,6 +37,7 @@
  export PNPM_HOME="/home/samarth/.local/share/pnpm"
 # export FUNCNEST=100 # IMP: this stops the recurstion limit to 100
 
+. "/home/samarth/.deno/env"
 
 
 export VISUAL=nvim
@@ -98,12 +100,7 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(sudo history web-search encode64 copypath zsh-syntax-highlighting zsh-autosuggestions docker docker-compose git kubectl kubectx)
+plugins=( history web-search encode64 copypath zsh-syntax-highlighting zsh-autosuggestions docker docker-compose git kubectl kubectx colored-man-pages )
 
 source $ZSH/oh-my-zsh.sh
 # web_search from terminal

@@ -4,5 +4,6 @@
     ],
     "diagnostics.disable": [
         "undefined-doc-name"
-    ]
+    ],
+    "completion.autoRequire": false
 }

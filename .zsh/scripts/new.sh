@@ -1,6 +1,8 @@
 # Get the most recently modified file within the last 100 minutes
 rawInput=$(stat --format="%n" -- "$(find ~/projects -type f -mmin -100 -print0 | xargs -0 stat --printf='%Y\t%n\n' | sort -n | tail -n1 | cut -f2-)")
 
+# fd --type f -0 . ~/projects | xargs -0 stat --format='%Y %n' 2>/dev/null | awk -v threshold=$(date +%s --date="10 minutes ago") '$1 > threshold {print $2; exit}'
+
 # Extract file path, extension, and filename using parameter expansion
 path="$rawInput"
 file="${path##*/}"
