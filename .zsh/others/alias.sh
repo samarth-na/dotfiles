@@ -41,7 +41,6 @@ alias L='eza --icons -lahBb --git '
 
 #--------------------------tmux------------------------------
 
-alias t='tmux'
 alias ta='tmux attach-session'
 
 alias ttop='tmux set -g status-position top'
