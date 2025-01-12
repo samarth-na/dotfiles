@@ -4,7 +4,7 @@
 // This shader was modified by April Hall (arithefirst)
 // Sourced from https://github.com/m-ahdal/ghostty-shaders/blob/main/retro-terminal.glsl
 
-float warp = 0.09; // simulate curvature of CRT monitor
+float warp = 0.0; // simulate curvature of CRT monitor
 float scan = 0.20; // simulate darkness between scanlines
 float transparency = 1; // 0.9 means 90% of original color (10% transparent)
 

@@ -126,44 +126,44 @@ tmux_conf_theme=false
 #---------------------------------------------
 
 # tokyonight
-#
-# tmux_conf_theme_colour_1="#1e2030"    # background (Tokyo Night Dark background)
-# tmux_conf_theme_colour_2="#32344a"    # dark gray (Darker background)
-# tmux_conf_theme_colour_3="#a9b1d6"    # light gray (Comments)
-# tmux_conf_theme_colour_4="#7aa2f7"    # light blue (Functions)
-# tmux_conf_theme_colour_5="#ff9e64 "    # yellow (Variables)
-# tmux_conf_theme_colour_6="#24283b"    # dark gray (Lighter background)
-# tmux_conf_theme_colour_7="#c0caf5"    # white (Foreground)
-# tmux_conf_theme_colour_8="#24283b"    # dark gray (Lighter background)
-# tmux_conf_theme_colour_9="#ff9e64 "    # yellow (Variables)
-# tmux_conf_theme_colour_10="#bb9af7"   # pink (Keywords)
-# tmux_conf_theme_colour_11="#73daca"   # green (Strings)
-# tmux_conf_theme_colour_12="#a9b1d6"   # light gray (Comments)
-# tmux_conf_theme_colour_13="#ffffff"   # white (Foreground)
-# tmux_conf_theme_colour_14="#24283b"   # dark gray (Lighter background)
-# tmux_conf_theme_colour_15="#1e2030"   # dark gray (Background)
-# tmux_conf_theme_colour_16="#ff757f"   # red (Errors)
-# tmux_conf_theme_colour_17="#ffffff"   # white (Foreground)
-# tmux_conf_theme_colour_18="#ffffff"   # white (Foreground)
-#
-tmux_conf_theme_colour_1="#323842"    # dark gray
-tmux_conf_theme_colour_2="#303030"    # gray
-tmux_conf_theme_colour_3="#8a8a8a"    # light gray
-tmux_conf_theme_colour_4="#61AFEF"    # light blue
-tmux_conf_theme_colour_5="#ffcc00"    # yellow
-tmux_conf_theme_colour_6="#080808"    # dark gray
-tmux_conf_theme_colour_7="#ffffff"    # white
-tmux_conf_theme_colour_8="#080808"    # dark gray
-tmux_conf_theme_colour_9="#f0ca33"    # yellow
-tmux_conf_theme_colour_10="#f02eac"   # pink
-tmux_conf_theme_colour_11="#30B6C2"   # green
-tmux_conf_theme_colour_12="#8a8a8a"   # light gray
-tmux_conf_theme_colour_13="#ffffff"   # white
-tmux_conf_theme_colour_14="#080808"   # dark gray
-tmux_conf_theme_colour_15="#323842"   # dark gray
-tmux_conf_theme_colour_16="#d11919"   # red
-tmux_conf_theme_colour_17="#ffffff"   # white
-tmux_conf_theme_colour_18="#ffffff"
+
+tmux_conf_theme_colour_1="#1e2030"    # background (Tokyo Night Dark background)
+tmux_conf_theme_colour_2="#32344a"    # dark gray (Darker background)
+tmux_conf_theme_colour_3="#a9b1d6"    # light gray (Comments)
+tmux_conf_theme_colour_4="#7aa2f7"    # light blue (Functions)
+tmux_conf_theme_colour_5="#ff9e64 "    # yellow (Variables)
+tmux_conf_theme_colour_6="#24283b"    # dark gray (Lighter background)
+tmux_conf_theme_colour_7="#c0caf5"    # white (Foreground)
+tmux_conf_theme_colour_8="#24283b"    # dark gray (Lighter background)
+tmux_conf_theme_colour_9="#ff9e64 "    # yellow (Variables)
+tmux_conf_theme_colour_10="#bb9af7"   # pink (Keywords)
+tmux_conf_theme_colour_11="#73daca"   # green (Strings)
+tmux_conf_theme_colour_12="#a9b1d6"   # light gray (Comments)
+tmux_conf_theme_colour_13="#ffffff"   # white (Foreground)
+tmux_conf_theme_colour_14="#24283b"   # dark gray (Lighter background)
+tmux_conf_theme_colour_15="#1e2030"   # dark gray (Background)
+tmux_conf_theme_colour_16="#ff757f"   # red (Errors)
+tmux_conf_theme_colour_17="#ffffff"   # white (Foreground)
+tmux_conf_theme_colour_18="#ffffff"   # white (Foreground)
+
+# tmux_conf_theme_colour_1="#323842"    # dark gray
+# tmux_conf_theme_colour_2="#303030"    # gray
+# tmux_conf_theme_colour_3="#8a8a8a"    # light gray
+# tmux_conf_theme_colour_4="#61AFEF"    # light blue
+# tmux_conf_theme_colour_5="#ffcc00"    # yellow
+# tmux_conf_theme_colour_6="#080808"    # dark gray
+# tmux_conf_theme_colour_7="#ffffff"    # white
+# tmux_conf_theme_colour_8="#080808"    # dark gray
+# tmux_conf_theme_colour_9="#f0ca33"    # yellow
+# tmux_conf_theme_colour_10="#f02eac"   # pink
+# tmux_conf_theme_colour_11="#30B6C2"   # green
+# tmux_conf_theme_colour_12="#8a8a8a"   # light gray
+# tmux_conf_theme_colour_13="#ffffff"   # white
+# tmux_conf_theme_colour_14="#080808"   # dark gray
+# tmux_conf_theme_colour_15="#323842"   # dark gray
+# tmux_conf_theme_colour_16="#d11919"   # red
+# tmux_conf_theme_colour_17="#ffffff"   # white
+# tmux_conf_theme_colour_18="#ffffff"
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"

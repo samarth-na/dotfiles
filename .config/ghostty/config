@@ -1,15 +1,16 @@
 # This is the configuration file for Ghostty.
 #   /home/samarth/.config/ghostty/config
 
-custom-shader = ./bettercrt.glsl
+# custom-shader = ./bettercrt.glsl
+
 
 font-family = "JetBrains Mono Nerd Font"
 theme = "OneHalfDark"
 font-size = 16.5
 
-background-opacity = 0.80
+# background-opacity = 0.80
 window-padding-x = 3,0
-window-padding-y = 3 
+window-padding-y = 3
 
 gtk-titlebar = false
 confirm-close-surface = false

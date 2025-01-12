@@ -1,64 +1,64 @@
-
-[colors.bright]
-black = "#5c6370"
-blue = "#61afef"
-cyan = "#56b6c2"
-green = "#98c379"
-magenta = "#c678dd"
-red = "#e06c75"
-white = "#e6efff"
-yellow = "#d19a66"
-
-[colors.dim]
-black = "#1e2127"
-blue = "#61afef"
-cyan = "#56b6c2"
-green = "#98c379"
-magenta = "#c678dd"
-red = "#e06c75"
-white = "#828791"
-yellow = "#d19a66"
-
-[colors.normal]
-black = "#1e2117"
-blue = "#61afdf"
-cyan = "#56b6b2"
-green = "#98c369"
-magenta = "#c678cd"
-red = "#e06c65"
-white = "#828781"
-yellow = "#d19a56"
-
-[colors.primary]
-background = "#1e2127"
-dim_foreground = "#919191"
-foreground = "#bec5d1"
-
 #
 # [colors.bright]
-# black = "#444b6a"
-# blue = "#7da6ff"
-# cyan = "#0db9d7"
-# green = "#b9f27c"
-# magenta = "#bb9af7"
-# red = "#ff7a93"
-# white = "#acb0d0"
-# yellow = "#ff9e64"
+# black = "#5c6370"
+# blue = "#61afef"
+# cyan = "#56b6c2"
+# green = "#98c379"
+# magenta = "#c678dd"
+# red = "#e06c75"
+# white = "#e6efff"
+# yellow = "#d19a66"
+#
+# [colors.dim]
+# black = "#1e2127"
+# blue = "#61afef"
+# cyan = "#56b6c2"
+# green = "#98c379"
+# magenta = "#c678dd"
+# red = "#e06c75"
+# white = "#828791"
+# yellow = "#d19a66"
 #
 # [colors.normal]
-# black = "#32344a"
-# blue = "#7aa2f7"
-# cyan = "#449dab"
-# green = "#9ece6a"
-# magenta = "#ad8ee6"
-# red = "#f7768e"
-# white = "#c0caf5"
-# yellow = "#e0af68"
+# black = "#1e2117"
+# blue = "#61afdf"
+# cyan = "#56b6b2"
+# green = "#98c369"
+# magenta = "#c678cd"
+# red = "#e06c65"
+# white = "#828781"
+# yellow = "#d19a56"
 #
 # [colors.primary]
-# background = "#24283b"
-# foreground = "#c0caf5"
+# background = "#1e2127"
+# dim_foreground = "#919191"
+# foreground = "#bec5d1"
 #
+#
+[colors.bright]
+black = "#444b6a"
+blue = "#7da6ff"
+cyan = "#0db9d7"
+green = "#b9f27c"
+magenta = "#bb9af7"
+red = "#ff7a93"
+white = "#acb0d0"
+yellow = "#ff9e64"
+
+[colors.normal]
+black = "#32344a"
+blue = "#7aa2f7"
+cyan = "#449dab"
+green = "#9ece6a"
+magenta = "#ad8ee6"
+red = "#f7768e"
+white = "#c0caf5"
+yellow = "#e0af68"
+
+[colors.primary]
+background = "#24283b"
+foreground = "#c0caf5"
+
 [env]
 TERM = "xterm-256color"
 
@@ -67,7 +67,7 @@ TERM = "xterm-256color"
   hide_when_typing= true
 
 [font]
-size = 16
+size = 16.1
 offset.x = 0  # For letter spacing (default: 0)
 offset.y = 0  # For line spacing (default: 0)
 [font.normal]
