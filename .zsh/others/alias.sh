@@ -1,5 +1,4 @@
 #-----------------------utils---------------------------
-alias lg='lazygit'
 
 
 alias c='clear'
@@ -12,10 +11,6 @@ alias e='nvim'
 alias e.='nvim .'
 alias kn='killall nvim '
 
-alias run='run.sh'
-
-
-alias so='source ~/.zshrc'
 
 
 #--------------------------apps------------------------------
@@ -23,6 +18,10 @@ alias fm='yazi'
 alias y='yazi'
 alias b='btop'
 alias ld='lazydocker'
+alias g='git'
+alias oma='ollama'
+alias lg='lazygit'
+alias obs="cd ~/obsidian/ && nvim "
 
 #------------------------dnf---------------------------------
 alias sdi='sudo dnf install'
@@ -59,6 +58,8 @@ alias gp='g++'
 alias pp='g++'
 alias g.='go run .'
 alias py='python'
+alias run='run.sh'
+alias so='source ~/.zshrc'
 alias cct= 'codecrafters test'
 #-------------------web-search------------
 alias pd="web_search phind "
@@ -73,8 +74,6 @@ function mdc(){
 }
 
 #---------------------------navigation-----------------------------
-alias obs="cd ~/obsidian/ && nvim "
-
 
 
 #-----------------------------big stuff-------------------------
@@ -82,7 +81,7 @@ alias obs="cd ~/obsidian/ && nvim "
 alias editfileinneovim='fd --type f --max-depth=1 | fzf  --reverse | xargs -o nvim'
 
 
-alias play='find ~/Music -type f \( -name "*.mp3" -or -name "*.m4a" -or -name "*.webm" \)| fzf-tmux --reverse -p |xargs -I {} vlc "{}"
+alias play='find ~/Music -type f \( -name "*.mp3" -or -name "*.m4a" -or -name "*.webm" \)| fzf-tmux --reverse -p |xargs -I {} mpv "{}"
 '
 alias ChangeTmuxPane="
  tmux list-panes -a -F '#{session_name}:#{window_index}.#{pane_index}.#{window_name}-#{pane_current_path}' | fzf-tmux -p | cut -d "." -f 1 |xargs tmux switch-client -t

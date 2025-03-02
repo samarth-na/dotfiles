@@ -38,6 +38,7 @@
 # export FUNCNEST=100 # IMP: this stops the recurstion limit to 100
 
 . "/home/samarth/.deno/env"
+fpath=($HOME/.zsh_completions $fpath)
 
 
 export VISUAL=nvim
@@ -197,3 +198,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# bun completions
+[ -s "/home/samarth/.bun/_bun" ] && source "/home/samarth/.bun/_bun"

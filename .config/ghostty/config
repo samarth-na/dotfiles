@@ -6,9 +6,9 @@
 
 font-family = "JetBrains Mono Nerd Font"
 theme = "OneHalfDark"
-font-size = 16.5
+font-size = 16.1
 
-# background-opacity = 0.80
+# background-opacity = 0.90
 window-padding-x = 3,0
 window-padding-y = 3
 

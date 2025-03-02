@@ -19,7 +19,7 @@ case "$extension" in
         go run "$path"
         ;;
     "js" | "ts")
-        bun run "$path"
+        deno "$path"
         ;;
     "c" | "c++" | "cpp")
         g++ "$path" && ./a.out
