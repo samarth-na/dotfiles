@@ -6,13 +6,13 @@
 
 font-family = "JetBrains Mono Nerd Font"
 theme = "OneHalfDark"
-font-size = 16.1
+font-size = 16
 
 # background-opacity = 0.90
 window-padding-x = 3,0
 window-padding-y = 3
 
-gtk-titlebar = false
+gtk-titlebar = true 
 confirm-close-surface = false
 mouse-hide-while-typing = true
 

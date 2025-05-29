@@ -7,6 +7,7 @@ format = """
 [](surface0)\
 $os\
 $username\
+$shell\
 [](bg:peach fg:surface0)\
 $directory\
 [](fg:peach bg:green)\
@@ -97,13 +98,13 @@ Artix = "󰣇"
 CentOS = ""
 Debian = "󰣚"
 Redhat = "󱄛"
-RedHatEnterprise = "󱄛"
+ RedHatEnterprise = "󱄛"
 
 [username]
 show_always = true
 style_user = "bg:surface0 fg:text"
 style_root = "bg:surface0 fg:text"
-format = '[ $user ]($style)'
+format = '[ $user]($style)'
 
 [directory]
 style = "fg:mantle bg:peach"
@@ -139,6 +140,14 @@ detect_extensions = ['js', 'mjs', 'cjs', 'ts', 'mts', 'cts']
 symbol = " "
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[shell]
+bash_indicator = " "
+zsh_indicator = "󰬡 "
+fish_indicator = " "
+format = '[ $indicator]($style)'
+style = "bg:surface0 fg:text"
+disabled = false
 
 [rust]
 symbol = ""

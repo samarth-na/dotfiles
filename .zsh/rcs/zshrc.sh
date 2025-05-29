@@ -153,20 +153,13 @@ source ~/.zsh/others/gitlias.sh
 source ~/.zsh/others/commands.sh
 source ~/godpin.sh
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/samna/google-cloud-sdk/path.zsh.inc' ]; then . '/home/samna/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/samna/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/samna/google-cloud-sdk/completion.zsh.inc'; fi
-
-export PATH="/path/to/google-cloud-sdk/bin:$PATH"
 
 
 [ -s "/home/samna/.bun/_bun" ] && source "/home/samna/.bun/_bun"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
- eval "$(starship init zsh)"
- eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
 
 # bun completions

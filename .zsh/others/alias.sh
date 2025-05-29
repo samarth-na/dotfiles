@@ -7,6 +7,7 @@ alias cls='clear'
 #--------------------nvim----------------------------------
 
 alias v='nvim'
+alias N='sudo nvim'
 alias e='nvim'
 alias e.='nvim .'
 alias kn='killall nvim '
@@ -61,25 +62,23 @@ alias py='python'
 alias run='run.sh'
 alias so='source ~/.zshrc'
 alias cct= 'codecrafters test'
+
 #-------------------web-search------------
 alias pd="web_search phind "
 alias px="web_search px"
 alias gpt="web_search gpt "
 alias stack="stackoverflow"
-#-----------------------------mk and cd-------------------------
 
+#-----------------------------mk and cd-------------------------
 function mdc(){
     mkdir "$@" 
     cd "$@" || cd ..
 }
 
-#---------------------------navigation-----------------------------
-
 
 #-----------------------------big stuff-------------------------
 
 alias editfileinneovim='fd --type f --max-depth=1 | fzf  --reverse | xargs -o nvim'
-
 
 alias play='find ~/Music -type f \( -name "*.mp3" -or -name "*.m4a" -or -name "*.webm" \)| fzf-tmux --reverse -p |xargs -I {} mpv "{}"
 '

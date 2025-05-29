@@ -26,6 +26,7 @@
  export PATH=$PATH:$HOME/dotfiles/.zsh/scripts
  export PATH=$PATH:/opt/nvim/ 
  export PATH="$BUN_INSTALL/bin:$PATH"
+ export OPENSSL_CONF=
  export NVM_DIR="$HOME/.nvm"  
  export ZSH=$HOME/.oh-my-zsh
  export GOPATH=$HOME/go
@@ -101,7 +102,7 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-plugins=( history web-search encode64 copypath zsh-syntax-highlighting zsh-autosuggestions docker docker-compose git kubectl kubectx colored-man-pages )
+plugins=( zsh-autopair history web-search encode64 copypath zsh-syntax-highlighting zsh-autosuggestions docker docker-compose git kubectl kubectx colored-man-pages )
 
 source $ZSH/oh-my-zsh.sh
 # web_search from terminal
