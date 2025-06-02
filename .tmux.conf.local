@@ -443,12 +443,12 @@ set -g status-keys vi
 set -g mode-keys vi
 
 # replace C-b by C-a instead of using both prefixes
- set -gu prefix2
- unbind C-a
- unbind C-b
- unbind o 
- set -g prefix2 C-a
- # set -g prefix C-space
+ # set -gu prefix2
+ # # unbind C-a
+ # # unbind C-b
+ # unbind o 
+ # set -g prefix2 C-a
+ # # set -g prefix C-space
  # bind C-space send-prefix
 
 # if you don't want Oh my tmux! to alter a binding, use #!important
