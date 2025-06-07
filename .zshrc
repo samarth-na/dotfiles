@@ -171,11 +171,9 @@ source /usr/share/fzf/shell/key-bindings.zsh
 
 
 
-#X!: The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/samna/google-cloud-sdk/path.zsh.inc' ]; then . '/home/samna/google-cloud-sdk/path.zsh.inc'; fi
-
-#X!: The next line enables shell command completion for gcloud.
-if [ -f '/home/samna/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/samna/google-cloud-sdk/completion.zsh.inc'; fi
+# #X!: The next line updates PATH for the Google Cloud SDK. does not work btw
+# if [ -f '/home/samna/google-cloud-sdk/path.zsh.inc' ]; then . '/home/samna/google-cloud-sdk/path.zsh.inc'; fi
+# if [ -f '/home/samna/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/samna/google-cloud-sdk/completion.zsh.inc'; fi
 
 
 

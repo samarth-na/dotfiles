@@ -89,7 +89,7 @@ Macos = ""
 Manjaro = ""
 Linux = "󰌽"
 Gentoo = "󰣨"
-Fedora = ""
+Fedora = "󱆃"
 Alpine = ""
 Amazon = ""
 Android = ""
@@ -144,7 +144,7 @@ format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 [shell]
 bash_indicator = " "
 zsh_indicator = ""
-fish_indicator = " "
+fish_indicator = " "
 format = '[ $indicator]($style)'
 style = "bg:surface0 fg:text"
 disabled = false
@@ -217,9 +217,8 @@ disabled = false
 
 [character]
 disabled = false
-success_symbol = '[◇┈◉](bold fg:deepblue)'
-error_symbol = '[◇┈⊘](bold fg:red)'
-vimcmd_symbol = '[◇┈](bold fg:creen)'
+success_symbol = '[>](bold fg:blue)'
+error_symbol = '[>](bold fg:teal)'
 vimcmd_replace_one_symbol = '[<-](bold fg:purple)'
 vimcmd_replace_symbol = '[<-](bold fg:purple)'
 vimcmd_visual_symbol = '[<-](bold fg:lavender)'

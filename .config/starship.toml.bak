@@ -144,7 +144,7 @@ format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 [shell]
 bash_indicator = " "
 zsh_indicator = ""
-fish_indicator = " "
+fish_indicator = " "
 format = '[ $indicator]($style)'
 style = "bg:surface0 fg:text"
 disabled = false
