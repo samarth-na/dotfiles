@@ -18,6 +18,8 @@ $c\
 $rust\
 $golang\
 $nodejs\
+$bun\
+$deno\
 $php\
 $java\
 $kotlin\
@@ -128,13 +130,23 @@ format = '[[ $symbol $branch ](fg:base bg:green)]($style)'
 style = "bg:teal"
 format = '[[($all_status$ahead_behind )](fg:base bg:green)]($style)'
 
+[deno]
+symbol = ""
+detect_files = ['deno.json', 'deno.jsonc', 'deno.lock', 'mod.ts', 'mod.js', 'deps.ts', 'deps.js']
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
+[bun]
+detect_files = ['bun.lockb', 'bun.lock', 'bun.toml']
+symbol = ""
+format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
+
 [nodejs]
-symbol = " "
+symbol = "󰎙"
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
-detect_files = [ '.node-version']
-detect_folders = []
-detect_extensions = ['js', 'mjs', 'cjs', 'ts', 'mts', 'cts']
+detect_files=	['tsconfig.json']
+detect_folders=	['']
+detect_extensions = ['']
 
 [c]
 symbol = " "
@@ -191,10 +203,16 @@ symbol = ""
 style = "bg:teal"
 format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 
+
+
 [docker_context]
-symbol = ""
+symbol = ""
+detect_files= ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
 style = "bg:mantle"
-format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
+format = '[[ $symbol( $context) ](fg:black bg:blue)]($style)'
+
+
+
 [lua]
 symbol = ""
 style = "bg:teal"
