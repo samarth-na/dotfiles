@@ -1,11 +1,9 @@
-# IMP: most important paths do not edit
-
  export PATH=$HOME/bin:/usr/local/bin:$PATH
  export PATH=$HOME/.zsh:$PATH.zsh
  export PATH=$PATH:/usr/sbin
 
 
-# NOTICE: setup paths 
+# : setup paths 
 
  export PATH=$PATH:$GOPATH/bin 
  export PATH=$PATH:$HOME/.local/bin
@@ -15,13 +13,13 @@
  export PATH=$PATH:~/go/bin
 
 
-# NOTICE: setup path for linuxbrew
+# : setup path for linuxbrew
 
  export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
  export PATH=/usr/local/bin:$PATH
 
 
-# NOTICE: other paths
+# : other paths
 
  export PATH=$PATH:$HOME/dotfiles/.zsh/scripts
  export PATH=$PATH:/opt/nvim/ 
@@ -36,7 +34,7 @@
  export LANG="en_US.UTF-8"
  export BUN_INSTALL="$HOME/.bun"
  export PNPM_HOME="/home/samarth/.local/share/pnpm"
-# export FUNCNEST=100 # IMP: this stops the recurstion limit to 100
+# export FUNCNEST=100 # : this stops the recurstion limit to 100
 
 . "/home/samarth/.deno/env"
 fpath=($HOME/.zsh_completions $fpath)
@@ -45,13 +43,12 @@ fpath=($HOME/.zsh_completions $fpath)
 export VISUAL=nvim
 export EDITOR=nvim
 
- if [[ -n $SSH_CONNECTION ]]; then # INFO: Preferred editor for local and remote sessions
+ if [[ -n $SSH_CONNECTION ]]; then # Preferred editor for local and remote sessions
    export EDITOR='vim'
  else
    export EDITOR='nvim'
  fi
 
-# IMP: this binds capslock to ctrl for wayland 
  gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 
 
@@ -162,16 +159,16 @@ source $ZSH/oh-my-zsh.sh
 
 
 
-#IMP: sourcing other files 
+# sourcing other files 
 source ~/.zsh/others/alias.sh
 source ~/.zsh/others/commands.sh
-source ~/.zsh/others/completions.sh #NOTE: completions for third party tools
-source ~/pins.sh #TODO: setup your private keys here
+source ~/.zsh/others/completions.sh # completions for third party tools
+source ~/pins.sh # setup your private keys here
 source /usr/share/fzf/shell/key-bindings.zsh
 
 
 
-# #X!: The next line updates PATH for the Google Cloud SDK. does not work btw
+#  The next line updates PATH for the Google Cloud SDK. does not work btw
 # if [ -f '/home/samna/google-cloud-sdk/path.zsh.inc' ]; then . '/home/samna/google-cloud-sdk/path.zsh.inc'; fi
 # if [ -f '/home/samna/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/samna/google-cloud-sdk/completion.zsh.inc'; fi
 
@@ -184,7 +181,7 @@ source /usr/share/fzf/shell/key-bindings.zsh
  eval "$(zoxide init zsh)"   # for better cd
  eval "$(atuin init zsh)"    # for better history
 
-alias cd='z' #WARN: DISABLE THIS IF YOURE NOT USING ZOXIDE 
+alias cd='z' # DISABLE THIS IF YOURE NOT USING ZOXIDE 
 export ATUIN_NOBIND="true"
 bindkey '^k' atuin-search
 

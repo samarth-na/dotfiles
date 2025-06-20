@@ -1,0 +1,10 @@
+[user]
+    name = Samarth Nagar 
+    email = samarth07nagar@gmail.com 
+
+[core]
+    editor = nvim
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
