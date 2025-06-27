@@ -2,22 +2,23 @@ alias c='clear'
 
 # apps 
 alias e nvim
-alias N='sudo nvim'
-alias kn='killall nvim '
 
 alias fm yazi
 alias y yazi
 alias b btop
 alias ld lazydocker
 alias lg lazygit
-alias g git
 alias oma ollama
+
+alias E='sudo nvim'
+alias kn='killall nvim '
 alias obs="cd ~/obsidian/ && nvim "
 
 # systemctl
-alias sys='systemctl'
+alias stl='systemctl'
 
 # git
+alias g git
 alias gi='git init'
 alias gd="git diff --output-indicator-new=' ' --output-indicator-old=' '"
 alias ga='git add -p'
