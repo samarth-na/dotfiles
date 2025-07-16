@@ -14,11 +14,6 @@
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
 
-[commit]
-    gpgSign = true
-    template = ~/.config/git/template
-    verbose = true  # add more context to commit messages
-
 [advice]  # disable advices
     addEmptyPathspec = false
     pushNonFastForward = false
@@ -118,4 +113,4 @@
     markEmptyLines = false
 
 [url "git@github.com:samarth-na/"]
-    insteadOf = "sm:"
+    insteadOf = "sn:"
