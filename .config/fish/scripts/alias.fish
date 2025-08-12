@@ -1,6 +1,7 @@
 alias c='clear'
 
 # apps 
+
 alias e nvim
 
 alias fm yazi
@@ -9,6 +10,7 @@ alias b btop
 alias ld lazydocker
 alias lg lazygit
 alias oma ollama
+alias ff fastfetch
 
 alias E='sudo nvim'
 alias kn='killall nvim '
@@ -18,14 +20,7 @@ alias obs="cd ~/obsidian/ && nvim "
 alias stl='systemctl'
 
 # git
-alias g git
-alias gi='git init'
-alias gd="git diff --output-indicator-new=' ' --output-indicator-old=' '"
-alias ga='git add -p'
-alias gc='git commit'
-alias gp='git push'
-alias gcl='git clone'
-alias gs='git status'
+# https://x.com/melqtx/status/1952632895014625606
 
 # dnf
 alias sdi='sudo dnf install'

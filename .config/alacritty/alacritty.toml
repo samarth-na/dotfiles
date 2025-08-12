@@ -73,16 +73,17 @@ offset.y = 0  # For line spacing (default: 0)
 
 [font.normal]
 family = "JetBrainsMono Nerd font"
+# family = "BlexMono Nerd font"
 # family = "GeistMono Nerd font"
 style = "Regular"
 
 [window]
 decorations = "none"
-opacity = 0.96
+opacity = 0.9
 startup_mode = "Maximized"
-blur = true
+
 [scrolling]
-history = 0
+history = 10000
 # dynamic_padding = true
 
 [window.padding]

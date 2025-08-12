@@ -1,0 +1,229 @@
+command_timeout = 2000
+
+add_newline = true
+
+"$schema" = 'https://starship.rs/config-schema.json'
+right_format ="""
+$cmd_duration\
+$time\
+"""
+format = """
+$os\
+$username\
+$directory\
+$git_branch\
+$git_status\
+$c\
+$rust\
+$golang\
+$nodejs\
+$bun\
+$deno\
+$php\
+$java\
+$kotlin\
+$haskell\
+$python\
+$docker_context\
+$line_break$character"""
+
+palette = 'catppuccin_mocha'
+
+[palettes.gruvbox_dark]
+color_fg0 = '#fbf1c7'
+color_bg1 = '#3c3836'
+color_bg3 = '#665c54'
+color_blue = '#458588'
+color_aqua = '#689d6a'
+color_green = '#98971a'
+color_orange = '#d65d0e'
+color_purple = '#b16286'
+color_red = '#cc241d'
+color_yellow = '#d79921'
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+orange = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3af"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#7bacfc"
+deepblue = "#8094ff"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
+
+[os]
+disabled = false
+style = "fg:text"
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = ""
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = ""
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+
+[username]
+show_always = true
+style_user = "fg:text"
+style_root = "fg:text"
+format = ' $user'
+
+[directory]
+style = "fg:peach"
+format = "[@$path]($style)"
+truncation_length = 0
+truncation_symbol = ""
+home_symbol = "home"
+
+[directory.substitutions]
+ # "Documents" = "󰈙 "
+ # "Downloads" = " "
+ # "Music" = "󰝚 "
+ # "Pictures" = " "
+ # "Developer" = "󰲋 "
+
+[git_branch]
+symbol = ""
+style = ""
+format = '[ $symbol$branch](fg:green)'
+
+[git_status]
+style = ""
+format = '[($all_status$ahead_behind)](fg:green)'
+
+[deno]
+symbol = "deno"
+detect_files = ['deno.json', 'deno.jsonc', 'deno.lock', 'mod.ts', 'mod.js', 'deps.ts', 'deps.js']
+format = '[@$symbol-($version)](fg:blue)'
+
+[bun]
+detect_files = ['bun.lockb', 'bun.lock', 'bun.toml']
+symbol = "bun"
+format = '[@$symbol-($version)](fg:blue)'
+
+[nodejs]
+symbol = "node"
+style = ""
+format = '[@$symbol-($version)](fg:blue)'
+detect_files = ['tsconfig.json']
+detect_folders = ['']
+detect_extensions = ['']
+
+[c]
+symbol = "C"
+style = ""
+format = '[@$symbol-($version)](fg:blue)'
+
+[shell]
+disabled = true
+
+[rust]
+symbol = "rs"
+style = ""
+format = '[@$symbol-($version)](fg:blue)'
+
+[golang]
+symbol = "go"
+style = ""
+format = '[@$symbol-($version)](fg:blue)'
+detect_files = [
+    'go.mod',
+    'glide.yaml',
+    'Gopkg.yml',
+    'Gopkg.lock',
+    '.go-version',
+]
+
+[php]
+symbol = "php"
+style = ""
+format = '[@$symbol-($version)](fg:blue)'
+
+[java]
+symbol = "java"
+style = ""
+format = '[@$symbol-($version)](fg:blue)'
+
+[kotlin]
+symbol = "kotlin"
+style = ""
+format = '[@$symbol-($version)](fg:blue)'
+
+[haskell]
+symbol = "󰊕"
+style = ""
+format = '[@$symbol-($version)](fg:blue)'
+
+[python]
+symbol = "py"
+style = ""
+format = '[@$symbol-($version)](fg:blue)'
+
+[docker_context]
+symbol = ""
+detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
+style = ""
+format = '[ \($symbol($context)\)](fg:deepblue)'
+
+
+[lua]
+symbol = "lua"
+disabled = false
+style = ""
+format = '[@$symbol-($version)](fg:blue)'
+detect_extensio	=["lua"]
+
+[time]
+disabled = false
+time_format = "%R"
+style = ""
+format = '[$time](fg:purple)'
+
+[cmd_duration]
+disabled = false
+min_time = 1
+format = '[<<$duration ](fg:teal)'
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[>](bold fg:blue)'
+error_symbol = '[>](bold fg:teal)'
+vimcmd_replace_one_symbol = '[<-](bold fg:purple)'
+vimcmd_replace_symbol = '[<-](bold fg:purple)'
+vimcmd_visual_symbol = '[<-](bold fg:lavender)'

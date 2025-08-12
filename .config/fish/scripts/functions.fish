@@ -32,6 +32,8 @@ function run --description 'Find the newest file modified in the last 10 minutes
                 rustc "$path" && ./"$filename"
             case 'sh'
                 sh "$path"
+            case 'fish'
+                fish "$path"
             case '*'
                 echo "No handler for extension: $extension"
         end
