@@ -17,3 +17,50 @@ function changeTmuxPane --description 'Change tmux pane with fuzzy selection'
     end
 end
 
+function run --description 'Find the latest file modified in the ~/projects and
+    run it'
+    set -l path (fd --type f -0 . ~/projects | xargs -0 stat --format='%Y %n' 2>/dev/null | sort -nr | head -1 | awk '{print $2}')
+
+    
+    if test -n "$path"
+        set -l filename (basename "$path")
+        set -l extension (string split -r -m1 . -- "$filename")[-1]
+
+        if test "$filename" = "$extension"
+            set extension ""
+        end
+
+
+        switch $extension
+            case 'c' 'c++' 'cpp'
+                g++ "$path"
+            case 'out'
+                ./a.out
+            case 'java'
+                java "$path"
+            case 'go'
+                go run "$path"
+            case 'lua'
+                lua "$path"
+            case 'py'
+                python "$path"
+            case 'js'
+                node "$path"
+            case 'ts'
+                deno "$path"
+            case 'rs'
+                rustc "$path" && ./"$filename"
+            case 'sh'
+                sh "$path"
+            case 'fish'
+                fish "$path"
+            case '*'
+                echo "No handler for extension: $extension"
+        end
+
+        echo "$path"
+    else
+        echo "no file found"
+    end
+
+end

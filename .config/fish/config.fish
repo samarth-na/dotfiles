@@ -1,5 +1,8 @@
 # user fish config there is also some changes in /etc/fish/config.fish
 
+# Check if the system is Fedora
+if test -f /etc/fedora-release
+
 # global PATH setup
 # set -gx PATH $PATH /usr/bin
 # set -gx PATH $PATH /usr/sbin
@@ -45,4 +48,7 @@ if status is-interactive
     bind \ck _atuin_search
 end
 
+else
+
+end
 
