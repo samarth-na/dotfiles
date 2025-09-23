@@ -1,0 +1,48 @@
+body {
+    margin: 40px auto;
+    max-width: 650px;
+    line-height: 1.6;
+    font-size: 18px;
+    color: #eee;
+    padding: 0 10px;
+    background-color: #444;
+    text-align: center;
+    margin: 5rem;
+}
+
+td {
+    border: 1px solid black;
+}
+button {
+    position: fixed;
+}
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+    text-align: center;
+}
+
+.parent {
+    display: flex;
+    gap: 20rem;
+    margin-left: 6rem;
+    margin-bottom: 5rem;
+}
+.html {
+    background-color: red;
+    width: 100px;
+    height: 30px;
+}
+.css {
+    background-color: blue;
+    width: 100px;
+    height: 30px;
+}
+.js {
+    background-color: yellow;
+    margin-left: 20rem;
+    width: 100px;
+    height: 30px;
+    margin-bottom: 5rem;
+}

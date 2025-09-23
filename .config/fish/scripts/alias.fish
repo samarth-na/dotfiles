@@ -1,4 +1,4 @@
-alias c='clear'
+alias c='clear' # use ctrl-l
 
 # apps 
 

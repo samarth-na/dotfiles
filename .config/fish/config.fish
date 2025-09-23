@@ -27,6 +27,7 @@ set -gx PATH /home/linuxbrew/.linuxbrew/bin $PATH
 set -gx ZSH $HOME/.oh-my-zsh
 set -gx PATH $PATH /opt/nvim/
 set -gx OPENSSL_CONF ""
+# set -gx PATH /home/samarth/.composer/vendor/bin doesnt work!!!
 # set -gx MANPATH /usr/share/man 
 # set -gx ARCHFLAGS "-arch x86_64"
 # set -gx LANG "en_US.UTF-8"
@@ -34,16 +35,18 @@ set -gx OPENSSL_CONF ""
 # set -gx VISUAL "nvim"
 
 source ~/.config/fish/scripts/non-interactive.fish
+source ~/.config/fish/scripts/alias.fish
 
+# source ~/.config/fish/paths.fish
 
 if status is-interactive
 
     gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 
-    source ~/.config/fish/scripts/alias.fish
     source ~/.config/fish/scripts/functions.fish
     source ~/.config/fish/scripts/commands.fish
     source ~/.config/fish/completions/homebrew.fish
+        
 
     bind \ck _atuin_search
 end

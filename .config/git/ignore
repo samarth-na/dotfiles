@@ -1,2 +1,8 @@
 .env
+node_moduls
 env
+.DS_Store
+.idea
+.vscode
+*.log
+*.swp

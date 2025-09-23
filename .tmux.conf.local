@@ -11,7 +11,7 @@
 
 set -g default-terminal "screen-256color"
 set-option -ga terminal-overrides ",*:RGB"
-set-option -g terminal-overrides '*:independent-colors:XT'
+# set-option -g terminal-overrides '*:independent-colors:XT'
 setw -g xterm-keys on
 set -s focus-events on
 set -q -g status-utf8 on                  # expect UTF-8 (tmux < 2.2)
@@ -317,7 +317,7 @@ tmux_conf_theme_pairing_bg="none"
 tmux_conf_theme_pairing_attr="none"
 
 # Prefix indicator
-tmux_conf_theme_prefix=" "
+tmux_conf_theme_prefix=" 󰌓 "
 tmux_conf_theme_prefix_fg="none"
 tmux_conf_theme_prefix_bg="none"
 tmux_conf_theme_prefix_attr="none"

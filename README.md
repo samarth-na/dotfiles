@@ -8,58 +8,58 @@
 
 ## main applications
 
--   **neovim** - fast/cli/modal code editor (dnf)
--   **alacritty** - fast/beautiful terminal emulator (flatpak)
--   **tmux** - powerful/peristing terminal multiplexer (dnd)
--   **zsh** - modern shell with plugin support (dnf)
+- **neovim** - fast/cli/modal code editor (dnf)
+- **alacritty** - fast/beautiful terminal emulator (flatpak)
+- **tmux** - powerful/peristing terminal multiplexer (dnd)
+- **zsh** - modern shell with plugin support (dnf)
 
 ### other apps
 
--   **yazi** - amazing file manager (linuxbrew/cargo)
--   **btop** - beautiful system monitor (dnf)
--   **lazygit** - tui git client (dnf)
--   **zoxide** - better cd alternative (dnf)
+- **yazi** - amazing file manager (linuxbrew/cargo)
+- **btop** - beautiful system monitor (dnf)
+- **lazygit** - tui git client (dnf)
+- **zoxide** - better cd alternative (dnf)
 
 ### tools
 
--   **fzf** - fuzzy finder utility (dnf)
--   **atuin** - shell history manager/search (linuxbrew)
--   **starship** - status line prompt (dnf)
--   **eza** - better ls alternative (dnf)
--   **vlc** - video player (flatpack)
--   **mpv** - terminal audio player (dnf)
--   **htop** - system monitor (dnf)
--   **procs** - better ps alternative (dnf)
--   **gdu** - disk usage analyzer (dnf)
--   **bat** - better cat alternative (dnf)
--   **ripgrep** - better grep alternative (dnf)
--   **fd** - better find alternative (dnf)
--   **hyperfine** - benchmarking tool (dnf)
--   **duf** - better df alternative (dnf)
--   **dust** - better du alternative (linuxbrew)
--   **tabiew** - viewer for csv and tsv files (linuxbrew)
--   **dua** - disk usage analyzer (linuxbrew)
--   **topgrade** - upgrade all packages (linuxbrew)
--   **age** - file encryption tool (dnf)
+- **fzf** - fuzzy finder utility (dnf)
+- **atuin** - shell history manager/search (linuxbrew)
+- **starship** - status line prompt (dnf)
+- **eza** - better ls alternative (dnf)
+- **vlc** - video player (flatpack)
+- **mpv** - terminal audio player (dnf)
+- **htop** - system monitor (dnf)
+- **procs** - better ps alternative (dnf)
+- **gdu** - disk usage analyzer (dnf)
+- **bat** - better cat alternative (dnf)
+- **ripgrep** - better grep alternative (dnf)
+- **fd** - better find alternative (dnf)
+- **hyperfine** - benchmarking tool (dnf)
+- **duf** - better df alternative (dnf)
+- **dust** - better du alternative (linuxbrew)
+- **tabiew** - viewer for csv and tsv files (linuxbrew)
+- **dua** - disk usage analyzer (linuxbrew)
+- **topgrade** - upgrade all packages (linuxbrew)
+- **age** - file encryption tool (dnf)
 
 ### fonts
 
 ##### jetbrains mono nerd font
 
--   semi bold for interface and window titles
--   regular for documents and code
+- semi bold for interface and window titles
+- regular for documents and code
 
 ---
 
 ### neovim
 
--   dependencies -
+- dependencies -
 
 ```bash
 sudo dnf install  cmake gcc-c++ libtool libuv libvterm msgpack-devel unibilium gettext-devel lua-devel
 ```
 
--   install the package -
+- install the package -
 
 ```bash
 sudo dnf neovim
@@ -67,7 +67,7 @@ sudo dnf neovim
 
 ### install zsh and set it as default shell
 
--   installation
+- installation
 
 ```bash
 sudo dnf install zsh
@@ -76,13 +76,13 @@ zsh --version
 which zsh
 ```
 
--   install oh-my-zsh package manager of my choice
+- install oh-my-zsh package manager of my choice
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
--   set zsh as default shell
+- set zsh as default shell
 
 ```bash
 chsh -s $(which zsh)
@@ -106,20 +106,20 @@ sudo dnf install  btop lazygit fzf zoxide eza mpv htop procs gdu bat fd hyperfin
 
 ## linuxbrew
 
--   install build tools
+- install build tools
 
 ```bash
 sudo dnf groupinstall "Development Tools"
 sudo dnf install curl file git
 ```
 
--   install linuxbrew from source
+- install linuxbrew from source
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
--   test linuxbrew installation
+- test linuxbrew installation
 
 ```bash
 test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
@@ -179,7 +179,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 
 ## rust
 
--   rustup/cargo installation
+- rustup/cargo installation
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -207,19 +207,19 @@ sudo dnf install python3-pip
 
 ## yazi
 
--   the dependencies
+- the dependencies
 
 ```bash
 sudo dnf install ffmpegthumbnailer p7zip p7zip-plugins jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick xclip xsel wl-clipboard
 ```
 
--   yazi installation from cargo _(you need to have rust installed)_
+- yazi installation from cargo _(you need to have rust installed)_
 
 ```bash
 cargo install --locked --git https://github.com/sxyazi/yazi.git yazi-fm yazi-cli
 ```
 
--   yazi installation with linuxbrew
+- yazi installation with linuxbrew
 
 ```bash
 brew install yazi
