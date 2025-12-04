@@ -19,7 +19,7 @@ end
 
 function run --description 'Find the latest file modified in the ~/codes and
     run it'
-    set -l path (fd --type f -0 . ~/codes | xargs -0 stat --format='%Y %n' 2>/dev/null | sort -nr | head -1 | awk '{print $2}')
+    set -l path = (fd --type f -0 . ~/codes | xargs -0 stat --format='%Y %n' 2>/dev/null | sort -nr | head -1 | awk '{print $2}')
 
     
     if test -n "$path"
