@@ -10,7 +10,9 @@ if test -f /etc/fedora-release
 
 # local PATHS
 set -gx PATH $PATH $HOME/bin \ $HOME/.local/bin
-set -gx GOPATH $HOME/go \ $HOME/go/bin \ /usr/local/go/bin
+
+set -Ux GOPATH $HOME/go
+set -Ux PATH $HOME/go/bin $PATH
 # set -gx PATH $PATH $HOME/.cargo/bin 
 
 # javascript PATHS
@@ -55,3 +57,6 @@ else
 
 end
 
+
+# opencode
+fish_add_path /home/samarth/.opencode/bin
