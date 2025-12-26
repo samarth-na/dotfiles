@@ -11,9 +11,9 @@ if test -f /etc/fedora-release
 # local PATHS
 set -gx PATH $PATH $HOME/bin \ $HOME/.local/bin
 
-set -Ux GOPATH $HOME/go
-set -Ux PATH $HOME/go/bin $PATH
 # set -gx PATH $PATH $HOME/.cargo/bin 
+set -gx GOPATH $HOME/go
+set -gx PATH /usr/local/go/bin $GOPATH/bin $PATH
 
 # javascript PATHS
 set -gx PATH $PATH $BUN_INSTALL/bin
