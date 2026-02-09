@@ -3,6 +3,8 @@ alias c='clear' # use ctrl-l
 # apps 
 
 alias e nvim
+alias o opencode
+alias ow "opencode web"
 alias fm yazi
 alias y yazi
 alias b btop

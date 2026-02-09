@@ -197,3 +197,5 @@ esac
 
 # bun completions
 [ -s "/home/samarth/.bun/_bun" ] && source "/home/samarth/.bun/_bun"
+
+. "$HOME/.turso/env"

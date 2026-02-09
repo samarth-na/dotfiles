@@ -104,13 +104,6 @@
     tag = yellow
     remoteBranch = magenta
 
-[interactive]
-    diffFilter = diff-so-fancy --patch
-    singlekey = true
-
-# Third-party: diff-so-fancy
-[diff-so-fancy]
-    markEmptyLines = false
 
 [url "git@github.com:samarth-na/"]
     insteadOf = "sn:"

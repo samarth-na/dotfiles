@@ -33,7 +33,7 @@ function run --description 'Find the latest file modified in the ~/codes and
 
         switch $extension
             case 'c' 'c++' 'cpp'
-                g++ "$path"
+                g++ "$path" && "./a.out"
             case 'out'
                 ./a.out
             case 'java'
