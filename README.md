@@ -1,226 +1,172 @@
-#### repository for all my dotfiles, End all be all for all my linux system and app configurations
+# Dotfiles
 
-> ### first update all packages
->
-> ```bash
-> sudo dnf update
-> ```
+Personal Fedora/Linux dotfiles for my terminal-first development workflow.
 
-## main applications
+This repo is centered on Fish, tmux, Neovim, and a small set of CLI tools I use every day. It is public for reference and backup, but it is still opinionated and machine-specific in a few places, so review before copying it directly onto your system.
 
-- **neovim** - fast/cli/modal code editor (dnf)
-- **alacritty** - fast/beautiful terminal emulator (flatpak)
-- **tmux** - powerful/peristing terminal multiplexer (dnd)
-- **zsh** - modern shell with plugin support (dnf)
+## What this repo manages
 
-### other apps
+- `fish` as the main shell
+- `tmux` for terminal multiplexing
+- `nvim` for editing
+- `starship` for the prompt
+- `atuin` for history
+- `yazi` for file management
+- `lazygit` and `lazydocker`
+- terminal configs for `ghostty`, `alacritty`, and `wezterm`
+- Git, htop, and a few extra app/env configs
 
-- **yazi** - amazing file manager (linuxbrew/cargo)
-- **btop** - beautiful system monitor (dnf)
-- **lazygit** - tui git client (dnf)
-- **zoxide** - better cd alternative (dnf)
+## Supported environment
 
-### tools
+This setup currently assumes:
 
-- **fzf** - fuzzy finder utility (dnf)
-- **atuin** - shell history manager/search (linuxbrew)
-- **starship** - status line prompt (dnf)
-- **eza** - better ls alternative (dnf)
-- **vlc** - video player (flatpack)
-- **mpv** - terminal audio player (dnf)
-- **htop** - system monitor (dnf)
-- **procs** - better ps alternative (dnf)
-- **gdu** - disk usage analyzer (dnf)
-- **bat** - better cat alternative (dnf)
-- **ripgrep** - better grep alternative (dnf)
-- **fd** - better find alternative (dnf)
-- **hyperfine** - benchmarking tool (dnf)
-- **duf** - better df alternative (dnf)
-- **dust** - better du alternative (linuxbrew)
-- **tabiew** - viewer for csv and tsv files (linuxbrew)
-- **dua** - disk usage analyzer (linuxbrew)
-- **topgrade** - upgrade all packages (linuxbrew)
-- **age** - file encryption tool (dnf)
+- Fedora or another `dnf`-based Linux distro
+- an XDG-style config layout under `~/.config`
+- GNOME in some places
+- a Nerd Font, especially JetBrains Mono Nerd Font
+- Homebrew/Linuxbrew for a few extra CLI packages
 
-### fonts
+## Repository layout
 
-##### jetbrains mono nerd font
+- `.config/` - main XDG application configs
+- `.config/fish/` - Fish config, aliases, functions, completions, and scripts
+- `.config/nvim/` - Neovim config managed as a git submodule
+- `.config/ghostty/` - Ghostty terminal config
+- `.config/alacritty/` - Alacritty config
+- `.config/git/` - Git config
+- `.config/yazi/` - Yazi config
+- `.tmux.conf` - upstream tmux base config
+- `.tmux.conf.local` - personal tmux overrides
+- `.vimrc` - fallback Vim config
+- `.wezterm.lua` - WezTerm config
+- `env-configs/` - extra app and environment config files
+- `redis.conf` - standalone Redis config
 
-- semi bold for interface and window titles
-- regular for documents and code
+## Core tools
 
----
-
-### neovim
-
-- dependencies -
+Main tools I expect to have installed:
 
 ```bash
-sudo dnf install  cmake gcc-c++ libtool libuv libvterm msgpack-devel unibilium gettext-devel lua-devel
+sudo dnf install fish tmux neovim git fzf zoxide starship ripgrep fd-find bat htop btop lazygit zoxide eza mpv procs gdu hyperfine
 ```
 
-- install the package -
+Useful clipboard tools for tmux and terminal workflows:
 
 ```bash
-sudo dnf neovim
+sudo dnf install wl-clipboard xclip xsel
 ```
 
-### install zsh and set it as default shell
-
-- installation
+Some tools I use come from Homebrew/Linuxbrew instead of `dnf`:
 
 ```bash
-sudo dnf install zsh
-# check the installation and source
-zsh --version
-which zsh
+brew install atuin yazi duf dua tabiew topgrade
 ```
 
-- install oh-my-zsh package manager of my choice
+## Installation
+
+Clone the repo with submodules so Neovim is pulled in too:
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone --recurse-submodules <your-repo-url> ~/dotfiles
 ```
 
-- set zsh as default shell
+If you already cloned without submodules:
 
 ```bash
-chsh -s $(which zsh)
+git submodule update --init --recursive
 ```
 
-### install tmux
+This repo does not currently ship with a bootstrap script or a `stow` setup, so the safe way to use it is to review the files you want and symlink them manually.
+
+Example:
 
 ```bash
-sudo dnf install tmux
+ln -s ~/dotfiles/.config/fish ~/.config/fish
+ln -s ~/dotfiles/.config/ghostty ~/.config/ghostty
+ln -s ~/dotfiles/.config/alacritty ~/.config/alacritty
+ln -s ~/dotfiles/.config/nvim ~/.config/nvim
+ln -s ~/dotfiles/.config/git ~/.config/git
+ln -s ~/dotfiles/.config/yazi ~/.config/yazi
+ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+ln -s ~/dotfiles/.tmux.conf.local ~/.tmux.conf.local
+ln -s ~/dotfiles/.wezterm.lua ~/.wezterm.lua
 ```
 
-basic setup is complete time to install other apps and tools
+Back up your existing configs first if you already use any of these tools.
 
-### other available apps on dnf
+## Fish setup
+
+Fish is the main shell in this repo.
+
+After installing it:
 
 ```bash
-sudo dnf install  btop lazygit fzf zoxide eza mpv htop procs gdu bat fd hyperfine
+chsh -s $(which fish)
 ```
 
----
+The Fish config expects or references tools such as:
 
-## linuxbrew
+- `starship`
+- `atuin`
+- `bun`
+- `nvm`
+- `go`
+- Homebrew/Linuxbrew
 
-- install build tools
+There are also a few machine-specific paths in the current config, so review `~/.config/fish/config.fish` before using it as-is.
+
+## Neovim
+
+Neovim lives in `.config/nvim/` and is tracked as a git submodule:
 
 ```bash
-sudo dnf groupinstall "Development Tools"
-sudo dnf install curl file git
+git submodule update --init --recursive
 ```
 
-- install linuxbrew from source
+If you want the full setup, make sure the language/runtime tools your Neovim config depends on are installed too.
+
+## Fonts
+
+This setup assumes JetBrains Mono Nerd Font.
+
+I use it across terminal and editor configs, so install a Nerd Font first if icons or prompt symbols look wrong.
+
+## Local and private config
+
+Some parts of this repo are intentionally personal and should be reviewed before reuse:
+
+- hardcoded `/home/samarth/...` paths
+- Homebrew path assumptions under `/home/linuxbrew/.linuxbrew`
+- GNOME `gsettings` changes in shell startup
+- local env files such as `/home/samarth/.deno/env` and `$HOME/.turso/env`
+- personal Git identity in `.config/git/config`
+
+If you adapt this repo, keep secrets, machine-local paths, and personal identity settings in untracked local files.
+
+## Optional tools
+
+Other tools I use in this repo:
+
+- `ghostty`
+- `alacritty`
+- `wezterm`
+- `lazydocker`
+- `redis`
+- browser and CSS snippets under `env-configs/`
+
+## Updating
+
+Update the repo and its submodules with:
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+git pull
+git submodule update --init --recursive
 ```
 
-- test linuxbrew installation
+Then restart Fish, tmux, or your terminal apps as needed.
 
-```bash
-test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+## Notes
 
-brew --version
-# test the installation
-brew install hello
-```
-
-Ensure Homebrew is up-to-date:
-
-```bash
-brew update
-brew upgrade
-```
-
-> ##### linuxbrew is an fork of Homebrew, the package manager for macOS. this lets us install all apps we macos have but dnf doesnt
-
-packages available on linuxbrew
-
-```bash
-brew install tabiew duf dua atuin topgrade
-```
-
----
-
-# important package managers/languages
-
-## JS/TS package managers
-
-### bun
-
-```bash
-curl -fsSL https://bun.sh/install | bash # for macOS, Linux, and WSL
-```
-
-### npm & node
-
-```bash
-sudo dnf install  nodejs npm
-```
-
-### pnpm install
-
-```bash
-sudo npm i -g pnpm
-```
-
-### nvm install
-
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-```
-
----
-
-## rust
-
-- rustup/cargo installation
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-
-## golang
-
-```bash
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.6.linux-amd64.tar.gz
-```
-
-## c++
-
-```bash
-sudo dnf install g++ gcc-c++
-```
-
-## python3/pip
-
-```bash
-sudo dnf install python3-pip
-```
-
----
-
-## yazi
-
-- the dependencies
-
-```bash
-sudo dnf install ffmpegthumbnailer p7zip p7zip-plugins jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick xclip xsel wl-clipboard
-```
-
-- yazi installation from cargo _(you need to have rust installed)_
-
-```bash
-cargo install --locked --git https://github.com/sxyazi/yazi.git yazi-fm yazi-cli
-```
-
-- yazi installation with linuxbrew
-
-```bash
-brew install yazi
-```
+- This repo is meant first for my own machines
+- it should still be useful as reference or a starting point
+- fork it, trim it, and make it yours instead of copying it blindly
