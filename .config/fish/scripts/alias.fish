@@ -12,7 +12,7 @@ alias ld lazydocker
 alias lg lazygit
 
 alias oma ollama
-alias stl systemctl
+alias ctl systemctl
 alias ff fastfetch
 
 alias E='sudo nvim'
