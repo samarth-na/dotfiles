@@ -10,17 +10,9 @@
             "output": 262144
           },
           "name": "kimi-k2.5:cloud"
-        },
-        "qwen3.5:397b-cloud": {
-          "_launch": true,
-          "name": "qwen3.5:397b-cloud"
-        },
-        "qwen3.5:cloud": {
-          "_launch": true,
-          "name": "qwen3.5:cloud"
         }
       },
-      "name": "Ollama (local)",
+      "name": "Ollama",
       "npm": "@ai-sdk/openai-compatible",
       "options": {
         "baseURL": "http://127.0.0.1:11434/v1"

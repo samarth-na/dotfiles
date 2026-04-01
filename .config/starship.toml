@@ -235,7 +235,8 @@ disabled = false
 [character]
 disabled = false
 success_symbol = '[>](bold fg:blue)'
+vimcmd_symbol = '[^](bold fg:teal)'
 error_symbol = '[>](bold fg:teal)'
-vimcmd_replace_one_symbol = '[<-](bold fg:purple)'
-vimcmd_replace_symbol = '[<-](bold fg:purple)'
-vimcmd_visual_symbol = '[<-](bold fg:lavender)'
+vimcmd_replace_one_symbol = '[^](bold fg:red)'
+vimcmd_replace_symbol = '[^](bold fg:red)'
+vimcmd_visual_symbol = '[^](bold fg:purple)'

@@ -17,7 +17,8 @@ alias ff fastfetch
 
 alias E='sudo nvim'
 alias N='sudo nvim'
-alias kn='killall nvim '
+alias kn='killall nvim'
+alias ko='killall opencode'
 alias obs="cd ~/obsidian/ && nvim "
 
 

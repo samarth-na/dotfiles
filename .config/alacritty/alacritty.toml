@@ -87,5 +87,5 @@ history = 10000
 # dynamic_padding = true
 
 [window.padding]
-x = 0
+x = 2
 y = 1

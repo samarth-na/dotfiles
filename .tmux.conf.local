@@ -379,6 +379,7 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'omerxx/tmux-sessionx'
 set -g @plugin 'sainnhe/tmux-fzf'
+set -g @plugin 'Ataraxy-Labs/opensessions'
 
 # Plugin configuration
 set -g @continuum-restore 'on'

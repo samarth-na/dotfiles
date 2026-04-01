@@ -38,6 +38,7 @@ set -gx OPENSSL_CONF ""
 
 source ~/.config/fish/scripts/non-interactive.fish
 source ~/.config/fish/scripts/alias.fish
+source ~/.config/fish/vim.fish
 
 # source ~/.config/fish/paths.fish
 
