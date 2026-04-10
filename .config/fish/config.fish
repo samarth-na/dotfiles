@@ -42,14 +42,21 @@ source ~/.config/fish/vim.fish
 
 # source ~/.config/fish/paths.fish
 
+
+gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+
 if status is-interactive
 
-    gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 
     source ~/.config/fish/scripts/functions.fish
     source ~/.config/fish/scripts/commands.fish
     source ~/.config/fish/completions/homebrew.fish
-        
+
+    starship init fish | source
+    zoxide init fish | source
+    zoxide init --cmd cd fish | source
+
+    atuin init fish | source
 
     bind \ck _atuin_search
 end
