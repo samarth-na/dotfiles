@@ -1,22 +1,48 @@
 {
-  "$schema": "https://opencode.ai/config.json",
-  "provider": {
-    "ollama": {
-      "models": {
-        "kimi-k2.5:cloud": {
-          "_launch": true,
-          "limit": {
-            "context": 262144,
-            "output": 262144
-          },
-          "name": "kimi-k2.5:cloud"
+    "$schema": "https://opencode.ai/config.json",
+    "default_agent": "plan",
+    "agent": {
+        "explore": {
+            "model": "opencode/minimax-m2.5-free"
+        },
+        "general": {
+            "model": "opencode-go/qwen3.5-plus"
+        },
+        "code": {
+            "model": "opencode-go/minimax-m2.7"
+        },
+        "ask": {
+            "model": "opencode-go/qwen3.5-plus"
         }
-      },
-      "name": "Ollama",
-      "npm": "@ai-sdk/openai-compatible",
-      "options": {
-        "baseURL": "http://127.0.0.1:11434/v1"
-      }
+    },
+    "plugin": ["@mohak34/opencode-notifier@latest"],
+    "lsp": {
+        "biome": {
+            "command": ["biome", "lsp-proxy"],
+            "extensions": [
+                ".js",
+                ".mjs",
+                ".cjs",
+                ".ts",
+                ".mts",
+                ".cts",
+                ".jsx",
+                ".tsx",
+                ".json"
+            ]
+        },
+        "typescript-language-server": {
+            "command": ["typescript-language-server", "--stdio"],
+            "extensions": [".ts", ".tsx", ".js", ".jsx", ".json"]
+        },
+        "eslint": {
+            "command": [
+                "eslint",
+                "--language=server",
+                "--stdin",
+                "--stdin-filename"
+            ],
+            "extensions": [".js", ".mjs", ".cjs", ".ts", ".jsx", ".tsx"]
+        }
     }
-  }
 }

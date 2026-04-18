@@ -69,15 +69,15 @@ TERM = "xterm-256color"
   hide_when_typing= true
 
 [font]
-size = 11.0
+size = 13.0
 offset.x = 0  # For letter spacing (default: 0)
 offset.y = 0  # For line spacing (default: 0)
 
 [font.normal]
-family = "OpenDyslexicM Nerd Font Mono"
-# family = "BlexMono Nerd font"
+# family = "OpenDyslexicM Nerd Font Mono"
+family = "jetbrains mono Nerd font"
 # family = "GeistMono Nerd font"
-style = "medium"
+style = "Regular"
 
 [window]
 decorations = "none"

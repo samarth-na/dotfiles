@@ -10,7 +10,6 @@
 # Terminal and encoding settings
 
 set -g default-terminal "screen-256color"
-set -sg escape-time 0
 set-option -ga terminal-overrides ",*:RGB"
 # set-option -g terminal-overrides '*:independent-colors:XT'
 setw -g xterm-keys on
@@ -37,6 +36,8 @@ set -g display-time 1000                  # slightly longer status messages disp
 
 # Activity monitoring
 set -g monitor-activity on
+setw -g monitor-bell on
+set -g bell-action any
 set -g visual-activity off
 
 # Visual styling
@@ -229,7 +230,6 @@ tmux_conf_theme=true
  tmux_conf_theme_colour_16="#ff757f"   # red (Errors)
  tmux_conf_theme_colour_17="#ffffff"   # white (Foreground)
  tmux_conf_theme_colour_18="#ffffff"   # white (Foreground)
-
 # -- Window and Pane Styling --------------------------------------------------
 
 # Window style
@@ -380,7 +380,6 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'omerxx/tmux-sessionx'
 set -g @plugin 'sainnhe/tmux-fzf'
-set -g @plugin 'Ataraxy-Labs/opensessions'
 
 # Plugin configuration
 set -g @continuum-restore 'on'
