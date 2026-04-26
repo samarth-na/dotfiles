@@ -21,7 +21,6 @@ alias kn='killall nvim'
 alias ko='killall opencode'
 alias obs="cd ~/obsidian/ && nvim "
 
-
 # git
 # https://x.com/melqtx/status/1952632895014625606
 

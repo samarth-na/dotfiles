@@ -3,68 +3,64 @@
 # Check if the system is Fedora
 if test -f /etc/fedora-release
 
-# global PATH setup
-# set -gx PATH $PATH /usr/bin
-# set -gx PATH $PATH /usr/sbin
-# set -gx PATH $PATH /usr/local/bin
+    # global PATH setup
+    # set -gx PATH $PATH /usr/bin
+    # set -gx PATH $PATH /usr/sbin
+    # set -gx PATH $PATH /usr/local/bin
 
-# local PATHS
-set -gx PATH $PATH $HOME/bin \ $HOME/.local/bin
+    # local PATHS
+    set -gx PATH $PATH $HOME/bin \ $HOME/.local/bin
 
-# set -gx PATH $PATH $HOME/.cargo/bin 
-set -gx GOPATH $HOME/go
-set -gx PATH /usr/local/go/bin $GOPATH/bin $PATH
+    # set -gx PATH $PATH $HOME/.cargo/bin 
+    set -gx GOPATH $HOME/go
+    set -gx PATH /usr/local/go/bin $GOPATH/bin $PATH
 
-# javascript PATHS
-set -gx PATH $PATH $BUN_INSTALL/bin
-set -gx PATH $PATH ~/.deno/bin 
-set -gx BUN_INSTALL "$HOME/.bun"
-set -gx NVM_DIR "$HOME/.nvm"
-set -gx PNPM_HOME "/home/samarth/.local/share/pnpm"
+    # javascript PATHS
+    set -gx PATH $PATH $BUN_INSTALL/bin
+    set -gx PATH $PATH ~/.deno/bin
+    set -gx BUN_INSTALL "$HOME/.bun"
+    set -gx NVM_DIR "$HOME/.nvm"
+    set -gx PNPM_HOME "/home/samarth/.local/share/pnpm"
 
-# Linuxbrew
-set -gx PATH /home/linuxbrew/.linuxbrew/bin $PATH
+    # Linuxbrew
+    set -gx PATH /home/linuxbrew/.linuxbrew/bin $PATH
 
-# Other env vars
-set -gx ZSH $HOME/.oh-my-zsh
-set -gx PATH $PATH /opt/nvim/
-set -gx OPENSSL_CONF ""
-# set -gx PATH /home/samarth/.composer/vendor/bin doesnt work!!!
-# set -gx MANPATH /usr/share/man 
-# set -gx ARCHFLAGS "-arch x86_64"
-# set -gx LANG "en_US.UTF-8"
-# set -gx EDITOR "nvim"
-# set -gx VISUAL "nvim"
+    # Other env vars
+    set -gx ZSH $HOME/.oh-my-zsh
+    set -gx PATH $PATH /opt/nvim/
+    set -gx OPENSSL_CONF ""
+    # set -gx PATH /home/samarth/.composer/vendor/bin doesnt work!!!
+    # set -gx MANPATH /usr/share/man 
+    # set -gx ARCHFLAGS "-arch x86_64"
+    # set -gx LANG "en_US.UTF-8"
+    # set -gx EDITOR "nvim"
+    # set -gx VISUAL "nvim"
 
-source ~/.config/fish/scripts/non-interactive.fish
-source ~/.config/fish/scripts/alias.fish
-source ~/.config/fish/vim.fish
+    source ~/.config/fish/scripts/non-interactive.fish
+    source ~/.config/fish/scripts/alias.fish
+    source ~/.config/fish/vim.fish
 
-# source ~/.config/fish/paths.fish
+    # source ~/.config/fish/paths.fish
 
+    gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+    if status is-interactive
 
-gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+        source ~/.config/fish/scripts/functions.fish
+        source ~/.config/fish/scripts/commands.fish
+        source ~/.config/fish/completions/homebrew.fish
 
-if status is-interactive
+        starship init fish | source
+        zoxide init fish | source
+        zoxide init --cmd cd fish | source
 
+        atuin init fish | source
 
-    source ~/.config/fish/scripts/functions.fish
-    source ~/.config/fish/scripts/commands.fish
-    source ~/.config/fish/completions/homebrew.fish
-
-    starship init fish | source
-    zoxide init fish | source
-    zoxide init --cmd cd fish | source
-
-    atuin init fish | source
-
-    bind \ck _atuin_search
-end
+        bind \ck _atuin_search
+    end
 
 else
 
 end
-
 
 # opencode
 fish_add_path /home/samarth/.opencode/bin
@@ -72,6 +68,6 @@ fish_add_path /home/samarth/.opencode/bin
 # pnpm
 set -gx PNPM_HOME "/home/samarth/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end

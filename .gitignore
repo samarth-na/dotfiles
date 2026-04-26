@@ -1,2 +1,5 @@
 .config/git/a.out
 
+.config/opencode/opencode-notifier-state.json
+
+opencode-notifier-state.*
