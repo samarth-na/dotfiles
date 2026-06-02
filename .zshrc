@@ -199,3 +199,6 @@ esac
 [ -s "/home/samarth/.bun/_bun" ] && source "/home/samarth/.bun/_bun"
 
 . "$HOME/.turso/env"
+
+# Added by LM Studio CLI tool (lms)
+export PATH="$PATH:/home/samarth/.lmstudio/bin"

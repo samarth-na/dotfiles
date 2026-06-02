@@ -3,16 +3,10 @@
     "default_agent": "plan",
     "agent": {
         "explore": {
-            "model": "opencode/minimax-m2.5-free"
+            "model": "opencode/deepseek-v4-flash-free"
         },
         "general": {
-            "model": "opencode-go/qwen3.5-plus"
-        },
-        "code": {
-            "model": "opencode-go/minimax-m2.7"
-        },
-        "ask": {
-            "model": "opencode-go/qwen3.5-plus"
+            "model": "opencode/deepseek-v4-flash-free"
         }
     },
     "plugin": ["@mohak34/opencode-notifier@latest"],
@@ -30,10 +24,6 @@
                 ".tsx",
                 ".json"
             ]
-        },
-        "typescript-language-server": {
-            "command": ["typescript-language-server", "--stdio"],
-            "extensions": [".ts", ".tsx", ".js", ".jsx", ".json"]
         },
         "eslint": {
             "command": [

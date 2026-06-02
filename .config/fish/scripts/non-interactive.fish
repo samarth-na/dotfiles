@@ -17,11 +17,10 @@ function changeTmuxPane --description 'Change tmux pane with fuzzy selection'
     end
 end
 
-function run --description 'Find the latest file modified in the ~/codes and
+function run --description 'Find the latest file modified in the ~/coding and
     run it'
-    set -l path (fd --type f -0 . ~/codes | xargs -0 stat --format='%Y %n' 2>/dev/null | sort -nr | head -1 | awk '{print $2}')
+    set -l path (fd --type f -0 . ~/coding | xargs -0 stat --format='%Y %n' 2>/dev/null | sort -nr | head -1 | awk '{print $2}')
 
-    
     if test -n "$path"
         set -l filename (basename "$path")
         set -l extension (string split -r -m1 . -- "$filename")[-1]
@@ -30,29 +29,28 @@ function run --description 'Find the latest file modified in the ~/codes and
             set extension ""
         end
 
-
         switch $extension
-            case 'c' 'c++' 'cpp'
+            case c 'c++' cpp
                 g++ "$path" && "./a.out"
-            case 'out'
+            case out
                 ./a.out
-            case 'java'
+            case java
                 java "$path"
-            case 'go'
+            case go
                 go run "$path"
-            case 'lua'
+            case lua
                 lua "$path"
-            case 'py'
+            case py
                 python "$path"
-            case 'js'
+            case js
                 node "$path"
-            case 'ts'
-                deno "$path"
-            case 'rs'
+            case ts
+                bun "$path"
+            case rs
                 rustc "$path" && ./"$filename"
-            case 'sh'
+            case sh
                 sh "$path"
-            case 'fish'
+            case fish
                 fish "$path"
             case '*'
                 echo "No handler for extension: $extension"
