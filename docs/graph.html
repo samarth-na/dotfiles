@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vite React Scaffolding — Graph</title>
+<script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #161a22;
+    --border: #232a36;
+    --text: #e6e8ec;
+    --muted: #8a93a3;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; background: var(--bg); color: var(--text);
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; }
+  header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  header h1 { margin: 0; font-size: 15px; font-weight: 600; }
+  header .sub { color: var(--muted); font-size: 12px; }
+  .toolbar { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .toolbar label { color: var(--muted); font-size: 12px; display: flex; align-items: center; gap: 6px; }
+  .toolbar select { background: var(--panel); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; font: inherit; }
+  .toolbar button { background: var(--panel); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; cursor: pointer; font: inherit; }
+  .toolbar button:hover { border-color: #6ea8ff; }
+  #layout { display: grid; grid-template-columns: 1fr 320px; height: calc(100vh - 53px); }
+  #graph { background: var(--bg); }
+  #side { border-left: 1px solid var(--border); background: var(--panel); padding: 16px; overflow-y: auto; }
+  #side h3 { margin: 0 0 4px; font-size: 14px; }
+  #side .cat { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px; }
+  #side p { color: #c8cdd6; font-size: 13px; }
+  #side .pick { color: #2bd4a4; font-size: 12px; margin-top: 10px; }
+  #side .pick strong { color: #e6e8ec; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chip { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: #1f2533; border: 1px solid var(--border); color: var(--muted); }
+  .chip.on { color: #2bd4a4; border-color: rgba(43,212,164,0.4); background: rgba(43,212,164,0.08); }
+  .chip.off { color: #ff8a8a; border-color: rgba(255,138,138,0.3); }
+  .legend { position: absolute; bottom: 12px; left: 12px; background: rgba(22,26,34,0.92); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 11px; color: var(--muted); }
+  .legend .row { display: flex; align-items: center; gap: 6px; margin: 2px 0; }
+  .legend .sw { width: 10px; height: 10px; border-radius: 50%; }
+  #hint { position: absolute; top: 12px; right: 12px; background: rgba(22,26,34,0.92); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Vite React Scaffolding — Force Graph</h1>
+  <span class="sub">Drag nodes · scroll to zoom · click for details</span>
+  <div class="toolbar">
+    <label>Layout
+      <select id="layoutSel">
+        <option value="force">Force-directed</option>
+        <option value="hierarchy">Hierarchical</option>
+        <option value="grid">Grid</option>
+      </select>
+    </label>
+    <button id="fit">Fit</button>
+    <button id="stabilize">Re-stabilize</button>
+  </div>
+</header>
+<div id="layout">
+  <div id="graph"></div>
+  <aside id="side">
+    <h3 id="dName">Click a node</h3>
+    <div class="cat" id="dCat">—</div>
+    <p id="dBlurb">Select any node on the left to see what it is, when to pick it, and which features it has.</p>
+    <div class="pick" id="dPick" style="display:none">Pick this if: <strong id="dPickT"></strong></div>
+    <div class="meta" id="dMeta"></div>
+  </aside>
+</div>
+<div id="hint">Tip: drag the background to pan</div>
+<div class="legend" id="legend"></div>
+
+<script>
+const palette = {
+  "TypeScript": "#2bd4a4",
+  "TypeScript + React Compiler": "#ffb454",
+  "JavaScript": "#ff7a90",
+  "JavaScript + React Compiler": "#58c4ff",
+  "RSC": "#c084fc",
+  "React Router v7": "#6ea8ff",
+  "TanStack Router": "#b58cff",
+  "RedwoodSDK": "#4ade80",
+  "Vike": "#f472b6",
+  "Plain React (SPA)": "#374151",
+  "Full-framework / SSR": "#374151"
+};
+
+const items = [
+  { id: "ts", name: "TypeScript", cat: "Plain React (SPA)", pick: "Learning / small SPA",
+    blurb: "React 19 + Vite + TypeScript. The default modern client-side React app. No router, no server.",
+    meta: { "TypeScript": "on", "React Compiler": "off", "Routing": "off", "SSR": "off", "RSC": "off", "Data loading": "off" } },
+  { id: "tsc", name: "TypeScript + React Compiler", cat: "Plain React (SPA)", pick: "Auto-memoization",
+    blurb: "Same as the TS template but with Meta's React Compiler enabled. Auto-memoizes components at build time so you stop writing useMemo / useCallback / React.memo. Still experimental but stabilizing in React 19.",
+    meta: { "TypeScript": "on", "React Compiler": "on", "Routing": "off", "SSR": "off", "RSC": "off", "Data loading": "off" } },
+  { id: "js", name: "JavaScript", cat: "Plain React (SPA)", pick: "No TypeScript",
+    blurb: "Same as the TS template but plain JavaScript (with JSDoc types). Pick if you're not using TypeScript.",
+    meta: { "TypeScript": "off", "React Compiler": "off", "Routing": "off", "SSR": "off", "RSC": "off", "Data loading": "off" } },
+  { id: "jsc", name: "JavaScript + React Compiler", cat: "Plain React (SPA)", pick: "JS + auto-memo",
+    blurb: "JS variant with the React Compiler enabled.",
+    meta: { "TypeScript": "off", "React Compiler": "on", "Routing": "off", "SSR": "off", "RSC": "off", "Data loading": "off" } },
+  { id: "rsc", name: "RSC", cat: "Full-framework / SSR", pick: "Server rendering without Next",
+    blurb: "Official Vite plugin for React Server Components. Mix server-rendered and client components without pulling in Next.js. Closest to Next.js-lite, powered directly by the React team's RSC features.",
+    meta: { "TypeScript": "on", "React Compiler": "off", "Routing": "off", "SSR": "on", "RSC": "on", "Data loading": "on" } },
+  { id: "rr7", name: "React Router v7", cat: "Full-framework / SSR", pick: "Remix-style data + routing",
+    blurb: "The rebrand of Remix. Framework mode = file-based routes, loader/action functions, nested layouts, SSR. Library mode is just <BrowserRouter>. This template uses framework mode.",
+    meta: { "TypeScript": "on", "React Compiler": "off", "Routing": "on", "SSR": "on", "RSC": "off", "Data loading": "on" } },
+  { id: "tsr", name: "TanStack Router", cat: "Full-framework / SSR", pick: "Max type safety on routes",
+    blurb: "Type-safe router by Tanner Linsley. Killer feature: end-to-end type inference — route params, search params, and loaders are all type-checked from a single source of truth. File-based or code-based routing, first-class search-param validation.",
+    meta: { "TypeScript": "on", "React Compiler": "off", "Routing": "on", "SSR": "on", "RSC": "off", "Data loading": "on" } },
+  { id: "rw", name: "RedwoodSDK", cat: "Full-framework / SSR", pick: "Cloudflare Workers full-stack",
+    blurb: "Full-stack React framework targeted at Cloudflare Workers + RSC. Successor in spirit to RedwoodJS, but for the edge. Pick this if you're deploying to Cloudflare and want batteries included.",
+    meta: { "TypeScript": "on", "React Compiler": "off", "Routing": "on", "SSR": "on", "RSC": "on", "Data loading": "on" } },
+  { id: "vike", name: "Vike", cat: "Full-framework / SSR", pick: "Thin customizable Vite layer",
+    blurb: "Formerly vite-plugin-ssr. A flexible meta-framework on top of Vite: you choose your routing lib, data layer, and SSR strategy. Less opinionated than the others. Good for embedding React into an existing Vite app or when the other frameworks feel too prescriptive.",
+    meta: { "TypeScript": "on", "React Compiler": "off", "Routing": "BYO", "SSR": "on", "RSC": "off", "Data loading": "BYO" } }
+];
+
+// Build nodes
+const nodes = new vis.DataSet([
+  { id: "cat-plain", label: "Plain React\n(SPA, no routing/SSR)", shape: "box", color: { background: "#1f2533", border: "#4b5563" }, font: { color: "#8a93a3", multi: false }, margin: 10, widthConstraint: { maximum: 160 } },
+  { id: "cat-full", label: "Full-framework / SSR", shape: "box", color: { background: "#1f2533", border: "#4b5563" }, font: { color: "#8a93a3", multi: false }, margin: 10, widthConstraint: { maximum: 160 } },
+  ...items.map(i => ({
+    id: i.id, label: i.name, color: { background: palette[i.name], border: "#0f1115", highlight: { background: palette[i.name], border: "#fff" } },
+    font: { color: "#0f1115", face: "-apple-system, system-ui, sans-serif", size: 14, bold: { color: "#0f1115" } },
+    shape: "dot", size: 28, borderWidth: 2
+  }))
+]);
+
+// Edges: each item → its category; similarity edges within each group
+const edges = new vis.DataSet([
+  { from: "ts", to: "cat-plain", color: { color: "#3a4356" } },
+  { from: "tsc", to: "cat-plain", color: { color: "#3a4356" } },
+  { from: "js", to: "cat-plain", color: { color: "#3a4356" } },
+  { from: "jsc", to: "cat-plain", color: { color: "#3a4356" } },
+  { from: "rsc", to: "cat-full", color: { color: "#3a4356" } },
+  { from: "rr7", to: "cat-full", color: { color: "#3a4356" } },
+  { from: "tsr", to: "cat-full", color: { color: "#3a4356" } },
+  { from: "rw", to: "cat-full", color: { color: "#3a4356" } },
+  { from: "vike", to: "cat-full", color: { color: "#3a4356" } },
+  // similarity within plain (TS↔JS, on↔off compiler)
+  { from: "ts", to: "js", dashes: true, color: { color: "#4b5563" }, width: 1, length: 120 },
+  { from: "tsc", to: "jsc", dashes: true, color: { color: "#4b5563" }, width: 1, length: 120 },
+  { from: "ts", to: "tsc", dashes: true, color: { color: "#4b5563" }, width: 1, length: 100 },
+  { from: "js", to: "jsc", dashes: true, color: { color: "#4b5563" }, width: 1, length: 100 },
+  // similarity within full (all have SSR + data loading)
+  { from: "rr7", to: "tsr", dashes: true, color: { color: "#4b5563" }, width: 1, length: 120 },
+  { from: "rsc", to: "rw", dashes: true, color: { color: "#4b5563" }, width: 1, length: 120 },
+  { from: "rsc", to: "vike", dashes: true, color: { color: "#4b5563" }, width: 1, length: 140 }
+]);
+
+const container = document.getElementById("graph");
+const data = { nodes, edges };
+let options = {
+  physics: { stabilization: { iterations: 250 }, barnesHut: { gravitationalConstant: -8000, springLength: 130, springConstant: 0.04 } },
+  interaction: { hover: true, navigationButtons: false },
+  nodes: { borderWidth: 2 },
+  edges: { smooth: { type: "continuous" } }
+};
+let network = new vis.Network(container, data, options);
+network.fit();
+
+// Layout switcher
+document.getElementById("layoutSel").onchange = (e) => {
+  const v = e.target.value;
+  if (v === "force") {
+    options = { ...options, physics: { stabilization: { iterations: 250 } }, layout: { improvedLayout: true } };
+  } else if (v === "hierarchy") {
+    options = { ...options, layout: { hierarchical: { direction: "UD", sortMethod: "directed", levelSeparation: 120, nodeSpacing: 140 } }, physics: { enabled: false } };
+  } else if (v === "grid") {
+    options = { ...options, layout: { improvedLayout: false }, physics: { enabled: false } };
+  }
+  network.setOptions(options);
+  network.redraw();
+  setTimeout(() => network.fit(), 200);
+};
+
+document.getElementById("fit").onclick = () => network.fit();
+document.getElementById("stabilize").onclick = () => {
+  network.setOptions({ physics: { enabled: true } });
+  network.stabilize(200);
+  setTimeout(() => network.fit(), 300);
+};
+
+// Detail panel
+const dName = document.getElementById("dName");
+const dCat = document.getElementById("dCat");
+const dBlurb = document.getElementById("dBlurb");
+const dPick = document.getElementById("dPick");
+const dPickT = document.getElementById("dPickT");
+const dMeta = document.getElementById("dMeta");
+
+network.on("selectNode", (e) => {
+  const id = e.nodes[0];
+  if (id === "cat-plain" || id === "cat-full") {
+    dName.textContent = id === "cat-plain" ? "Plain React (SPA)" : "Full-framework / SSR";
+    dCat.textContent = "Category";
+    dBlurb.textContent = id === "cat-plain"
+      ? "Bare client-side React + Vite. No router, no server, no data layer. Just a SPA."
+      : "Apps that handle routing, data loading, and (usually) server rendering — not just a SPA.";
+    dPick.style.display = "none";
+    dMeta.innerHTML = "";
+    return;
+  }
+  const it = items.find(i => i.id === id);
+  if (!it) return;
+  dName.textContent = it.name;
+  dCat.textContent = it.cat;
+  dBlurb.textContent = it.blurb;
+  dPickT.textContent = it.pick;
+  dPick.style.display = "block";
+  dMeta.innerHTML = Object.entries(it.meta).map(([k, v]) => {
+    const cls = v === "on" ? "on" : v === "off" ? "off" : "";
+    return `<span class="chip ${cls}">${k}: ${v}</span>`;
+  }).join("");
+});
+
+// Legend
+const legend = document.getElementById("legend");
+legend.innerHTML = items.map(i => `<div class="row"><span class="sw" style="background:${palette[i.name]}"></span>${i.name}</div>`).join("") +
+  `<div class="row" style="margin-top:6px;border-top:1px solid #2a3140;padding-top:4px;"><span class="sw" style="background:#374151"></span>category</div>` +
+  `<div class="row"><span class="sw" style="background:transparent;border:1px dashed #4b5563"></span>similar</div>`;
+</script>
+</body>
+</html>

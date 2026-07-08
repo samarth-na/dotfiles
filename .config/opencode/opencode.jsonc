@@ -1,3 +1,12 @@
 {
-  "$schema": "https://opencode.ai/config.json"
+    "$schema": "https://opencode.ai/config.json",
+    "model": "opencode/deepseek-v4-flash-free",
+    "agent": {
+        "explore": {
+            "model": "opencode/deepseek-v4-flash-free",
+        },
+        "general": {
+            "model": "opencode/deepseek-v4-flash-free",
+        }
+    }
 }

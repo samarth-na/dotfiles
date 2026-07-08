@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vite React Scaffolding — Tree</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #161a22;
+    --border: #232a36;
+    --text: #e6e8ec;
+    --muted: #8a93a3;
+    --accent: #6ea8ff;
+    --accent-2: #b58cff;
+    --leaf: #2bd4a4;
+    --leaf-2: #ffb454;
+    --leaf-3: #ff7a90;
+    --leaf-4: #58c4ff;
+    --leaf-5: #c084fc;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; }
+  header { padding: 18px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  header h1 { margin: 0; font-size: 16px; font-weight: 600; letter-spacing: 0.2px; }
+  header .sub { color: var(--muted); font-size: 12px; }
+  .toolbar { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+  .toolbar input { background: var(--panel); color: var(--text); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 10px; min-width: 220px; font: inherit; }
+  .toolbar button { background: var(--panel); color: var(--text); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 10px; cursor: pointer; font: inherit; }
+  .toolbar button:hover { border-color: var(--accent); }
+  main { padding: 20px 24px 80px; max-width: 980px; }
+  .node { margin: 4px 0; }
+  .row { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; cursor: pointer; user-select: none; }
+  .row:hover { background: #1c2230; }
+  .row.dim { opacity: 0.25; }
+  .row.match { background: rgba(110, 168, 255, 0.12); }
+  .caret { width: 14px; display: inline-block; text-align: center; color: var(--muted); transition: transform 0.15s ease; }
+  .caret.open { transform: rotate(90deg); }
+  .caret.leaf { color: transparent; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: 0 0 10px; }
+  .dot.cat-1 { background: var(--leaf); }
+  .dot.cat-2 { background: var(--leaf-2); }
+  .dot.cat-3 { background: var(--leaf-3); }
+  .dot.cat-4 { background: var(--leaf-4); }
+  .dot.cat-5 { background: var(--leaf-5); }
+  .dot.cat-6 { background: var(--accent); }
+  .dot.cat-7 { background: var(--accent-2); }
+  .dot.cat-8 { background: #4ade80; }
+  .dot.cat-9 { background: #f472b6; }
+  .name { font-weight: 500; }
+  .tag { font-size: 11px; color: var(--muted); padding: 1px 6px; border: 1px solid var(--border); border-radius: 999px; margin-left: 6px; }
+  .children { margin-left: 22px; border-left: 1px dashed #2a3140; padding-left: 10px; display: none; }
+  .children.open { display: block; }
+  .detail { display: none; margin: 4px 8px 10px 32px; padding: 12px 14px; background: var(--panel);
+    border: 1px solid var(--border); border-radius: 8px; color: var(--text); }
+  .detail.open { display: block; }
+  .detail h4 { margin: 0 0 6px; font-size: 13px; color: var(--accent); }
+  .detail p { margin: 0 0 6px; color: #c8cdd6; }
+  .detail .pick { color: var(--leaf); font-size: 12px; }
+  .meta { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 0; }
+  .chip { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: #1f2533; border: 1px solid var(--border); color: var(--muted); }
+  .chip.on { color: var(--leaf); border-color: rgba(43, 212, 164, 0.4); background: rgba(43, 212, 164, 0.08); }
+  .chip.off { color: #ff8a8a; border-color: rgba(255, 138, 138, 0.3); }
+  .legend { margin-top: 24px; padding: 12px 14px; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-size: 12px; }
+  .kbd { background: #1f2533; border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Vite React Scaffolding — Tree</h1>
+  <span class="sub">9 options from <code>bun create vite</code></span>
+  <div class="toolbar">
+    <input id="search" placeholder="Filter by name or tag…" />
+    <button id="expand">Expand all</button>
+    <button id="collapse">Collapse all</button>
+  </div>
+</header>
+<main>
+  <div id="root"></div>
+  <div class="legend">
+    Click a row to expand/collapse. Click the name to toggle its detail panel.
+    Use the search box to filter; matches highlight, non-matches dim.
+    <br/><br/>
+    <span class="kbd">/</span> focuses search · <span class="kbd">Esc</span> clears it.
+  </div>
+</main>
+
+<script>
+const data = {
+  name: "Vite React Scaffolding",
+  tag: "9 options",
+  children: [
+    {
+      name: "Plain React (SPA, no routing, no SSR)",
+      tag: "4 options",
+      children: [
+        {
+          name: "TypeScript",
+          tag: "TS",
+          cls: "cat-1",
+          pick: "Learning / small SPA",
+          blurb: "React 19 + Vite + TypeScript. The default modern client-side React app. No router, no server.",
+          meta: { "TypeScript": "on", "React Compiler": "off", "Routing": "off", "SSR": "off", "RSC": "off", "Data loading": "off" }
+        },
+        {
+          name: "TypeScript + React Compiler",
+          tag: "TS + Compiler",
+          cls: "cat-2",
+          pick: "Auto-memoization",
+          blurb: "Same as the TS template but with Meta's React Compiler enabled. Auto-memoizes components at build time so you stop writing useMemo / useCallback / React.memo. Still experimental but stabilizing in React 19.",
+          meta: { "TypeScript": "on", "React Compiler": "on", "Routing": "off", "SSR": "off", "RSC": "off", "Data loading": "off" }
+        },
+        {
+          name: "JavaScript",
+          tag: "JS",
+          cls: "cat-3",
+          pick: "No TypeScript",
+          blurb: "Same as the TS template but plain JavaScript (with JSDoc types). Pick if you're not using TypeScript.",
+          meta: { "TypeScript": "off", "React Compiler": "off", "Routing": "off", "SSR": "off", "RSC": "off", "Data loading": "off" }
+        },
+        {
+          name: "JavaScript + React Compiler",
+          tag: "JS + Compiler",
+          cls: "cat-4",
+          pick: "JS + auto-memo",
+          blurb: "JS variant with the React Compiler enabled.",
+          meta: { "TypeScript": "off", "React Compiler": "on", "Routing": "off", "SSR": "off", "RSC": "off", "Data loading": "off" }
+        }
+      ]
+    },
+    {
+      name: "Full-framework / SSR",
+      tag: "5 options",
+      children: [
+        {
+          name: "RSC",
+          tag: "Server Components",
+          cls: "cat-5",
+          pick: "Server rendering without Next",
+          blurb: "Official Vite plugin for React Server Components. Mix server-rendered and client components without pulling in Next.js. Closest to Next.js-lite, powered directly by the React team's RSC features.",
+          meta: { "TypeScript": "on", "React Compiler": "off", "Routing": "off", "SSR": "on", "RSC": "on", "Data loading": "on" }
+        },
+        {
+          name: "React Router v7",
+          tag: "Remix rebrand",
+          cls: "cat-6",
+          pick: "Remix-style data + routing",
+          blurb: "The rebrand of Remix. Framework mode = file-based routes, loader/action functions, nested layouts, SSR. Library mode is just <BrowserRouter>. This template uses framework mode.",
+          meta: { "TypeScript": "on", "React Compiler": "off", "Routing": "on", "SSR": "on", "RSC": "off", "Data loading": "on" }
+        },
+        {
+          name: "TanStack Router",
+          tag: "Type-safe routing",
+          cls: "cat-7",
+          pick: "Max type safety on routes",
+          blurb: "Type-safe router by Tanner Linsley. Killer feature: end-to-end type inference — route params, search params, and loaders are all type-checked from a single source of truth. File-based or code-based routing, first-class search-param validation.",
+          meta: { "TypeScript": "on", "React Compiler": "off", "Routing": "on", "SSR": "on", "RSC": "off", "Data loading": "on" }
+        },
+        {
+          name: "RedwoodSDK",
+          tag: "Cloudflare edge",
+          cls: "cat-8",
+          pick: "Cloudflare Workers full-stack",
+          blurb: "Full-stack React framework targeted at Cloudflare Workers + RSC. Successor in spirit to RedwoodJS, but for the edge. Pick this if you're deploying to Cloudflare and want batteries included.",
+          meta: { "TypeScript": "on", "React Compiler": "off", "Routing": "on", "SSR": "on", "RSC": "on", "Data loading": "on" }
+        },
+        {
+          name: "Vike",
+          tag: "Flexible meta",
+          cls: "cat-9",
+          pick: "Thin customizable Vite layer",
+          blurb: "Formerly vite-plugin-ssr. A flexible meta-framework on top of Vite: you choose your routing lib, data layer, and SSR strategy. Less opinionated than the others. Good for embedding React into an existing Vite app or when the other frameworks feel too prescriptive.",
+          meta: { "TypeScript": "on", "React Compiler": "off", "Routing": "bring-your-own", "SSR": "on", "RSC": "off", "Data loading": "bring-your-own" }
+        }
+      ]
+    }
+  ]
+};
+
+const root = document.getElementById("root");
+
+function metaChips(meta) {
+  return Object.entries(meta).map(([k, v]) => {
+    const cls = v === "on" ? "on" : v === "off" ? "off" : "";
+    return `<span class="chip ${cls}">${k}: ${v}</span>`;
+  }).join("");
+}
+
+function renderNode(node, depth) {
+  const hasChildren = !!node.children;
+  const wrap = document.createElement("div");
+  wrap.className = "node";
+  wrap.dataset.search = (node.name + " " + (node.tag || "") + " " + (node.blurb || "")).toLowerCase();
+
+  const row = document.createElement("div");
+  row.className = "row";
+  const caret = document.createElement("span");
+  caret.className = "caret" + (hasChildren ? "" : " leaf");
+  caret.textContent = "▶";
+  const dot = document.createElement("span");
+  dot.className = "dot " + (node.cls || "cat-1");
+  const name = document.createElement("span");
+  name.className = "name";
+  name.textContent = node.name;
+  const tag = document.createElement("span");
+  tag.className = "tag";
+  tag.textContent = node.tag || "";
+  row.append(caret, dot, name, tag);
+  wrap.append(row);
+
+  if (hasChildren) {
+    const childWrap = document.createElement("div");
+    childWrap.className = "children open";
+    for (const c of node.children) childWrap.append(renderNode(c, depth + 1));
+    wrap.append(childWrap);
+    caret.addEventListener("click", (e) => {
+      e.stopPropagation();
+      childWrap.classList.toggle("open");
+      caret.classList.toggle("open");
+    });
+  }
+
+  if (node.blurb) {
+    const detail = document.createElement("div");
+    detail.className = "detail open";
+    detail.innerHTML = `
+      <h4>${node.name}</h4>
+      <p>${node.blurb}</p>
+      <p class="pick">Pick this if: <strong>${node.pick}</strong></p>
+      <div class="meta">${metaChips(node.meta)}</div>
+    `;
+    wrap.append(detail);
+    name.addEventListener("click", (e) => {
+      e.stopPropagation();
+      detail.classList.toggle("open");
+    });
+  }
+
+  return wrap;
+}
+
+root.append(renderNode(data, 0));
+
+// Expand/collapse all
+document.getElementById("expand").onclick = () => {
+  document.querySelectorAll(".children").forEach(c => c.classList.add("open"));
+  document.querySelectorAll(".caret:not(.leaf)").forEach(c => c.classList.add("open"));
+  document.querySelectorAll(".detail").forEach(d => d.classList.add("open"));
+};
+document.getElementById("collapse").onclick = () => {
+  document.querySelectorAll(".children").forEach(c => c.classList.remove("open"));
+  document.querySelectorAll(".caret:not(.leaf)").forEach(c => c.classList.remove("open"));
+  document.querySelectorAll(".detail").forEach(d => d.classList.remove("open"));
+};
+
+// Search / filter
+const search = document.getElementById("search");
+function applyFilter() {
+  const q = search.value.trim().toLowerCase();
+  document.querySelectorAll(".node").forEach(n => {
+    n.classList.remove("dim", "match");
+  });
+  if (!q) return;
+  let matched = 0;
+  document.querySelectorAll(".node").forEach(n => {
+    const hit = n.dataset.search.includes(q);
+    n.classList.toggle("match", hit);
+    if (hit) {
+      matched++;
+      // open all ancestors
+      let p = n.parentElement;
+      while (p && p !== root) {
+        if (p.classList.contains("children")) {
+          p.classList.add("open");
+          const prev = p.previousElementSibling;
+          if (prev) prev.querySelector(".caret")?.classList.add("open");
+        }
+        p = p.parentElement;
+      }
+    }
+  });
+  // dim non-matches
+  document.querySelectorAll(".node").forEach(n => {
+    if (!n.classList.contains("match")) n.classList.add("dim");
+  });
+}
+search.addEventListener("input", applyFilter);
+window.addEventListener("keydown", (e) => {
+  if (e.key === "/" && document.activeElement !== search) { e.preventDefault(); search.focus(); }
+  if (e.key === "Escape") { search.value = ""; applyFilter(); search.blur(); }
+});
+</script>
+</body>
+</html>
