@@ -4,6 +4,7 @@ alias c='clear' # use ctrl-l
 
 alias e nvim
 alias o opencode
+alias o2 opencode2
 alias ow "opencode web"
 alias fm yazi
 alias y yazi

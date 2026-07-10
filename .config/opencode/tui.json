@@ -1,0 +1,15 @@
+{
+    "$schema": "https://opencode.ai/tui.json",
+    "keybinds": {
+        "session_rename": "none"
+    },
+    "plugin": [
+        [
+            "@renjfk/opencode-voice",
+            {
+                "endpoint": "http://127.0.0.1:1/v1",
+                "model": "no-llm"
+            }
+        ]
+    ]
+}
