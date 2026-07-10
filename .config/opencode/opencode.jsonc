@@ -8,5 +8,23 @@
         "general": {
             "model": "opencode/deepseek-v4-flash-free",
         }
+    },
+    "mcp": {
+        "linear": {
+            "type": "remote",
+            "url": "https://mcp.linear.app/mcp"
+        },
+        "better-auth": {
+            "type": "remote",
+            "url": "https://mcp.better-auth.com/mcp"
+        },
+        "postgres": {
+            "type": "local",
+            "command": ["uvx", "postgres-mcp", "--access-mode=restricted"],
+            "enabled": true,
+            "environment": {
+                "DATABASE_URI": "{env:DATABASE_URI}"
+            }
+        }
     }
 }
