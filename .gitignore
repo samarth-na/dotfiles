@@ -3,3 +3,6 @@
 .config/opencode/opencode-notifier-state.json
 
 opencode-notifier-state.*
+
+# secrets
+.config/opencode/service.json
