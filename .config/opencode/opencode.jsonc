@@ -6,8 +6,11 @@
             "model": "opencode/deepseek-v4-flash-free",
         },
         "general": {
-            "model": "opencode/deepseek-v4-flash-free",
-        }
+            "model": "opencode/mimo-v2.5-free",
+        },
+        "git-wizard": {
+            "color": "#0eef23" //green
+        },
     },
     "mcp": {
         "linear": {
@@ -20,7 +23,11 @@
         },
         "postgres": {
             "type": "local",
-            "command": ["uvx", "postgres-mcp", "--access-mode=restricted"],
+            "command": [
+                "uvx",
+                "postgres-mcp",
+                "--access-mode=restricted"
+            ],
             "enabled": true,
             "environment": {
                 "DATABASE_URI": "{env:DATABASE_URI}"
