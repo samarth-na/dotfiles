@@ -21,6 +21,14 @@
             "type": "remote",
             "url": "https://mcp.better-auth.com/mcp"
         },
+        "github": {
+            "type": "local",
+            "command": [
+                "gh",
+                "mcp"
+            ],
+            "enabled": true
+        },
         "postgres": {
             "type": "local",
             "command": [
@@ -33,5 +41,6 @@
                 "DATABASE_URI": "{env:DATABASE_URI}"
             }
         }
-    }
+    },
+    "shell": "/bin/bash"
 }

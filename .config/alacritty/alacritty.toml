@@ -76,7 +76,9 @@ offset.y = 0  # For line spacing (default: 0)
 # family = "OpenDyslexicM Nerd Font Mono"
 family = "jetbrains mono Nerd font"
 # family = "GeistMono Nerd font"
-style = "Regular"
+
+style = "light"
+# style = "regular"
 
 [window]
 decorations = "none"
