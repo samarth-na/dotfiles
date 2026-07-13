@@ -5,7 +5,7 @@ alias c='clear' # use ctrl-l
 alias e nvim
 alias o opencode
 alias o2 opencode2
-alias ow "opencode web"
+alias ow "opencode web --port 4311"
 alias fm yazi
 alias y yazi
 alias b btop

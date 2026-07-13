@@ -8,9 +8,6 @@
         "general": {
             "model": "opencode/mimo-v2.5-free",
         },
-        "git-wizard": {
-            "color": "#0eef23" //green
-        },
     },
     "mcp": {
         "linear": {
