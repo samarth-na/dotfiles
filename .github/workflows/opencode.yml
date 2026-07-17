@@ -117,5 +117,6 @@ jobs:
               --base main \
               --head dev \
               --title "Review: $SHORT_SHA" \
-              --body-file /tmp/pr-body.md
+              --body-file /tmp/pr-body.md \
+              --add-reviewer samarth-na
           fi

@@ -8,6 +8,9 @@
         "general": {
             "model": "opencode/mimo-v2.5-free",
         },
+        "worker": {
+            "model": "opencode/deepseek-v4-flash-free",
+        },
     },
     "mcp": {
         "linear": {
@@ -36,6 +39,19 @@
             "enabled": true,
             "environment": {
                 "DATABASE_URI": "{env:DATABASE_URI}"
+            }
+        },
+        "vision": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "@z_ai/mcp-server@latest"
+            ],
+            "enabled": true,
+            "environment": {
+                "Z_AI_API_KEY": "{env:Z_AI_API_KEY}",
+                "Z_AI_MODE": "ZAI"
             }
         }
     },
