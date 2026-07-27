@@ -1,5 +1,7 @@
 # AGENTS.md
 
+**This repo is symlinked into `$HOME` via GNU Stow. Edit files in place here — do NOT look in `~/.config/opencode`, `~/.config/fish`, `~/.config/nvim`, or `~/.config/git` etc. The real source of truth is in this repo at `.config/opencode/`, `.config/fish/`, `.config/git/`, etc.**
+
 ## Scope
 
 This is a personal dotfiles repo set up with GNU Stow. Configs were symlinked into `$HOME` via `stow` once at setup time — you do not need to re-run it. Edit files in place here; the existing symlinks point back to this repo.

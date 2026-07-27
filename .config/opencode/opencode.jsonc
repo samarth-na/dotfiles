@@ -53,7 +53,11 @@
                 "Z_AI_API_KEY": "{env:Z_AI_API_KEY}",
                 "Z_AI_MODE": "ZAI"
             }
+        },
+        "browser-control": {
+            "type": "local",
+            "command": ["browser-control-mcp"],
+            "enabled": false
         }
-    },
-    "shell": "/bin/bash"
+    }
 }
