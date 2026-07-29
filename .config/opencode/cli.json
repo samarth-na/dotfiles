@@ -1,0 +1,31 @@
+{
+  "theme": {
+    "name": "one-dark",
+    "mode": "dark"
+  },
+  "keybinds": {
+    "session_rename": "none"
+  },
+  "plugins": [
+    {
+      "package": "@renjfk/opencode-voice",
+      "options": {
+        "endpoint": "http://127.0.0.1:1/v1",
+        "model": "no-llm"
+      }
+    }
+  ],
+  "diffs": {
+    "wrap": "none"
+  },
+  "session": {
+    "sidebar": "auto",
+    "scrollbar": true,
+    "thinking": "show",
+    "grouping": "none"
+  },
+  "hints": {
+    "onboarding": false
+  },
+  "animations": true
+}

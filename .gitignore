@@ -1,8 +1,8 @@
-.config/git/a.out
 
 .config/opencode/opencode-notifier-state.json
 
 opencode-notifier-state.*
 
 # secrets
-.config/opencode/service.json
+.config/opencode/service*
+.config/fish/conf.d/secrets.fish
