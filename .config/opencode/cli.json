@@ -1,31 +1,57 @@
 {
-  "theme": {
-    "name": "one-dark",
-    "mode": "dark"
-  },
-  "keybinds": {
-    "session_rename": "none"
-  },
-  "plugins": [
-    {
-      "package": "@renjfk/opencode-voice",
-      "options": {
-        "endpoint": "http://127.0.0.1:1/v1",
-        "model": "no-llm"
-      }
+    "theme": {
+        "name": "one-dark",
+        "mode": "dark"
+    },
+    "keybinds": {
+        "session_rename": "none"
+    },
+    "plugins": [
+        {
+            "package": "@renjfk/opencode-voice",
+            "options": {
+                "endpoint": "http://127.0.0.1:1/v1",
+                "model": "no-llm"
+            }
+        },
+        {
+            "package": "/home/samarth/repos/tps-oc2/src/index.tsx",
+            "options": {
+                "charsPerToken": 4,
+                "showTotals": true
+            }
+        }
+    ],
+    "diffs": {
+        "wrap": "word",
+        "view": "unified",
+        "tree": true,
+        "single": false
+    },
+    "session": {
+        "sidebar": "auto",
+        "scrollbar": true,
+        "thinking": "show",
+        "grouping": "none"
+    },
+    "animations": true,
+    "scroll": {
+        "speed": 5,
+        "acceleration": true
+    },
+    "prompt": {
+        "editor": true
+    },
+    "leader": {
+        "timeout": 2000
+    },
+    "attention": {
+        "enabled": true,
+        "volume": 0.6
+    },
+    "debug": {
+      "devtools": true,
+      "turn_tokens": true,
+      "timing": true
     }
-  ],
-  "diffs": {
-    "wrap": "none"
-  },
-  "session": {
-    "sidebar": "auto",
-    "scrollbar": true,
-    "thinking": "show",
-    "grouping": "none"
-  },
-  "hints": {
-    "onboarding": false
-  },
-  "animations": true
 }
