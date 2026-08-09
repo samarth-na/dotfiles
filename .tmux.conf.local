@@ -52,11 +52,12 @@ set -g status-keys vi
 set -g mode-keys vi
 
 # =============================================================================
-# PREFIX AND SECONDARY PREFIX
+# PREFIX
 # =============================================================================
 
-set -g prefix2 C-a                        # GNU-Screen compatible prefix
-bind C-a send-prefix -2
+set -g prefix C-a                         # GNU-Screen compatible prefix
+unbind C-b                                # remove default C-b prefix
+bind C-a send-prefix
 
 
 # =============================================================================

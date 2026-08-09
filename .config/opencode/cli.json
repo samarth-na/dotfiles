@@ -1,6 +1,6 @@
 {
   "theme": {
-    "name": "one-dark",
+    "name": "system",
     "mode": "dark"
   },
   "keybinds": {
@@ -13,6 +13,13 @@
         "endpoint": "http://127.0.0.1:1/v1",
         "model": "no-llm"
       }
+    },
+    {
+      "package": "/home/samarth/repos/live-token-info/src/index.tsx",
+      "options": {
+        "charsPerToken": 4,
+        "showTotals": true
+      }
     }
   ],
   "diffs": {
@@ -24,8 +31,9 @@
     "thinking": "show",
     "grouping": "none"
   },
-  "hints": {
-    "onboarding": false
-  },
-  "animations": true
+  "animations": true,
+  "debug": {
+    "devtools": true,
+    "turn_tokens": true
+  }
 }
