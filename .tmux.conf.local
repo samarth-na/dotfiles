@@ -91,10 +91,11 @@ bind Tab last-window                      # move to last active window
 # =============================================================================
 
 # Pane navigation (Alt + arrow keys)
-bind -n M-Left select-pane -L
-bind -n M-Right select-pane -R
-bind -n M-Up select-pane -U
-bind -n M-Down select-pane -D
+# M-Up / M-Down / M-Left / M-Right are left unbound so fullscreen apps (e.g. opencode) can use alt+arrows
+unbind -n M-Up
+unbind -n M-Down
+unbind -n M-Left
+unbind -n M-Right
 
 # Pane navigation (Alt + vim keys)
 bind -n M-h select-pane -L

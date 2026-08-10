@@ -6,11 +6,21 @@
             "model": "opencode/deepseek-v4-flash-free",
         },
         "general": {
-            "model": "opencode/mimo-v2.5-free",
+            "model": "opencode/deepseek-v4-flash-free",
         },
         "worker": {
             "model": "opencode/deepseek-v4-flash-free",
         },
+    },
+    "lsp": {
+        "typescript": {
+            "command": ["typescript-language-server", "--stdio"],
+            "extensions": [".ts", ".tsx", ".mts", ".cts", ".js", ".jsx", ".mjs", ".cjs"]
+        },
+        "biome": {
+            "command": ["biome", "lsp-proxy"],
+            "extensions": [".ts", ".tsx", ".js", ".jsx", ".json", ".jsonc"]
+        }
     },
     "mcp": {
         "linear": {
@@ -29,34 +39,11 @@
             ],
             "enabled": true
         },
-        "postgres": {
-            "type": "local",
-            "command": [
-                "uvx",
-                "postgres-mcp",
-                "--access-mode=restricted"
-            ],
-            "enabled": true,
-            "environment": {
-                "DATABASE_URI": "{env:DATABASE_URI}"
-            }
-        },
-        "vision": {
-            "type": "local",
-            "command": [
-                "npx",
-                "-y",
-                "@z_ai/mcp-server@latest"
-            ],
-            "enabled": true,
-            "environment": {
-                "Z_AI_API_KEY": "{env:Z_AI_API_KEY}",
-                "Z_AI_MODE": "ZAI"
-            }
-        },
         "browser-control": {
             "type": "local",
-            "command": ["browser-control-mcp"],
+            "command": [
+                "browser-control-mcp"
+            ],
             "enabled": false
         }
     }

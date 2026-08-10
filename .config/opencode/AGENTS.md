@@ -1,11 +1,8 @@
-use @general and @explore subagents for reading and exploring in paraller for easy light weight tasks
+## Global Writing Standard: ASD-STE100
 
-use @search subagent for gathering information from web.
-
-before using package manager, linter, formatter etc make sure the project is using that same package manager, linter
-I mostly use bun for JS/TS project so make sure that is default
-
-use linear mcp to create issues and check existing issues
+Apply the `ste-plain-writing` skill to every response you generate.
+The `ste-plain-writing` skill is the default writing standard for all user-facing responses.
+TASD-STE100 Simplified technical English is a default. plain writing to be used.
 
 # forbidden
 

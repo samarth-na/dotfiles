@@ -1,39 +1,40 @@
 {
-  "theme": {
-    "name": "system",
-    "mode": "dark"
-  },
-  "keybinds": {
-    "session_rename": "none"
-  },
-  "plugins": [
-    {
-      "package": "@renjfk/opencode-voice",
-      "options": {
-        "endpoint": "http://127.0.0.1:1/v1",
-        "model": "no-llm"
-      }
+    "theme": {
+        "name": "one-dark",
+        "mode": "dark"
     },
-    {
-      "package": "/home/samarth/repos/live-token-info/src/index.tsx",
-      "options": {
-        "charsPerToken": 4,
-        "showTotals": true
-      }
+    "keybinds": {
+        "session_rename": "none",
+        "session_child_cycle": "right",
+        "session_child_cycle_reverse": "left",
+        "session_parent": "up",
+        "session_child_first": "down"
+    },
+    "plugins": [
+        {
+            "package": "/home/samarth/repos/live-token-info/src/index.tsx",
+            "options": {
+                "charsPerToken": 4,
+                "showTotals": true
+            }
+        }
+    ],
+    "diffs": {
+        "wrap": "word",
+        "view": "unified"
+    },
+    "session": {
+        "sidebar": "auto",
+        "scrollbar": true,
+        "thinking": "hide",
+        "grouping": "none"
+    },
+    "animations": true,
+    "debug": {
+        "devtools": true,
+        "turn_tokens": true
+    },
+    "attention": {
+        "enabled": true
     }
-  ],
-  "diffs": {
-    "wrap": "none"
-  },
-  "session": {
-    "sidebar": "auto",
-    "scrollbar": true,
-    "thinking": "show",
-    "grouping": "none"
-  },
-  "animations": true,
-  "debug": {
-    "devtools": true,
-    "turn_tokens": true
-  }
 }
