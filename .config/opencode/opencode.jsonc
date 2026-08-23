@@ -1,49 +1,54 @@
 {
     "$schema": "https://opencode.ai/config.json",
     "model": "opencode/deepseek-v4-flash-free",
-    "agent": {
-        "explore": {
-            "model": "opencode/deepseek-v4-flash-free",
-        },
-        "general": {
-            "model": "opencode/deepseek-v4-flash-free",
-        },
-        "worker": {
-            "model": "opencode/deepseek-v4-flash-free",
-        },
-    },
     "lsp": {
         "typescript": {
-            "command": ["typescript-language-server", "--stdio"],
-            "extensions": [".ts", ".tsx", ".mts", ".cts", ".js", ".jsx", ".mjs", ".cjs"]
+            "command": [
+                "typescript-language-server",
+                "--stdio"
+            ],
+            "extensions": [
+                ".ts",
+                ".tsx",
+                ".mts",
+                ".cts",
+                ".js",
+                ".jsx",
+                ".mjs",
+                ".cjs"
+            ]
         },
         "biome": {
-            "command": ["biome", "lsp-proxy"],
-            "extensions": [".ts", ".tsx", ".js", ".jsx", ".json", ".jsonc"]
+            "command": [
+                "biome",
+                "lsp-proxy"
+            ],
+            "extensions": [
+                ".ts",
+                ".tsx",
+                ".js",
+                ".jsx",
+                ".json",
+                ".jsonc"
+            ]
         }
     },
     "mcp": {
-        "linear": {
-            "type": "remote",
-            "url": "https://mcp.linear.app/mcp"
-        },
-        "better-auth": {
-            "type": "remote",
-            "url": "https://mcp.better-auth.com/mcp"
-        },
-        "github": {
-            "type": "local",
-            "command": [
-                "gh",
-                "mcp"
-            ],
-            "enabled": true
-        },
         "browser-control": {
             "type": "local",
             "command": [
                 "browser-control-mcp"
             ],
+            "enabled": false
+        },
+        "firecrawl": {
+            "type": "remote",
+            "url": "https://mcp.firecrawl.dev/v2/mcp",
+            "enabled": false
+        },
+        "notion": {
+            "type": "remote",
+            "url": "https://mcp.notion.com/mcp",
             "enabled": false
         }
     }

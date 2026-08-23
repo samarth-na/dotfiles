@@ -4,15 +4,17 @@
         "mode": "dark"
     },
     "keybinds": {
-        "session_rename": "none",
+        "leader": "ctrl+o",
+        "open.menu": "<leader>space",
+        "session.rename": "none",
         "session_child_cycle": "right",
         "session_child_cycle_reverse": "left",
-        "session_parent": "up",
-        "session_child_first": "down"
+        "session.parent": "up",
+        "session.child.first": "down"
     },
     "plugins": [
         {
-            "package": "/home/samarth/repos/live-token-info/src/index.tsx",
+            "package": "/home/samarth/dev/prod/live-token-meter/src/index.tsx",
             "options": {
                 "charsPerToken": 4,
                 "showTotals": true
@@ -26,15 +28,21 @@
     "session": {
         "sidebar": "auto",
         "scrollbar": true,
-        "thinking": "show",
+        "thinking": "hide",
         "grouping": "none"
     },
     "animations": true,
     "debug": {
-        "devtools": true,
+        "devtools": false,
         "turn_tokens": true
     },
     "attention": {
         "enabled": true
+    },
+    "terminal": {
+        "title": true
+    },
+    "tabs": {
+        "layout": "horizontal"
     }
 }

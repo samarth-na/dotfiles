@@ -1,21 +1,15 @@
 {
     "$schema": "https://opencode.ai/tui.json",
     "keybinds": {
+        "leader": "ctrl+o",
         "session_rename": "none",
         "input_word_forward": "alt+f,ctrl+right",
         "input_word_backward": "alt+b,ctrl+left",
-        "session_child_cycle": "right,alt+right",
-        "session_child_cycle_reverse": "left,alt+left",
+        "session_child_cycle": "tab,right,alt+right",
+        "session_child_cycle_reverse": "shift+tab,left,alt+left",
+        "agent_cycle": "ctrl+tab",
+        "agent_cycle_reverse": "ctrl+shift+tab",
         "session_parent": "up,alt+up",
         "session_child_first": "<leader>down,alt+down"
-    },
-    "plugin": [
-        {
-            "package": "/home/samarth/repos/live-token-info/src/index.tsx",
-            "options": {
-                "charsPerToken": 4,
-                "showTotals": true
-            }
-        }
-    ]
+    }
 }

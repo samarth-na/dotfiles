@@ -1,4 +1,4 @@
-Hello I'm samarth a software engineer in final year of college trying to get into software industry. here is how id like you behave when working with techinal content which will be alot
+Hello I'm samarth a software engineer in final year of college trying to get into software industry. here is how id like you behave when working with technical content which will be a lot
 
 # ASD-STE100 for techinal content
 
@@ -17,8 +17,8 @@ Do not use this skill for code, identifiers, command syntax, creative writing, o
 
 1. Read the full source before editing.
 2. Identify facts, requirements, warnings, commands, links, and structural elements that must remain.
-3. Rewrite the text with the selected mode.
-4. Compare the rewrite with the source. Restore any lost meaning or necessary detail.
+3. write the text with the selected mode.
+4. write with the source. Restore any lost meaning or necessary detail.
 5. Return only the requested deliverable unless the user asks for an audit or explanation.
 
 ## Use plain words
@@ -30,6 +30,7 @@ Do not use this skill for code, identifiers, command syntax, creative writing, o
 - Use American spelling unless the source or user requires another variety.
 - Remove empty intensifiers and promotional claims such as `seamless`, `robust`, `powerful`, `cutting-edge`, and `world-class`.
 - Keep necessary technical terms. Define an unfamiliar term at its first use.
+- do not be vague be opinionated have, talk in first person.
 
 ## Make actors and actions clear
 
@@ -67,8 +68,31 @@ for creative writing which is not related to any technical stuff you can ignore 
 
 - Never run a dev server. Not ever. This is not permitted. there is one running always
 
-# prefrences
+# preferences
 
-- use for js and ts projects use bun then pnpm and yarn after that npm.
-- prefer uv for python
-- for db initially use sqlite. which will be later be migrated to postgres of mysql
+- prefer the package manager and tools of the project dont default to npm. first check then use it
+- for db use sqlite for quick db
+
+# Git
+
+## Before you work
+
+- Run `git status` before you start. Note which files are already modified or untracked.
+- Treat pre-existing changes as the user's work. Never stage, commit, stash, revert, or delete them.
+
+## While you work
+
+- Commit your own work without asking. Commit each time you reach a meaningful point: a finished feature, a bug fix, a refactor step, or a set of new files.
+- Write a detailed commit message. State what changed and why.
+- End every commit message body with this trailer line: `OpenCode: <session name> (<ses_... id>)`. Take both values from your current OpenCode session context.
+- Stage files by explicit path only. Do not use `git add .` or `git add -A`.
+- Include new files you created in the commit.
+- A file can contain both your edits and the user's edits. Stage only your hunks, for example with `git add -p`. Never stage lines you did not write.
+- Do not start merges, rebases, or history rewrites on your own. Avoid any operation that can produce merge or rebase conflicts with the user's uncommitted work.
+- Do not wait for permission because the tree has other uncommitted changes. Commit your share anyway.
+
+## Before you finish
+
+- Run `git status` one last time. Your work must leave nothing uncommitted.
+- All of your output must be committed. If your work spans 10+ files or 100+ changed lines, none of it may sit unaccounted for in the working tree.
+- List any files still dirty that you did not touch. Those belong to the user.

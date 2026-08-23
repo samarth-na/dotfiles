@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepSeek V4 Flash usage since 2026-07-31</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>@import url('https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+:root{--ink:#0a0a0a;--paper:#ffffff;--line:#d7dbe2;--accent:#1d4ed8;--muted:#5b6472;--accent-soft:rgba(29,78,216,0.07);--accent-line:rgba(29,78,216,0.25);--radius:6px;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Schibsted Grotesk',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-line)}
+a:hover{border-bottom-color:var(--accent)}
+a.totop{border-bottom:none}
+.container{max-width:1000px;margin:0 auto;padding:48px 24px 24px}
+code{font-family:'Fragment Mono',monospace;font-size:.85em;background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:3px;padding:1px 5px}
+.kicker{font-family:'Fragment Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+h1{font-family:'Fraunces',serif;font-weight:300;font-size:2.6rem;line-height:1.12;letter-spacing:-.01em;margin-bottom:16px}
+.lede{font-size:1.08rem;color:var(--muted);max-width:64ch;margin-bottom:16px}
+.meta{font-family:'Fragment Mono',monospace;font-size:.74rem;color:var(--muted);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:40px;display:flex;flex-wrap:wrap;gap:6px 24px}
+nav.toc{border-left:3px solid var(--accent);padding:14px 20px;margin-bottom:44px;background:var(--accent-soft);border-radius:0 var(--radius) var(--radius) 0}
+nav.toc h2{font-family:'Fraunces',serif;font-weight:300;font-size:1rem;color:var(--muted);margin-bottom:10px}
+nav.toc ol{columns:2;column-gap:32px;padding-left:20px}
+nav.toc li{font-size:.9rem;margin-bottom:4px;break-inside:avoid}
+section{margin-bottom:48px;scroll-margin-top:20px}
+h2{font-family:'Fraunces',serif;font-weight:300;font-size:1.7rem;margin-bottom:6px}
+h2 .num{color:var(--accent);margin-right:10px}
+h3{font-size:.95rem;font-weight:600;margin:18px 0 6px;color:var(--ink)}
+p{margin-bottom:10px;color:#333}
+ul.plain{padding-left:22px;margin-bottom:12px}
+.cardgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin:14px 0}
+.card{border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;background:var(--accent-soft)}
+.card .k{font-family:'Fragment Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.card .v{font-family:'Fraunces',serif;font-weight:400;font-size:1.45rem;margin-top:4px}
+.chart{position:relative;height:300px;margin:16px 0 8px}
+.chart.sm{height:260px}
+.chart.tall{height:340px}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:14px 0 10px}
+caption{caption-side:top;text-align:left;font-family:'Fragment Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+th{text-align:right;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);padding:6px 8px;border-bottom:2px solid var(--line);font-weight:600}
+td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+tr.total td{border-top:2px solid var(--line);font-weight:700;background:var(--accent-soft)}
+.note{border:1px solid var(--accent-line);background:var(--accent-soft);border-radius:var(--radius);padding:12px 16px;font-size:.88rem;color:#333;margin:14px 0}
+.note strong{color:var(--accent)}
+.chip{display:inline-block;font-family:'Fragment Mono',monospace;font-size:.7rem;border:1px solid var(--accent-line);background:var(--accent-soft);color:var(--accent);border-radius:99px;padding:1px 10px;margin-right:6px}
+table.heat{font-size:.68rem}
+table.heat th,table.heat td{padding:2px 3px;text-align:center;min-width:18px}
+table.heat th:first-child,table.heat td:first-child{text-align:left;min-width:52px}
+.overflow{overflow-x:auto}
+footer{border-top:1px solid var(--line);padding-top:16px;font-size:.78rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media print{a.totop{display:none}}</style>
+</head>
+<body>
+<div class="container">
+<header>
+<div class="kicker">OpenCode telemetry &middot; model usage report</div>
+<h1>DeepSeek V4 Flash usage since&nbsp;2026-07-31</h1>
+<p class="lede">Every call made through the <code>deepseek-v4-flash</code> and
+<code>deepseek-v4-flash-free</code> models between 31 July and 12 August 2026,
+read from the local OpenCode databases. Includes cost, cache, throughput,
+project, session, and time-of-day analysis.</p>
+<div class="meta">
+<span><strong>2,532</strong> calls</span>
+<span><strong>190,586,642</strong> tokens</span>
+<span><strong>92.6%</strong> cache hit rate</span>
+<span><strong>59.1</strong> avg TPS</span>
+<span><strong>37</strong> errors</span>
+<span>generated 2026-08-12 20:13:13 UTC</span>
+</div>
+</header>
+
+<nav class="toc">
+<h2>Contents</h2>
+<ol>
+<li><a href="#s1">Sources and method</a></li>
+<li><a href="#s2">Total usage</a></li>
+<li><a href="#s3">Calls per day</a></li>
+<li><a href="#s4">Tokens per day</a></li>
+<li><a href="#s5">Cache and hit rate</a></li>
+<li><a href="#s6">What it would cost</a></li>
+<li><a href="#s7">Throughput</a></li>
+<li><a href="#s8">Agents</a></li>
+<li><a href="#s9">Variants</a></li>
+<li><a href="#s10">Projects</a></li>
+<li><a href="#s11">Sessions</a></li>
+<li><a href="#s12">Time of day</a></li>
+<li><a href="#s13">Reliability</a></li>
+<li><a href="#s14">Per-call profile</a></li>
+<li><a href="#s15">Sources split</a></li>
+</ol>
+</nav>
+
+<section id="s1">
+<h2><span class="num">01</span>Sources and method</h2>
+<p>All figures come from the two OpenCode databases on this machine:</p>
+<ul class="plain">
+<li><code>~/.local/share/opencode/opencode.db</code> &mdash; the CLI and desktop shared server (<code>local</code> build).</li>
+<li><code>~/.local/share/opencode/opencode-next.db</code> &mdash; the installed <code>next</code> build.</li>
+</ul>
+<p>The window starts at 00:00 India Standard Time on 31 July 2026. A call
+counts as one assistant message from either flash model. The window excludes
+all other models.</p>
+<div class="note"><strong>Note.</strong> The desktop app shares the same server
+and databases as the CLI. Its sessions appear under <code>opencode.db</code>.
+No other database on the machine contains flash usage.</div>
+</section>
+
+<section id="s2">
+<h2><span class="num">02</span>Total usage</h2>
+<div class="cardgrid">
+<div class="card"><div class="k">Calls</div><div class="v">2,532</div></div>
+<div class="card"><div class="k">Input tokens</div><div class="v">13,885,891</div></div>
+<div class="card"><div class="k">Output tokens</div><div class="v">1,419,012</div></div>
+<div class="card"><div class="k">Reasoning</div><div class="v">1,600,203</div></div>
+<div class="card"><div class="k">Cache read</div><div class="v">173,681,536</div></div>
+<div class="card"><div class="k">Cache write</div><div class="v">0</div></div>
+<div class="card"><div class="k">Cost paid</div><div class="v">$0.00</div></div>
+<div class="card"><div class="k">Est. cost</div><div class="v">$3.28</div></div>
+</div>
+<p>All flash usage ran on the <span class="chip">free</span> tier. At DeepSeek
+list rates the same volume costs about <strong>$3.28</strong>. Across
+<strong>133</strong> sessions the average session made
+<strong>19.0</strong> flash calls (median 7).</p>
+</section>
+
+<section id="s3">
+<h2><span class="num">03</span>Calls per day</h2>
+<div class="chart sm"><canvas id="callsDay"></canvas></div>
+<table><caption>Usage per day, IST</caption><thead><tr><th>date</th><th>calls</th><th>input</th><th>output</th><th>reasoning</th><th>cache read</th><th>hit rate</th><th>est. cost</th></tr></thead><tbody><tr><tr class=""><td>2026-08-01</td><td>946</td><td>4,658,765</td><td>719,250</td><td>1,100,748</td><td>73,438,336</td><td>94.0%</td><td>$1.37</td></tr></tr><tr><tr class=""><td>2026-08-02</td><td>322</td><td>792,532</td><td>97,284</td><td>133,397</td><td>28,346,112</td><td>97.3%</td><td>$0.25</td></tr></tr><tr><tr class=""><td>2026-08-03</td><td>259</td><td>345,978</td><td>74,361</td><td>87,031</td><td>10,241,024</td><td>96.7%</td><td>$0.12</td></tr></tr><tr><tr class=""><td>2026-08-04</td><td>125</td><td>610,218</td><td>81,688</td><td>31,140</td><td>8,667,264</td><td>93.4%</td><td>$0.14</td></tr></tr><tr><tr class=""><td>2026-08-05</td><td>138</td><td>1,899,771</td><td>62,733</td><td>88,928</td><td>8,582,528</td><td>81.9%</td><td>$0.33</td></tr></tr><tr><tr class=""><td>2026-08-06</td><td>512</td><td>4,586,085</td><td>250,954</td><td>101,116</td><td>27,637,120</td><td>85.8%</td><td>$0.82</td></tr></tr><tr><tr class=""><td>2026-08-08</td><td>13</td><td>171,372</td><td>8,814</td><td>891</td><td>586,496</td><td>77.4%</td><td>$0.03</td></tr></tr><tr><tr class=""><td>2026-08-10</td><td>32</td><td>62,238</td><td>39,693</td><td>19,028</td><td>2,614,528</td><td>97.7%</td><td>$0.03</td></tr></tr><tr><tr class=""><td>2026-08-11</td><td>180</td><td>633,958</td><td>83,301</td><td>37,316</td><td>13,478,272</td><td>95.5%</td><td>$0.16</td></tr></tr><tr><tr class=""><td>2026-08-12</td><td>5</td><td>124,974</td><td>934</td><td>608</td><td>89,856</td><td>41.8%</td><td>$0.02</td></tr></tr><tr class="total"><tr class=""><td>TOTAL</td><td>2,532</td><td>13,885,891</td><td>1,419,012</td><td>1,600,203</td><td>173,681,536</td><td>92.6%</td><td>$3.28</td></tr></tr></tbody></table>
+</section>
+
+<section id="s4">
+<h2><span class="num">04</span>Tokens per day</h2>
+<p>Stacked bars show input, output, and reasoning tokens per day. Cache reads
+appear separately because they dominate the volume. The line shows the
+cumulative estimated cost at DeepSeek rates.</p>
+<div class="chart"><canvas id="tokensDay"></canvas></div>
+<div class="chart sm"><canvas id="cacheDay"></canvas></div>
+<div class="chart sm"><canvas id="cumCost"></canvas></div>
+</section>
+
+<section id="s5">
+<h2><span class="num">05</span>Cache and hit rate</h2>
+<div class="chart sm"><canvas id="hitLine"></canvas></div>
+<div class="chart sm"><canvas id="hitDonut"></canvas></div>
+<p>Cache hit rate measures cached input against all billed input:
+<code>cache&nbsp;read / (cache&nbsp;read + input + cache&nbsp;write)</code>.
+DeepSeek bills cached prefixes at 2&nbsp;% of the miss rate.</p>
+<table><caption>Cache hit rate per variant</caption><thead><tr><th>variant</th><th>cache read</th><th>cache miss</th><th>cache write</th><th>hit rate</th></tr></thead><tbody><tr><td>max</td><td>124,045,440</td><td>7,563,045</td><td>0</td><td><strong>94.3%</strong></td></tr><tr><td>default</td><td>49,636,096</td><td>6,322,846</td><td>0</td><td><strong>88.7%</strong></td></tr></tbody></table>
+<div class="note"><strong>Effective input price</strong> after caching:
+<b>$12957.1167</b> per 1M billed input tokens ($0.14 list). The hit rate held
+above 80&nbsp;% on every day with real volume; the five-call sample on 12
+August dipped to 42&nbsp;%.</div>
+</section>
+
+<section id="s6">
+<h2><span class="num">06</span>What it would cost</h2>
+<p>DeepSeek V4 Flash list rates: $0.14 per 1M input tokens on a cache miss,
+$0.0028 per 1M on a cache hit, and $0.28 per 1M output tokens. Reasoning
+tokens bill as output.</p>
+<table><caption>What this usage would cost on the DeepSeek V4 Flash API</caption><thead><tr><th>component</th><th>tokens</th><th>rate / 1M</th><th>cost</th></tr></thead><tbody><tr><tr class=""><td>Input, cache miss</td><td>13,885,891</td><td>$0.1400</td><td>$1.94</td></tr></tr><tr><tr class=""><td>Input, cache hit</td><td>173,681,536</td><td>$0.0028</td><td>$0.49</td></tr></tr><tr><tr class=""><td>Output</td><td>1,419,012</td><td>$0.2800</td><td>$0.40</td></tr></tr><tr><tr class=""><td>Reasoning (billed as output)</td><td>1,600,203</td><td>$0.2800</td><td>$0.45</td></tr></tr><tr class="total"><tr class=""><td><strong>Total</strong></td><td></td><td></td><td><strong>$3.28</strong></td></tr></tr></tbody></table>
+<div class="cardgrid">
+<div class="card"><div class="k">Per call</div><div class="v">$0.0013</div></div>
+<div class="card"><div class="k">Per active day</div><div class="v">$0.33</div></div>
+<div class="card"><div class="k">Worst case, no cache</div><div class="v">$27.10</div></div>
+</div>
+<div class="chart sm"><canvas id="costDay"></canvas></div>
+<div class="note"><strong>Worst case.</strong> If no prefix ever hit the cache,
+the same volume would cost <b>$27.10</b>. DeepSeek has announced a
+2&times; surcharge during peak hours; it is not yet in effect. The user paid
+<strong>$0.00</strong> through the free tier.</div>
+</section>
+
+<section id="s7">
+<h2><span class="num">07</span>Throughput</h2>
+<p>Tokens per second come from the wall-clock time between message start and
+completion, dividing generated tokens (output plus reasoning). Short tool-call
+stubs and zero-token messages are excluded.</p>
+<div class="cardgrid">
+<div class="card"><div class="k">Avg TPS</div><div class="v">59.1</div></div>
+<div class="card"><div class="k">Median TPS</div><div class="v">49.7</div></div>
+<div class="card"><div class="k">P95 TPS</div><div class="v">147.7</div></div>
+<div class="card"><div class="k">Samples</div><div class="v">2,115</div></div>
+</div>
+<div class="chart tall"><canvas id="tpsAgent"></canvas></div>
+<table><caption>Throughput per agent</caption><thead><tr><th>agent</th><th>samples</th><th>avg TPS</th><th>median TPS</th><th>p95 TPS</th></tr></thead><tbody><tr><tr class=""><td>build</td><td>1,159</td><td>55.6</td><td>45.5</td><td>146.7</td></tr></tr><tr><tr class=""><td>worker</td><td>508</td><td>72.8</td><td>57.7</td><td>187.8</td></tr></tr><tr><tr class=""><td>explore</td><td>323</td><td>48.3</td><td>42.7</td><td>99.1</td></tr></tr><tr><tr class=""><td>search</td><td>88</td><td>64.3</td><td>64.5</td><td>101.3</td></tr></tr><tr><tr class=""><td>plan</td><td>22</td><td>46.9</td><td>40.0</td><td>77.2</td></tr></tr><tr><tr class=""><td>compaction</td><td>11</td><td>100.2</td><td>99.3</td><td>122.8</td></tr></tr><tr><tr class=""><td>chat</td><td>4</td><td>43.5</td><td>45.9</td><td>74.6</td></tr></tr></tbody></table>
+<div class="note"><strong>Caveat.</strong> TPS here is wall-clock time seen by
+OpenCode, starting at the request. It includes queue and network latency, so
+the raw streaming rate is higher.</div>
+</section>
+
+<section id="s8">
+<h2><span class="num">08</span>Agents</h2>
+<p>The <span class="chip">build</span> agent dominates flash calls. The
+<span class="chip">worker</span> agent is fastest and the
+<span class="chip">compaction</span> agent produces the most reasoning per
+call.</p>
+<div class="chart tall"><canvas id="agentBar"></canvas></div>
+<table><caption>Usage per agent</caption><thead><tr><th>agent</th><th>calls</th><th>input</th><th>output</th><th>reasoning</th><th>cache read</th><th>hit rate</th></tr></thead><tbody><tr><tr class=""><td>build</td><td>1,537</td><td>4,772,729</td><td>769,228</td><td>449,311</td><td>117,195,648</td><td>96.1%</td></tr></tr><tr><tr class=""><td>worker</td><td>526</td><td>4,124,252</td><td>408,670</td><td>996,384</td><td>32,918,400</td><td>88.9%</td></tr></tr><tr><tr class=""><td>explore</td><td>342</td><td>1,990,926</td><td>145,229</td><td>40,371</td><td>16,416,512</td><td>89.2%</td></tr></tr><tr><tr class=""><td>search</td><td>89</td><td>1,655,364</td><td>61,375</td><td>74,957</td><td>6,052,992</td><td>78.5%</td></tr></tr><tr><tr class=""><td>plan</td><td>22</td><td>544,078</td><td>13,151</td><td>18,541</td><td>1,055,360</td><td>66.0%</td></tr></tr><tr><tr class=""><td>compaction</td><td>12</td><td>670,143</td><td>20,075</td><td>19,839</td><td>0</td><td>0.0%</td></tr></tr><tr><tr class=""><td>chat</td><td>4</td><td>128,399</td><td>1,284</td><td>800</td><td>42,624</td><td>24.9%</td></tr></tr></tbody></table>
+<h3>Efficiency profile per agent</h3>
+<table><caption>Per-call profile and efficiency per agent</caption><thead><tr><th>agent</th><th>calls</th><th>median TPS</th><th>input / call</th><th>output / call</th><th>reasoning / call</th><th>hit rate</th></tr></thead><tbody><tr><tr class=""><td>build</td><td>1,537</td><td>45.5</td><td>3,105</td><td>500</td><td>292</td><td>96.1%</td></tr></tr><tr><tr class=""><td>worker</td><td>526</td><td>57.7</td><td>7,841</td><td>777</td><td>1,894</td><td>88.9%</td></tr></tr><tr><tr class=""><td>explore</td><td>342</td><td>42.7</td><td>5,821</td><td>425</td><td>118</td><td>89.2%</td></tr></tr><tr><tr class=""><td>search</td><td>89</td><td>64.5</td><td>18,600</td><td>690</td><td>842</td><td>78.5%</td></tr></tr><tr><tr class=""><td>plan</td><td>22</td><td>40.0</td><td>24,731</td><td>598</td><td>843</td><td>66.0%</td></tr></tr><tr><tr class=""><td>compaction</td><td>12</td><td>99.3</td><td>55,845</td><td>1,673</td><td>1,653</td><td>0.0%</td></tr></tr><tr><tr class=""><td>chat</td><td>4</td><td>45.9</td><td>32,100</td><td>321</td><td>200</td><td>24.9%</td></tr></tr></tbody></table>
+</section>
+
+<section id="s9">
+<h2><span class="num">09</span>Variants</h2>
+<p>Variant share per day, stacked. The <code>max</code> variant took over from
+the default gateway mid-window.</p>
+<div class="chart"><canvas id="variantShare"></canvas></div>
+<div class="chart sm"><canvas id="variantBar"></canvas></div>
+<table><caption>Usage per variant</caption><thead><tr><th>variant (gateway)</th><th>calls</th><th>input</th><th>output</th><th>reasoning</th><th>cache read</th><th>hit rate</th></tr></thead><tbody><tr><tr class=""><td>max</td><td>1,653</td><td>7,563,045</td><td>860,328</td><td>561,417</td><td>124,045,440</td><td>94.3%</td></tr></tr><tr><tr class=""><td>default</td><td>879</td><td>6,322,846</td><td>558,684</td><td>1,038,786</td><td>49,636,096</td><td>88.7%</td></tr></tr></tbody></table>
+</section>
+
+<section id="s10">
+<h2><span class="num">10</span>Projects</h2>
+<p>Usage attributed per working directory of the message.</p>
+<div class="chart tall"><canvas id="projectBar"></canvas></div>
+<table><caption>Usage per project (top 15)</caption><thead><tr><th>project</th><th>calls</th><th>input</th><th>output</th><th>reasoning</th><th>cache read</th><th>est. cost</th></tr></thead><tbody><tr><tr class=""><td>event-management-system</td><td>903</td><td>2,425,986</td><td>369,012</td><td>405,010</td><td>67,693,568</td><td>$0.75</td></tr></tr><tr><tr class=""><td>modheshwari</td><td>707</td><td>5,450,427</td><td>343,694</td><td>139,198</td><td>41,724,544</td><td>$1.02</td></tr></tr><tr><tr class=""><td>showcase-dsv4-flash.1</td><td>421</td><td>3,051,969</td><td>479,215</td><td>873,341</td><td>25,261,440</td><td>$0.88</td></tr></tr><tr><tr class=""><td>function-explain</td><td>263</td><td>869,685</td><td>74,968</td><td>62,913</td><td>24,004,096</td><td>$0.23</td></tr></tr><tr><tr class=""><td>samarth</td><td>100</td><td>1,364,044</td><td>55,207</td><td>76,357</td><td>6,091,648</td><td>$0.24</td></tr></tr><tr><tr class=""><td>vite</td><td>87</td><td>406,051</td><td>55,216</td><td>20,582</td><td>5,903,872</td><td>$0.09</td></tr></tr><tr><tr class=""><td>demo-deepseek-v4-flash-0731-oc2-zed</td><td>31</td><td>62,238</td><td>39,693</td><td>19,028</td><td>2,614,528</td><td>$0.03</td></tr></tr><tr><tr class=""><td>Desktop</td><td>9</td><td>181,785</td><td>1,117</td><td>2,833</td><td>263,552</td><td>$0.03</td></tr></tr><tr><tr class=""><td>.linuxbrew</td><td>8</td><td>31,490</td><td>869</td><td>860</td><td>124,288</td><td>$0.01</td></tr></tr><tr><tr class=""><td>showcase-dsv4-flash</td><td>2</td><td>42,216</td><td>21</td><td>81</td><td>0</td><td>$0.01</td></tr></tr><tr><tr class=""><td>schema-visualizer</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0.00</td></tr></tr><tr class="total"><tr class=""><td>TOTAL</td><td>2,532</td><td>13,885,891</td><td>1,419,012</td><td>1,600,203</td><td>173,681,536</td><td>$3.28</td></tr></tr></tbody></table>
+</section>
+
+<section id="s11">
+<h2><span class="num">11</span>Sessions</h2>
+<p><strong>133</strong> sessions used flash models, averaging
+<strong>19.0</strong> flash calls each. The busiest session made
+<strong>7</strong>-scale workloads; per-session counts range from
+one-off prompts to long build sessions.</p>
+<div class="chart tall"><canvas id="sessionBar"></canvas></div>
+<table><caption>Top 12 sessions by calls</caption><thead><tr><th>session</th><th>title</th><th>project</th><th>calls</th><th>input</th><th>output</th></tr></thead><tbody><tr><tr class=""><td><code>ses_03eb7f9a</code></td><td>TypeScript function explainer app</td><td>function-explain</td><td>231</td><td>483,067</td><td>60,261</td></tr></tr><tr><tr class=""><td><code>ses_04616912</code></td><td>Event app UI elements in Linear style</td><td>event-management-sys</td><td>162</td><td>343,006</td><td>73,763</td></tr></tr><tr><tr class=""><td><code>ses_045d520b</code></td><td>Note app landing: 5 second-brain designs</td><td>showcase-dsv4-flash.</td><td>134</td><td>316,960</td><td>182,783</td></tr></tr><tr><tr class=""><td><code>ses_04602ca8</code></td><td>Event manager app for planners and managers</td><td>event-management-sys</td><td>104</td><td>191,314</td><td>53,146</td></tr></tr><tr><tr class=""><td><code>ses_0281a027</code></td><td>Frontend UI overhaul with design skill</td><td>modheshwari</td><td>104</td><td>1,391,589</td><td>55,271</td></tr></tr><tr><tr class=""><td><code>ses_0371c1f6</code></td><td>untitled</td><td>vite</td><td>87</td><td>406,051</td><td>55,216</td></tr></tr><tr><tr class=""><td><code>ses_045f31b9</code></td><td>Build auth, shell, settings (@worker subagen</td><td>event-management-sys</td><td>80</td><td>186,782</td><td>30,510</td></tr></tr><tr><tr class=""><td><code>ses_045da1e7</code></td><td>App architecture breakdown with HTML slide d</td><td>event-management-sys</td><td>80</td><td>404,599</td><td>68,119</td></tr></tr><tr><tr class=""><td><code>ses_0280c3eb</code></td><td>Re-skin auth/profile/family pages (@worker s</td><td>modheshwari</td><td>58</td><td>521,294</td><td>21,993</td></tr></tr><tr><tr class=""><td><code>ses_00f4c4f3</code></td><td>App architecture deep dive with styled HTML</td><td>modheshwari</td><td>55</td><td>212,519</td><td>39,201</td></tr></tr><tr><tr class=""><td><code>ses_039dc6c7</code></td><td>untitled</td><td>event-management-sys</td><td>55</td><td>49,432</td><td>11,561</td></tr></tr><tr><tr class=""><td><code>ses_03c367ef</code></td><td>Show entire SQL schema</td><td>event-management-sys</td><td>52</td><td>105,423</td><td>32,312</td></tr></tr></tbody></table>
+</section>
+
+<section id="s12">
+<h2><span class="num">12</span>Time of day</h2>
+<p>Usage concentrates in the afternoon. The busiest hour is
+<strong>00:00</strong> IST and <strong>51%</strong> of all
+flash calls landed on weekends (Saturday or Sunday).</p>
+<div class="chart sm"><canvas id="hourBar"></canvas></div>
+<div class="chart sm"><canvas id="weekdayBar"></canvas></div>
+<div class="overflow"><table class="heat"><caption>Usage heatmap &mdash; calls per hour (IST), darker = more</caption><thead><tr><th>day</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th><th>21</th><th>22</th><th>23</th><th>total</th></tr></thead><tbody><tr><td>08-01</td><td style="" title="2026-08-01 0:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 1:00 IST &mdash; 0 calls">&nbsp;</td><td style="background:rgba(29,78,216,0.79)" title="2026-08-01 2:00 IST &mdash; 372 calls">372</td><td style="background:rgba(29,78,216,0.51)" title="2026-08-01 3:00 IST &mdash; 227 calls">227</td><td style="background:rgba(29,78,216,0.66)" title="2026-08-01 4:00 IST &mdash; 308 calls">308</td><td style="" title="2026-08-01 5:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 6:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 7:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 8:00 IST &mdash; 0 calls">&nbsp;</td><td style="background:rgba(29,78,216,0.14)" title="2026-08-01 9:00 IST &mdash; 39 calls">39</td><td style="" title="2026-08-01 10:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 11:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 12:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 13:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 14:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 15:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 16:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 17:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 18:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 19:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 20:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 21:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 22:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-01 23:00 IST &mdash; 0 calls">&nbsp;</td><td><strong>946</strong></td></tr><tr><td>08-02</td><td style="background:rgba(29,78,216,0.06)" title="2026-08-02 0:00 IST &mdash; 2 calls">2</td><td style="" title="2026-08-02 1:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 2:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 3:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 4:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 5:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 6:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 7:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 8:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 9:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 10:00 IST &mdash; 0 calls">&nbsp;</td><td style="background:rgba(29,78,216,0.08)" title="2026-08-02 11:00 IST &mdash; 8 calls">8</td><td style="background:rgba(29,78,216,0.44)" title="2026-08-02 12:00 IST &mdash; 194 calls">194</td><td style="background:rgba(29,78,216,0.29)" title="2026-08-02 13:00 IST &mdash; 118 calls">118</td><td style="" title="2026-08-02 14:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 15:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 16:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 17:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 18:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 19:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 20:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 21:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 22:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-02 23:00 IST &mdash; 0 calls">&nbsp;</td><td><strong>322</strong></td></tr><tr><td>08-03</td><td style="background:rgba(29,78,216,0.32)" title="2026-08-03 0:00 IST &mdash; 136 calls">136</td><td style="" title="2026-08-03 1:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 2:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 3:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 4:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 5:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 6:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 7:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 8:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 9:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 10:00 IST &mdash; 0 calls">&nbsp;</td><td style="background:rgba(29,78,216,0.30)" title="2026-08-03 11:00 IST &mdash; 123 calls">123</td><td style="" title="2026-08-03 12:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 13:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 14:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 15:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 16:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 17:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 18:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 19:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 20:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 21:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 22:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-03 23:00 IST &mdash; 0 calls">&nbsp;</td><td><strong>259</strong></td></tr><tr><td>08-04</td><td style="background:rgba(29,78,216,0.23)" title="2026-08-04 0:00 IST &mdash; 87 calls">87</td><td style="" title="2026-08-04 1:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 2:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 3:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 4:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 5:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 6:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 7:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 8:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 9:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 10:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 11:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 12:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 13:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 14:00 IST &mdash; 0 calls">&nbsp;</td><td style="background:rgba(29,78,216,0.14)" title="2026-08-04 15:00 IST &mdash; 38 calls">38</td><td style="" title="2026-08-04 16:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 17:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 18:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 19:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 20:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 21:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 22:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-04 23:00 IST &mdash; 0 calls">&nbsp;</td><td><strong>125</strong></td></tr><tr><td>08-05</td><td style="" title="2026-08-05 0:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 1:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 2:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 3:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 4:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 5:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 6:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 7:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 8:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 9:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 10:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 11:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 12:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 13:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 14:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 15:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 16:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 17:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 18:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 19:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-05 20:00 IST &mdash; 0 calls">&nbsp;</td><td style="background:rgba(29,78,216,0.15)" title="2026-08-05 21:00 IST &mdash; 45 calls">45</td><td style="background:rgba(29,78,216,0.25)" title="2026-08-05 22:00 IST &mdash; 93 calls">93</td><td style="" title="2026-08-05 23:00 IST &mdash; 0 calls">&nbsp;</td><td><strong>138</strong></td></tr><tr><td>08-06</td><td style="background:rgba(29,78,216,0.47)" title="2026-08-06 0:00 IST &mdash; 207 calls">207</td><td style="" title="2026-08-06 1:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 2:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 3:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 4:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 5:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 6:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 7:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 8:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 9:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 10:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 11:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 12:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 13:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 14:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 15:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 16:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 17:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 18:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 19:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-06 20:00 IST &mdash; 0 calls">&nbsp;</td><td style="background:rgba(29,78,216,0.10)" title="2026-08-06 21:00 IST &mdash; 21 calls">21</td><td style="background:rgba(29,78,216,0.59)" title="2026-08-06 22:00 IST &mdash; 266 calls">266</td><td style="background:rgba(29,78,216,0.09)" title="2026-08-06 23:00 IST &mdash; 18 calls">18</td><td><strong>512</strong></td></tr><tr><td>08-08</td><td style="" title="2026-08-08 0:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 1:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 2:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 3:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 4:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 5:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 6:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 7:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 8:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 9:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 10:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 11:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 12:00 IST &mdash; 0 calls">&nbsp;</td><td style="background:rgba(29,78,216,0.09)" title="2026-08-08 13:00 IST &mdash; 12 calls">12</td><td style="" title="2026-08-08 14:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 15:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 16:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 17:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 18:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 19:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 20:00 IST &mdash; 0 calls">&nbsp;</td><td style="background:rgba(29,78,216,0.06)" title="2026-08-08 21:00 IST &mdash; 1 calls">1</td><td style="" title="2026-08-08 22:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-08 23:00 IST &mdash; 0 calls">&nbsp;</td><td><strong>13</strong></td></tr><tr><td>08-10</td><td style="" title="2026-08-10 0:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 1:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 2:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 3:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 4:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 5:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 6:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 7:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 8:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 9:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 10:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 11:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 12:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 13:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 14:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 15:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 16:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 17:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 18:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 19:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-10 20:00 IST &mdash; 0 calls">&nbsp;</td><td style="background:rgba(29,78,216,0.06)" title="2026-08-10 21:00 IST &mdash; 1 calls">1</td><td style="background:rgba(29,78,216,0.12)" title="2026-08-10 22:00 IST &mdash; 31 calls">31</td><td style="" title="2026-08-10 23:00 IST &mdash; 0 calls">&nbsp;</td><td><strong>32</strong></td></tr><tr><td>08-11</td><td style="" title="2026-08-11 0:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 1:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 2:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 3:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 4:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 5:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 6:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 7:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 8:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 9:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 10:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 11:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 12:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 13:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 14:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 15:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 16:00 IST &mdash; 0 calls">&nbsp;</td><td style="background:rgba(29,78,216,0.38)" title="2026-08-11 17:00 IST &mdash; 166 calls">166</td><td style="background:rgba(29,78,216,0.09)" title="2026-08-11 18:00 IST &mdash; 14 calls">14</td><td style="" title="2026-08-11 19:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 20:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 21:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 22:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-11 23:00 IST &mdash; 0 calls">&nbsp;</td><td><strong>180</strong></td></tr><tr><td>08-12</td><td style="" title="2026-08-12 0:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 1:00 IST &mdash; 0 calls">&nbsp;</td><td style="background:rgba(29,78,216,0.07)" title="2026-08-12 2:00 IST &mdash; 5 calls">5</td><td style="" title="2026-08-12 3:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 4:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 5:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 6:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 7:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 8:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 9:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 10:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 11:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 12:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 13:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 14:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 15:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 16:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 17:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 18:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 19:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 20:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 21:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 22:00 IST &mdash; 0 calls">&nbsp;</td><td style="" title="2026-08-12 23:00 IST &mdash; 0 calls">&nbsp;</td><td><strong>5</strong></td></tr></tbody></table></div>
+</section>
+
+<section id="s13">
+<h2><span class="num">13</span>Reliability</h2>
+<p><strong>37</strong> aborted calls (<strong>1.46%</strong> of
+all flash calls). Every one is a <code>MessageAbortedError</code>: an
+in-flight generation stopped mid-stream, not a provider failure.</p>
+<div class="chart sm"><canvas id="finishDoughnut"></canvas></div>
+<table><caption>Finish reasons</caption><thead><tr><th>reason</th><th>calls</th><th>share</th></tr></thead><tbody><tr><td>tool-calls</td><td>2,313</td><td>91.4%</td></tr><tr><td>stop</td><td>158</td><td>6.2%</td></tr><tr><td>unknown</td><td>50</td><td>2.0%</td></tr><tr><td>length</td><td>11</td><td>0.4%</td></tr></tbody></table>
+<table><caption>Aborted calls by type</caption><thead><tr><th>error</th><th>count</th><th>share of calls</th></tr></thead><tbody><tr class=""><td>MessageAbortedError</td><td>24</td><td>0.95%</td></tr><tr class=""><td>UnknownError</td><td>13</td><td>0.51%</td></tr></tbody></table>
+<table><caption>Most recent aborted calls</caption><thead><tr><th>message</th><th>timestamp</th><th>agent</th><th>project</th></tr></thead><tbody><tr><tr class=""><td><code>Aborted</code></td><td><code>1786450708408</code></td><td>build</td><td>modheshwari</td></tr></tr><tr><tr class=""><td><code>Aborted</code></td><td><code>1786377526240</code></td><td>build</td><td>schema-visualizer</td></tr></tr><tr><tr class=""><td><code>Aborted</code></td><td><code>1786204082502</code></td><td>build</td><td>modheshwari</td></tr></tr><tr><tr class=""><td><code>Aborted</code></td><td><code>1786037626899</code></td><td>build</td><td>modheshwari</td></tr></tr><tr><tr class=""><td><code>Aborted</code></td><td><code>1786037592732</code></td><td>build</td><td>modheshwari</td></tr></tr><tr><tr class=""><td><code>Aborted</code></td><td><code>1786035687958</code></td><td>build</td><td>modheshwari</td></tr></tr><tr><tr class=""><td><code>Aborted</code></td><td><code>1786034545596</code></td><td>explore</td><td>modheshwari</td></tr></tr><tr><tr class=""><td><code>Aborted</code></td><td><code>1786034524911</code></td><td>explore</td><td>modheshwari</td></tr></tr></tbody></table>
+</section>
+
+<section id="s14">
+<h2><span class="num">14</span>Per-call profile</h2>
+<p>The average flash call moved <strong>75,271</strong> tokens. The
+largest single call used <strong>201,825</strong> tokens.</p>
+<div class="chart sm"><canvas id="avgCall"></canvas></div>
+<div class="note"><strong>Largest call.</strong> 2026-08-05 22:15 &middot; search &middot; samarth (input 36,250, output 170, reasoning 413, cache 164,992)</div>
+</section>
+
+<section id="s15">
+<h2><span class="num">15</span>Sources split</h2>
+<table><caption>Usage by source database</caption><thead><tr><th>source database</th><th>calls</th><th>input</th><th>output</th><th>cache read</th></tr></thead><tbody><tr><tr class=""><td>opencode.db</td><td>2,164</td><td>12,758,952</td><td>1,274,575</td><td>153,577,472</td></tr></tr><tr><tr class=""><td>opencode-next.db</td><td>368</td><td>1,126,939</td><td>144,437</td><td>20,104,064</td></tr></tr></tbody></table>
+<p><code>opencode.db</code> carries 85&nbsp;% of the flash calls. The rest
+come from the installed <code>next</code> build used until 8 August.</p>
+</section>
+
+<footer>
+<span>Source: local OpenCode databases &middot; Generated 2026-08-12 20:13:13 UTC</span>
+<a class="totop" href="#top">Back to top &uarr;</a>
+</footer>
+</div>
+
+<script>
+const D = {"generated": "2026-08-12T20:13:13.696912+00:00", "days": ["2026-08-01", "2026-08-02", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06", "2026-08-08", "2026-08-10", "2026-08-11", "2026-08-12"], "by_day": {"2026-08-01": {"calls": 946, "input": 4658765, "output": 719250, "reasoning": 1100748, "cr": 73438336, "cw": 0}, "2026-08-02": {"calls": 322, "input": 792532, "output": 97284, "reasoning": 133397, "cr": 28346112, "cw": 0}, "2026-08-03": {"calls": 259, "input": 345978, "output": 74361, "reasoning": 87031, "cr": 10241024, "cw": 0}, "2026-08-04": {"calls": 125, "input": 610218, "output": 81688, "reasoning": 31140, "cr": 8667264, "cw": 0}, "2026-08-05": {"calls": 138, "input": 1899771, "output": 62733, "reasoning": 88928, "cr": 8582528, "cw": 0}, "2026-08-06": {"calls": 512, "input": 4586085, "output": 250954, "reasoning": 101116, "cr": 27637120, "cw": 0}, "2026-08-08": {"calls": 13, "input": 171372, "output": 8814, "reasoning": 891, "cr": 586496, "cw": 0}, "2026-08-10": {"calls": 32, "input": 62238, "output": 39693, "reasoning": 19028, "cr": 2614528, "cw": 0}, "2026-08-11": {"calls": 180, "input": 633958, "output": 83301, "reasoning": 37316, "cr": 13478272, "cw": 0}, "2026-08-12": {"calls": 5, "input": 124974, "output": 934, "reasoning": 608, "cr": 89856, "cw": 0}}, "total": {"calls": 2532, "input": 13885891, "output": 1419012, "reasoning": 1600203, "cr": 173681536, "cw": 0}, "by_variant": {"max": {"calls": 1653, "input": 7563045, "output": 860328, "reasoning": 561417, "cr": 124045440, "cw": 0}, "default": {"calls": 879, "input": 6322846, "output": 558684, "reasoning": 1038786, "cr": 49636096, "cw": 0}}, "variant_share": {"2026-08-01": {"max": 53.38266384778013, "default": 46.61733615221987}, "2026-08-02": {"max": 91.61490683229813, "default": 8.385093167701864}, "2026-08-03": {"max": 94.20849420849422, "default": 5.7915057915057915}, "2026-08-04": {"max": 100.0}, "2026-08-05": {"max": 100.0}, "2026-08-06": {"default": 52.9296875, "max": 47.0703125}, "2026-08-08": {"max": 100.0}, "2026-08-10": {"max": 100.0}, "2026-08-11": {"default": 69.44444444444444, "max": 30.555555555555557}, "2026-08-12": {"max": 100.0}}, "by_agent": {"build": {"calls": 1537, "input": 4772729, "output": 769228, "reasoning": 449311, "cr": 117195648, "cw": 0}, "compaction": {"calls": 12, "input": 670143, "output": 20075, "reasoning": 19839, "cr": 0, "cw": 0}, "explore": {"calls": 342, "input": 1990926, "output": 145229, "reasoning": 40371, "cr": 16416512, "cw": 0}, "worker": {"calls": 526, "input": 4124252, "output": 408670, "reasoning": 996384, "cr": 32918400, "cw": 0}, "chat": {"calls": 4, "input": 128399, "output": 1284, "reasoning": 800, "cr": 42624, "cw": 0}, "search": {"calls": 89, "input": 1655364, "output": 61375, "reasoning": 74957, "cr": 6052992, "cw": 0}, "plan": {"calls": 22, "input": 544078, "output": 13151, "reasoning": 18541, "cr": 1055360, "cw": 0}}, "by_src": {"opencode.db": {"calls": 2164, "input": 12758952, "output": 1274575, "reasoning": 1456025, "cr": 153577472, "cw": 0}, "opencode-next.db": {"calls": 368, "input": 1126939, "output": 144437, "reasoning": 144178, "cr": 20104064, "cw": 0}}, "by_project": {"event-management-system": {"calls": 903, "input": 2425986, "output": 369012, "reasoning": 405010, "cr": 67693568, "cw": 0}, "modheshwari": {"calls": 707, "input": 5450427, "output": 343694, "reasoning": 139198, "cr": 41724544, "cw": 0}, "showcase-dsv4-flash.1": {"calls": 421, "input": 3051969, "output": 479215, "reasoning": 873341, "cr": 25261440, "cw": 0}, "function-explain": {"calls": 263, "input": 869685, "output": 74968, "reasoning": 62913, "cr": 24004096, "cw": 0}, "samarth": {"calls": 100, "input": 1364044, "output": 55207, "reasoning": 76357, "cr": 6091648, "cw": 0}, "vite": {"calls": 87, "input": 406051, "output": 55216, "reasoning": 20582, "cr": 5903872, "cw": 0}, "demo-deepseek-v4-flash-0731-oc2-zed": {"calls": 31, "input": 62238, "output": 39693, "reasoning": 19028, "cr": 2614528, "cw": 0}, "Desktop": {"calls": 9, "input": 181785, "output": 1117, "reasoning": 2833, "cr": 263552, "cw": 0}, ".linuxbrew": {"calls": 8, "input": 31490, "output": 869, "reasoning": 860, "cr": 124288, "cw": 0}, "showcase-dsv4-flash": {"calls": 2, "input": 42216, "output": 21, "reasoning": 81, "cr": 0, "cw": 0}, "schema-visualizer": {"calls": 1, "input": 0, "output": 0, "reasoning": 0, "cr": 0, "cw": 0}}, "top_sessions": {"ses_03eb7f9aeffeBYrc4kvRTa31Wn": {"calls": 231, "input": 483067, "output": 60261, "reasoning": 52416, "cr": 21835776, "cw": 0}, "ses_046169120ffeHkY34yVDGEAB3v": {"calls": 162, "input": 343006, "output": 73763, "reasoning": 36397, "cr": 15245696, "cw": 0}, "ses_045d520b1ffewbDHmKjM4uXMCs": {"calls": 134, "input": 316960, "output": 182783, "reasoning": 31202, "cr": 13067904, "cw": 0}, "ses_04602ca8bffevu30KBHiOmZR1m": {"calls": 104, "input": 191314, "output": 53146, "reasoning": 25624, "cr": 10736512, "cw": 0}, "ses_0281a027dffeS7B11F2tBBdVdj": {"calls": 104, "input": 1391589, "output": 55271, "reasoning": 25499, "cr": 7153792, "cw": 0}, "ses_0371c1f61ffeCu3BHEKyHOqEse": {"calls": 87, "input": 406051, "output": 55216, "reasoning": 20582, "cr": 5903872, "cw": 0}, "ses_045f31b99ffe9dkZe0dTTuiD5K": {"calls": 80, "input": 186782, "output": 30510, "reasoning": 43084, "cr": 8604800, "cw": 0}, "ses_045da1e78ffe7edx4sGbkua4Vn": {"calls": 80, "input": 404599, "output": 68119, "reasoning": 41421, "cr": 7348992, "cw": 0}, "ses_0280c3ebbffeq8T0ZDzx4h07XL": {"calls": 58, "input": 521294, "output": 21993, "reasoning": 14295, "cr": 3469056, "cw": 0}, "ses_00f4c4f3affeiIdHnZtJvFnJPh": {"calls": 55, "input": 212519, "output": 39201, "reasoning": 24810, "cr": 5423104, "cw": 0}, "ses_039dc6c71ffeRDXgq6m02mwpLf": {"calls": 55, "input": 49432, "output": 11561, "reasoning": 15972, "cr": 2421760, "cw": 0}, "ses_03c367ef7ffe24whJvummRPDag": {"calls": 52, "input": 105423, "output": 32312, "reasoning": 19505, "cr": 3039104, "cw": 0}}, "hit_rate": 92.59685371703691, "hit_rate_day": {"2026-08-01": 94.03465053075402, "2026-08-02": 97.28013424372116, "2026-08-03": 96.73204935637114, "2026-08-04": 93.42259031060367, "2026-08-05": 81.87638990263491, "2026-08-06": 85.76775649721993, "2026-08-08": 77.38761895211303, "2026-08-10": 97.67488080766118, "2026-08-11": 95.50774044924154, "2026-08-12": 41.826560536237956}, "cost": {"input": 1.9440247400000004, "hit": 0.4863083008, "output": 0.39732336, "reasoning": 0.44805684000000007, "total": 3.2757132408000005, "worst": 27.104819980000006}, "cost_day": {"2026-08-01": 1.3674538808, "2026-08-02": 0.2549142736, "2026-08-03": 0.12230154720000001, "2026-08-04": 0.1412906992, "2026-08-05": 0.3324640984, "2026-08-06": 0.818015436, "2026-08-08": 0.028351668800000004, "2026-08-10": 0.032475878400000005, "2026-08-11": 0.16026604160000002, "2026-08-12": 0.018179716800000002}, "cum_cost": {"2026-08-01": 1.3674538808, "2026-08-02": 1.6223681544000002, "2026-08-03": 1.7446697016000001, "2026-08-04": 1.8859604008000002, "2026-08-05": 2.2184244992, "2026-08-06": 3.0364399352, "2026-08-08": 3.0647916040000003, "2026-08-10": 3.0972674824000004, "2026-08-11": 3.2575335240000003, "2026-08-12": 3.2757132408000005}, "eff_in": 12957.116700225355, "tps_all": {"n": 2115, "avg": 59.082564533614345, "med": 49.65753424657534, "p95": 147.65454905324273}, "tps_agent": {"build": {"n": 1159, "avg": 55.56068925893361, "med": 45.52625647960334, "p95": 146.73300788584302}, "compaction": {"n": 11, "avg": 100.20540439406501, "med": 99.31205593774669, "p95": 122.83092577450714}, "explore": {"n": 323, "avg": 48.34012712818422, "med": 42.66900790166813, "p95": 99.06948903520706}, "worker": {"n": 508, "avg": 72.80347637737945, "med": 57.70644986514169, "p95": 187.80071867957855}, "chat": {"n": 4, "avg": 43.52866292086477, "med": 45.91382279463643, "p95": 74.64120239575094}, "search": {"n": 88, "avg": 64.30627581291881, "med": 64.47266223144723, "p95": 101.28291694800811}, "plan": {"n": 22, "avg": 46.88325926468106, "med": 40.03848282351778, "p95": 77.21469345069502}}, "by_hour": {"0": 432, "1": 0, "2": 377, "3": 227, "4": 308, "5": 0, "6": 0, "7": 0, "8": 0, "9": 39, "10": 0, "11": 131, "12": 194, "13": 130, "14": 0, "15": 38, "16": 0, "17": 166, "18": 14, "19": 0, "20": 0, "21": 68, "22": 390, "23": 18}, "weekday": {"0": 291, "1": 305, "2": 143, "3": 512, "4": 0, "5": 959, "6": 322}, "hour_matrix": {"2026-08-01": {"0": 0, "1": 0, "2": 372, "3": 227, "4": 308, "5": 0, "6": 0, "7": 0, "8": 0, "9": 39, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}, "2026-08-02": {"0": 2, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 8, "12": 194, "13": 118, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}, "2026-08-03": {"0": 136, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 123, "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}, "2026-08-04": {"0": 87, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 38, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}, "2026-08-05": {"0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 45, "22": 93, "23": 0}, "2026-08-06": {"0": 207, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 21, "22": 266, "23": 18}, "2026-08-08": {"0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 12, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 1, "22": 0, "23": 0}, "2026-08-10": {"0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 1, "22": 31, "23": 0}, "2026-08-11": {"0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 166, "18": 14, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}, "2026-08-12": {"0": 0, "1": 0, "2": 5, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0, "22": 0, "23": 0}}, "finishes": {"tool-calls": 2313, "stop": 158, "unknown": 50, "length": 11}, "errors": {"MessageAbortedError": 24, "UnknownError": 13}, "err_day": {"2026-08-01": 21, "2026-08-02": 1, "2026-08-03": 0, "2026-08-04": 0, "2026-08-05": 3, "2026-08-06": 9, "2026-08-08": 1, "2026-08-10": 1, "2026-08-11": 1, "2026-08-12": 0}, "max_call": {"tokens": 201825, "ts": 1785948331705, "agent": "search", "project": "samarth", "input": 36250, "output": 170, "reasoning": 413, "cr": 164992}, "calls_per_session": {"sessions": 133, "avg": 19.037593984962406, "med": 7}, "hour_peak": 432, "weekend_share": 50.59241706161137};
+const nf = new Intl.NumberFormat('en-US');
+const fmt = n => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(0)+'k' : String(n);
+Chart.defaults.color = '#5b6472';
+Chart.defaults.borderColor = '#d7dbe2';
+Chart.defaults.font.family = "'Schibsted Grotesk',sans-serif";
+const ACC = '#1d4ed8', TEA = '#0f766e', AMB = '#d97706', GRAY = '#64748b';
+
+const yFmt = {ticks:{callback:v=>fmt(v)}};
+
+new Chart(document.getElementById('callsDay'), {type:'bar', data:{
+  labels: D.days,
+  datasets:[{label:'calls', data:D.days.map(d=>D.by_day[d].calls), backgroundColor:ACC, borderRadius:4}]
+}, options:{plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, ticks:{precision:0}}}}});
+
+new Chart(document.getElementById('tokensDay'), {type:'bar', data:{
+  labels: D.days,
+  datasets:[
+    {label:'input', data:D.days.map(d=>D.by_day[d].input), backgroundColor:ACC},
+    {label:'output', data:D.days.map(d=>D.by_day[d].output), backgroundColor:TEA},
+    {label:'reasoning', data:D.days.map(d=>D.by_day[d].reasoning), backgroundColor:AMB},
+  ]
+}, options:{scales:{x:{stacked:true},y:{stacked:true, ...yFmt}}}});
+
+new Chart(document.getElementById('cacheDay'), {type:'bar', data:{
+  labels: D.days,
+  datasets:[{label:'cache read', data:D.days.map(d=>D.by_day[d].cr), backgroundColor:GRAY, borderRadius:4}]
+}, options:{plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, ...yFmt}}}});
+
+new Chart(document.getElementById('cumCost'), {type:'line', data:{
+  labels: D.days,
+  datasets:[{label:'cumulative est. cost ($)', data:D.days.map(d=>+D.cum_cost[d].toFixed(3)), borderColor:ACC, backgroundColor:'rgba(29,78,216,0.08)', fill:true, tension:.25, pointRadius:3}]
+}, options:{plugins:{legend:{display:false}}}});
+
+new Chart(document.getElementById('hitLine'), {type:'line', data:{
+  labels: D.days,
+  datasets:[{label:'cache hit rate %', data:D.days.map(d=>+D.hit_rate_day[d].toFixed(1)), borderColor:TEA, tension:.25, pointRadius:3, yAxisID:'y'}]
+}, options:{scales:{y:{min:0, max:100, ticks:{callback:v=>v+'%'}}}}});
+
+new Chart(document.getElementById('hitDonut'), {type:'doughnut', data:{
+  labels:['cache hit', 'cache miss'],
+  datasets:[{data:[D.hit_rate, 100 - D.hit_rate], backgroundColor:[TEA, '#eef0f4'], borderWidth:0}]
+}, options:{cutout:'68%', plugins:{legend:{position:'right'}, tooltip:{callbacks:{label: c => c.label + ' ' + c.parsed.toFixed(1) + '%'}}}}});
+
+new Chart(document.getElementById('costDay'), {type:'bar', data:{
+  labels: D.days,
+  datasets:[{label:'est. cost ($)', data:D.days.map(d=>+D.cost_day[d].toFixed(3)), backgroundColor:AMB, borderRadius:4}]
+}, options:{plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}});
+
+const hbar = (id, data, color) => new Chart(document.getElementById(id), {type:'bar', data:{
+  labels: data.map(x=>x[0]),
+  datasets:[{data: data.map(x=>x[1]), backgroundColor:color, borderRadius:4}]
+}, options:{indexAxis:'y', plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true}}}});
+
+hbar('tpsAgent', Object.entries(D.tps_agent).sort((a,b)=>b[1].med-a[1].med).map(([k,v])=>[k, +v.med.toFixed(1)]), TEA);
+hbar('agentBar', Object.entries(D.by_agent).sort((a,b)=>b[1].calls-a[1].calls).map(([k,v])=>[k, v.calls]), ACC);
+hbar('variantBar', Object.entries(D.by_variant).sort((a,b)=>b[1].calls-a[1].calls).map(([k,v])=>[k, v.calls]), ACC);
+hbar('projectBar', Object.entries(D.by_project).slice(0,15).sort((a,b)=>b[1].calls-a[1].calls).map(([k,v])=>[k, v.calls]), AMB);
+hbar('sessionBar', Object.entries(D.top_sessions).sort((a,b)=>b[1].calls-a[1].calls).reverse().map(([k,v])=>[k.slice(0,18), v.calls]), GRAY);
+
+new Chart(document.getElementById('variantShare'), {type:'bar', data:{
+  labels: D.days,
+  datasets:Object.entries(D.by_variant).sort((a,b)=>b[1].calls-a[1].calls).map((v,i)=>(
+    {label:v[0], data:D.days.map(d=>D.variant_share[d] && D.variant_share[d][v[0]] ? +D.variant_share[d][v[0]].toFixed(1) : 0), backgroundColor:[ACC,TEA,AMB,GRAY][i%4]})),
+}, options:{scales:{x:{stacked:true},y:{stacked:true, max:100, ticks:{callback:v=>v+'%'}}}}});
+
+const hours = Object.entries(D.by_hour).sort((a,b)=>+a[0]-+b[0]).map(([k,v])=>[k+':00', v]);
+new Chart(document.getElementById('hourBar'), {type:'bar', data:{
+  labels: hours.map(x=>x[0]),
+  datasets:[{label:'calls', data:hours.map(x=>x[1]), backgroundColor: ACC, borderRadius:4}]
+}, options:{plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, ticks:{precision:0}}}}});
+
+const wd = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+new Chart(document.getElementById('weekdayBar'), {type:'bar', data:{
+  labels: wd,
+  datasets:[{label:'calls', data:wd.map((_,i)=>D.weekday[i]), backgroundColor: TEA, borderRadius:4}]
+}, options:{plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, ticks:{precision:0}}}}});
+
+new Chart(document.getElementById('finishDoughnut'), {type:'doughnut', data:{
+  labels: Object.keys(D.finishes),
+  datasets:[{data: Object.values(D.finishes), backgroundColor:[ACC,TEA,AMB,GRAY], borderWidth:0}]
+}, options:{cutout:'60%', plugins:{legend:{position:'right'}}}});
+
+const avgCall = D.days.map(d=>{const t=D.by_day[d]; const c=t.calls||1; return [t.input/c, t.output/c, t.reasoning/c];});
+new Chart(document.getElementById('avgCall'), {type:'bar', data:{
+  labels: D.days,
+  datasets:[
+    {label:'input / call', data:avgCall.map(x=>x[0]), backgroundColor:ACC},
+    {label:'output / call', data:avgCall.map(x=>x[1]), backgroundColor:TEA},
+    {label:'reasoning / call', data:avgCall.map(x=>x[2]), backgroundColor:AMB},
+  ]
+}, options:{scales:{x:{stacked:true},y:{stacked:true, ...yFmt}}}});
+</script>
+</body>
+</html>
