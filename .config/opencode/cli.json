@@ -7,14 +7,14 @@
         "leader": "ctrl+o",
         "open.menu": "<leader>space",
         "session.rename": "none",
-        "session_child_cycle": "right",
-        "session_child_cycle_reverse": "left",
+        "session.child.next": "right",
+        "session.child.previous": "left",
         "session.parent": "up",
         "session.child.first": "down"
     },
     "plugins": [
         {
-            "package": "/home/samarth/dev/prod/live-token-meter/src/index.tsx",
+            "package": "/home/samarth/dev/prod/live-token-meter",
             "options": {
                 "charsPerToken": 4,
                 "showTotals": true
@@ -37,7 +37,8 @@
         "turn_tokens": true
     },
     "attention": {
-        "enabled": true
+        "notifications": true,
+        "sound": true
     },
     "terminal": {
         "title": true

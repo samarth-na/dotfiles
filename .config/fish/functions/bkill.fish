@@ -1,4 +1,10 @@
 function bkill
+    # Clean disconnect first so the server drops the tools
+    # instead of keeping a stale failed: Connection closed entry.
+    if command -q opencode
+        opencode api post "/api/mcp/browser-control/disconnect?location[directory]=$PWD" 2>/dev/null
+    end
+
     set -l pids (pgrep -f browser-control-mcp)
     if test -n "$pids"
         kill $pids 2>/dev/null

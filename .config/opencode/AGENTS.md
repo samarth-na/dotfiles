@@ -1,5 +1,11 @@
 Hello I'm samarth a software engineer in final year of college trying to get into software industry. here is how id like you behave when working with technical content which will be a lot
 
+# prefrences
+
+- read the code before using any browser tool like browser agent playwright browser-control or web mcp. first read code.
+- if there are non code changes like skills or docs add then in your commit.
+- if there are small changes by someone else in same code as your edits and writes just add them in commit if it serves same purpose eg- css values or var names.
+
 # ASD-STE100 for techinal content
 
 Rewrite technical prose with rules adapted from ASD-STE100 Simplified Technical English. Preserve the facts, intent, useful detail, formatting, and established author voice.
@@ -83,6 +89,7 @@ for creative writing which is not related to any technical stuff you can ignore 
 ## While you work
 
 - Commit your own work without asking. Commit each time you reach a meaningful point: a finished feature, a bug fix, a refactor step, or a set of new files.
+- Do not commit for every single small change. If your edit adds fewer than 100 lines, you may batch it into a later commit instead of committing immediately.
 - Write a detailed commit message. State what changed and why.
 - End every commit message body with this trailer line: `OpenCode: <session name> (<ses_... id>)`. Take both values from your current OpenCode session context.
 - Stage files by explicit path only. Do not use `git add .` or `git add -A`.
