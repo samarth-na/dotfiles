@@ -1,12 +1,11 @@
-Hello I'm samarth a software engineer in final year of college trying to get into software industry. here is how id like you behave when working with technical content which will be a lot
+I am Samarth, a software engineer in my final year of college, trying to enter the software industry.
+I work with technical content often. Follow these preferences when you help me.
 
-# prefrences
+# Preferences
 
-- read the code before using any browser tool like browser agent playwright browser-control or web mcp. first read code.
-- if there are non code changes like skills or docs add then in your commit.
-- if there are small changes by someone else in same code as your edits and writes just add them in commit if it serves same purpose eg- css values or var names.
+- Read the relevant code before using browser agents, Playwright, browser-control, or web MCP tools.
 
-# ASD-STE100 for techinal content
+# ASD-STE100 for technical content
 
 Rewrite technical prose with rules adapted from ASD-STE100 Simplified Technical English. Preserve the facts, intent, useful detail, formatting, and established author voice.
 
@@ -17,14 +16,15 @@ Rewrite technical prose with rules adapted from ASD-STE100 Simplified Technical 
 - Use strict mode when the user does not specify a mode and the text tells a reader what to do.
 - Use STE-flavored mode for all other requests.
 
-Do not use this skill for code, identifiers, command syntax, creative writing, or marketing copy that depends on a distinct voice.
+Do not apply these writing rules to code, identifiers, command syntax, or creative writing.
+Do not apply them to marketing copy that depends on a distinct voice.
 
 ## Apply the workflow
 
 1. Read the full source before editing.
 2. Identify facts, requirements, warnings, commands, links, and structural elements that must remain.
-3. write the text with the selected mode.
-4. write with the source. Restore any lost meaning or necessary detail.
+3. Rewrite the text with the selected mode.
+4. Compare the rewrite with the source. Restore any lost meaning or necessary detail.
 5. Return only the requested deliverable unless the user asks for an audit or explanation.
 
 ## Use plain words
@@ -36,7 +36,7 @@ Do not use this skill for code, identifiers, command syntax, creative writing, o
 - Use American spelling unless the source or user requires another variety.
 - Remove empty intensifiers and promotional claims such as `seamless`, `robust`, `powerful`, `cutting-edge`, and `world-class`.
 - Keep necessary technical terms. Define an unfamiliar term at its first use.
-- do not be vague be opinionated have, talk in first person.
+- Be specific. State your opinion clearly. Speak in the first person.
 
 ## Make actors and actions clear
 
@@ -67,39 +67,53 @@ Do not use this skill for code, identifiers, command syntax, creative writing, o
 - Do not add personality when neutral technical prose is correct.
 - Do not claim that text is human-written or undetectable.
 
-improves the form of technical prose. It cannot make weak ideas true or unsupported claims credible.
-for creative writing which is not related to any technical stuff you can ignore these rules
+These writing rules improve the form of technical prose. They cannot make weak ideas true or unsupported claims credible.
+For creative writing unrelated to technical content, you can ignore these writing rules.
 
 # Forbidden
 
-- Never run a dev server. Not ever. This is not permitted. there is one running always
+- Never run a development server. One is always running already.
 
-# preferences
+# Project tools
 
-- prefer the package manager and tools of the project dont default to npm. first check then use it
-- for db use sqlite for quick db
+- Check which package manager and tools the project uses. Use them instead of defaulting to npm.
+- For a quick database, use SQLite.
 
 # Git
 
 ## Before you work
 
 - Run `git status` before you start. Note which files are already modified or untracked.
-- Treat pre-existing changes as the user's work. Never stage, commit, stash, revert, or delete them.
+- Treat pre-existing changes as the user's work, except edits you made earlier in this session and deferred for batching.
+- Never stash, revert, or delete the user's changes.
+- Do not stage or commit the user's changes except under the small, same-purpose exception below.
 
 ## While you work
 
-- Commit your own work without asking. Commit each time you reach a meaningful point: a finished feature, a bug fix, a refactor step, or a set of new files.
-- Do not commit for every single small change. If your edit adds fewer than 100 lines, you may batch it into a later commit instead of committing immediately.
+- Include small changes by someone else when they serve the same purpose and are in the code you edit.
+  Examples include related CSS values or variable names. This is the only exception for committing another person's changes.
+- Commit your own work without asking only when it reaches a substantial, meaningful point.
+  Examples include a finished feature, a bug fix, a refactor step, or a set of new files.
+  A small edit does not require its own commit merely because it completes a task or ends a reply.
+- Batch related small edits into a later substantial commit, including across replies in the same session.
+  If an edit adds fewer than 100 lines, you may defer its commit.
+  Do not create a commit for each line, small edit, or reply.
+- Include your non-code changes, such as skills and docs, in the relevant commit.
 - Write a detailed commit message. State what changed and why.
 - End every commit message body with this trailer line: `OpenCode: <session name> (<ses_... id>)`. Take both values from your current OpenCode session context.
 - Stage files by explicit path only. Do not use `git add .` or `git add -A`.
 - Include new files you created in the commit.
-- A file can contain both your edits and the user's edits. Stage only your hunks, for example with `git add -p`. Never stage lines you did not write.
-- Do not start merges, rebases, or history rewrites on your own. Avoid any operation that can produce merge or rebase conflicts with the user's uncommitted work.
-- Do not wait for permission because the tree has other uncommitted changes. Commit your share anyway.
+- A file can contain both your edits and the user's edits. Stage only your hunks, for example with `git add -p`.
+  Include others' hunks only under the small, same-purpose exception above.
+- Do not start merges, rebases, or history rewrites on your own.
+  Avoid operations that can cause merge or rebase conflicts with the user's uncommitted work.
+- When a commit is due, do not wait for permission because the working tree contains other uncommitted changes.
+  Commit your share and leave unrelated changes alone.
 
 ## Before you finish
 
-- Run `git status` one last time. Your work must leave nothing uncommitted.
-- All of your output must be committed. If your work spans 10+ files or 100+ changed lines, none of it may sit unaccounted for in the working tree.
-- List any files still dirty that you did not touch. Those belong to the user.
+- Run `git status` one last time.
+- At a substantial milestone, commit all your output for that milestone, including related edits deferred earlier in this session.
+- Small-only work may remain uncommitted for batching. An ending reply alone does not require a commit.
+- If your accumulated uncommitted work spans 10+ files or 100+ changed lines, commit it before finishing.
+- List any deferred edits of your own. List remaining unrelated changes as the user's work, including changes in shared files.
