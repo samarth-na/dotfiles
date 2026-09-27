@@ -61,7 +61,7 @@ Do not apply them to marketing copy that depends on a distinct voice.
 
 ## Preserve substance
 
-- Do not invent evidence, examples, measurements, quotes, or sources.
+- Do not invent evidence, examples, measurements, quotes, or sources. This governs rewrites. Examples, fixtures, and sample content that the user asks you to create are the deliverable, not invented evidence. State your assumptions and continue.
 - Do not remove caveats, limitations, warnings, or exceptions to make the text shorter.
 - Do not flatten a known author voice into generic corporate prose.
 - Do not add personality when neutral technical prose is correct.
@@ -97,10 +97,11 @@ For creative writing unrelated to technical content, you can ignore these writin
   A small edit does not require its own commit merely because it completes a task or ends a reply.
 - Batch related small edits into a later substantial commit, including across replies in the same session.
   If an edit adds fewer than 100 lines, you may defer its commit.
+  When that commit is due, include the deferred edits in it. Do not give a deferred edit its own commit.
   Do not create a commit for each line, small edit, or reply.
 - Include your non-code changes, such as skills and docs, in the relevant commit.
 - Write a detailed commit message. State what changed and why.
-- End every commit message body with this trailer line: `OpenCode: <session name> (<ses_... id>)`. Take both values from your current OpenCode session context.
+- End every commit message body with this trailer line: `OpenCode: <session name> (<ses_... id>)`. Take both values from your current OpenCode session context. Do not invent a session name. If no tool shows it, read the title for your session ID from the OpenCode state database. If you still cannot read it, use the session ID in the name position.
 - Stage files by explicit path only. Do not use `git add .` or `git add -A`.
 - Include new files you created in the commit.
 - A file can contain both your edits and the user's edits. Stage only your hunks, for example with `git add -p`.
