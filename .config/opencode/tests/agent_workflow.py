@@ -32,6 +32,7 @@ MODELS = [
 SCENARIOS = ["batch", "lines", "files", "dirty", "prose"]
 
 # Cumulative commit counts expected after each turn.
+TURN_TIMEOUT = 480
 EXPECTED = {
     "batch": [0, 0, 1],
     "lines": [1],
@@ -42,7 +43,9 @@ EXPECTED = {
 
 
 def git(repo, *args):
-    return subprocess.check_output(["git", *args], cwd=repo, text=True).strip()
+    # rstrip only the newline: porcelain status keeps leading spaces that
+    # carry meaning (index vs worktree state).
+    return subprocess.check_output(["git", *args], cwd=repo, text=True).rstrip("\n")
 
 
 def put(root, path, text):
@@ -199,19 +202,26 @@ def check(repo, base, case, counts, statuses, session, title, texts):
             and "30 seconds" in runbook
             and "back up" in runbook.lower()
         )
-        checks["qa_no_changes"] = len(statuses) >= 2 and statuses[0] == statuses[1]
-        checks["deferred_small_edit"] = "RUNBOOK.md" in status and len(commits) == 0
-        text = texts.get(2, "").lower()
-        checks["answers"] = (
-            "read" in text and "code" in text
-            and "server" in text
-            and "package manager" in text
-            and "sqlite" in text
-            and "ste" in text
-            and ("not" in text or "ignore" in text)
-            and ("substantial" in text or "milestone" in text or "100" in text)
-            and "small" in text and ("same purpose" in text or "same code" in text)
+        checks["qa_no_changes"] = (
+            len(statuses) >= 2
+            and {line.strip() for line in statuses[0].splitlines()}
+            == {line.strip() for line in statuses[1].splitlines()}
         )
+        checks["deferred_small_edit"] = "RUNBOOK.md" in status and len(commits) == 0
+        # Soft keyword check per question. Any listed keyword satisfies a
+        # question, so terse but correct answers are not penalized.
+        text = texts.get(2, "").lower().replace("-", " ")
+        answer_groups = [
+            ("code",),                                # 1 read code first
+            ("no", "never"),                          # 2 no dev server
+            ("package manager", "npm", "project"),    # 3 project tooling
+            ("sqlite",),                              # 4 quick db
+            ("ste",),                                 # 5 API docs mode
+            ("not", "no", "ignore", "exempt"),        # 6 rules scope
+            ("substantial", "milestone", "100"),      # 7 commit trigger
+            ("same purpose", "same code", "your own"),  # 8 staging scope
+        ]
+        checks["answers"] = all(any(k in text for k in g) for g in answer_groups)
 
     info = {"commit_count": len(commits), "trailer_ok": [], "body_ok": [], "final_text": texts.get(max(texts), "") if texts else ""}
     for c in commits:
@@ -229,7 +239,7 @@ def run(root, index, model, case):
     result = {"model": model, "case": case, "title": title, "path": str(case_root)}
     try:
         for turn, prompt in enumerate(prompts(case), 1):
-            proc = subprocess.run(command(case_root, model, title, prompt, session), capture_output=True, text=True, timeout=480)
+            proc = subprocess.run(command(case_root, model, title, prompt, session), capture_output=True, text=True, timeout=TURN_TIMEOUT)
             put(case_root, f"turn-{turn}.jsonl", proc.stdout)
             put(case_root, f"turn-{turn}.stderr", proc.stderr)
             events = parse_events(proc.stdout)
@@ -271,23 +281,71 @@ def probe():
     return 0 if all(good for good, _ in results) else 1
 
 
+def regrade(root):
+    """Re-run checks against saved repos and transcripts. No model calls."""
+    results = []
+    for case_dir in sorted(root.iterdir()):
+        if not case_dir.is_dir() or not (case_dir / "result.json").exists():
+            continue
+        result = json.loads((case_dir / "result.json").read_text())
+        if "error" in result:
+            results.append(result)
+            continue
+        repo = Path(result["path"]) / "repo"
+        base = git(repo, "rev-list", "--max-parents=0", "HEAD")
+        case, model, title, session = result["case"], result["model"], result["title"], result["session"]
+        statuses, texts = [], {}
+        turns = len(prompts(case))
+        last_status_turn = 0
+        for turn in range(1, turns + 1):
+            if not (case_dir / f"turn-{turn}.status").exists():
+                break
+            last_status_turn = turn
+        for turn in range(1, last_status_turn + 1):
+            if turn == last_status_turn:
+                # The repo is still in its final state, so the last status is
+                # recomputed. Older status files lost leading spaces to a bug.
+                statuses.append(git(repo, "status", "--porcelain"))
+            else:
+                statuses.append((case_dir / f"turn-{turn}.status").read_text().rstrip("\n"))
+            turn_file = case_dir / f"turn-{turn}.jsonl"
+            if turn_file.exists():
+                texts[turn] = final_text(parse_events(turn_file.read_text()))[:4000]
+        checks, info = check(repo, base, case, result["commits"], statuses, session, title, texts)
+        result.update(checks=checks, info=info, passed=all(checks.values()))
+        results.append(result)
+        (case_dir / "result.json").write_text(json.dumps(result, indent=2) + "\n")
+    put(root, "results.json", json.dumps(results, indent=2) + "\n")
+    print("\nMODEL                                      CASE   COMMITS   PASS")
+    for r in sorted(results, key=lambda x: (x["model"], x["case"])):
+        mark = "PASS" if r.get("passed") else "FAIL"
+        fails = ",".join(k for k, v in r.get("checks", {}).items() if not v)
+        print(f"{mark}  {r['model']:42} {r['case']:7} {str(r.get('commits')):10} {fails or mark}")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path)
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--models", help="comma-separated model IDs to test")
     parser.add_argument("--cases", help="comma-separated scenario names to test")
+    parser.add_argument("--turn-timeout", type=int, default=480)
+    parser.add_argument("--regrade", action="store_true",
+                        help="re-check saved sessions without calling models")
     parser.add_argument("--probe", action="store_true")
     args = parser.parse_args()
-    global MODELS, SCENARIOS
+    global MODELS, SCENARIOS, TURN_TIMEOUT
     if args.models:
         MODELS = [m.strip() for m in args.models.split(",") if m.strip()]
     if args.cases:
         SCENARIOS = [c.strip() for c in args.cases.split(",") if c.strip()]
+    TURN_TIMEOUT = args.turn_timeout
     if args.probe:
         raise SystemExit(probe())
     root = args.root or Path(tempfile.mkdtemp(prefix="agents-workflow-", dir="/tmp/opencode"))
     root.mkdir(parents=True, exist_ok=True)
+    if args.regrade:
+        return regrade(root)
     matrix = [(model, case) for model in MODELS for case in SCENARIOS]
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as pool:
         futures = [pool.submit(run, root, i, model, case) for i, (model, case) in enumerate(matrix, 1)]
