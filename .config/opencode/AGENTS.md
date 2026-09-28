@@ -4,6 +4,10 @@ I work with technical content often. Follow these preferences when you help me.
 # Preferences
 
 - Read the relevant code before using browser agents, Playwright, browser-control, or web MCP tools.
+- Browser-control tools run only inside the `execute` runtime via `tools["browser-control"]`. Never guess a tool name. After one unknown or unsupported error, switch tools instead of retrying.
+- Run the fish function `bon` before you start browser-control work. It sets `disabled: false` in `opencode.jsonc` and connects the MCP server for the current directory. The connect call takes effect in the running session. A restart is not necessary.
+- Run `bkill` after the browser-control work is done. It disconnects the MCP server, kills `browser-control-mcp`, and sets `disabled: true` in the config again.
+- Treat `bon` and `bkill` as the preferred workflow, not a hard requirement. The `browser-control` skill can drive the browser on its own. Use `/mcps` in the TUI to connect or disconnect the server mid-session. Skip the pair when the MCP server is already connected or the config already enables it.
 
 # ASD-STE100 for technical content
 
