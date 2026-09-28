@@ -2,7 +2,7 @@ function bkill
     # Clean disconnect first so the server drops the tools
     # instead of keeping a stale failed: Connection closed entry.
     if command -q opencode
-        opencode api post "/api/mcp/browser-control/disconnect?location[directory]=$PWD" 2>/dev/null
+        opencode api post "/api/experimental/mcp/browser-control/disconnect?location[directory]=$PWD" 2>/dev/null
     end
 
     set -l pids (pgrep -f browser-control-mcp)
@@ -13,7 +13,7 @@ function bkill
         echo "No browser-control-mcp processes running"
     end
 
-    sed -i '/"browser-control"/,/"enabled"/ s/"enabled": true/"enabled": false/' \
+    sed -i '/"browser-control"/,/"disabled"/ s/"disabled": false/"disabled": true/' \
         $HOME/.config/opencode/opencode.jsonc
 
     echo "browser-control disabled in config"
