@@ -1,7 +1,7 @@
 {
     "theme": {
         "name": "one-dark",
-        "mode": "dark"
+        "mode": "system"
     },
     "keybinds": {
         "leader": "ctrl+o",
@@ -28,7 +28,7 @@
     "session": {
         "sidebar": "auto",
         "scrollbar": true,
-        "thinking": "hide",
+        "thinking": "show",
         "grouping": "none"
     },
     "animations": true,
