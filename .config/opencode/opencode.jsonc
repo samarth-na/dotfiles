@@ -1,14 +1,33 @@
 {
     "$schema": "https://opencode.ai/config.json",
     "model": "opencode/deepseek-v4-flash-free",
-    "agents": {
-        "explore": {
-            "model": "opencode/muse-spark-1-3-contributor-free"
-        },
-        "general": {
-            "model": "opencode/muse-spark-1-3-contributor-free"
-        }
-    },
+    // Shell tools run fish. Agents must write fish syntax (see AGENTS.md).
+    "shell": "/usr/bin/fish",
+    // Last match wins. Inherited base policy allows everything first; these
+    // global rules are appended after it, then agent rules after these.
+    "permissions": [
+        // Frictionless read-only git inspection.
+        { "action": "shell", "resource": "git status *", "effect": "allow" },
+        { "action": "shell", "resource": "git diff *", "effect": "allow" },
+        { "action": "shell", "resource": "git log *", "effect": "allow" },
+        // AGENTS.md forbids staging everything. Enforce it at the tool layer.
+        { "action": "shell", "resource": "git add .", "effect": "deny" },
+        { "action": "shell", "resource": "git add . *", "effect": "deny" },
+        { "action": "shell", "resource": "git add -A", "effect": "deny" },
+        { "action": "shell", "resource": "git add -A *", "effect": "deny" },
+        { "action": "shell", "resource": "git add --all *", "effect": "deny" },
+        // Destructive shell shapes. Must hold under --auto.
+        { "action": "shell", "resource": "rm -rf *", "effect": "deny" },
+        { "action": "shell", "resource": "sudo *", "effect": "deny" },
+        { "action": "shell", "resource": "git push --force *", "effect": "deny" },
+        { "action": "shell", "resource": "git push * --force *", "effect": "deny" },
+        // Credential-bearing files. Never read into context or commit.
+        // AGENTS.md forbids `.env`; deny it so `--auto` cannot approve it.
+        { "action": "read", "resource": "*.env", "effect": "deny" },
+        { "action": "read", "resource": "*.env.*", "effect": "deny" },
+        { "action": "read", "resource": "*opencode/service*.json", "effect": "deny" },
+        { "action": "read", "resource": "*conf.d/secrets.fish", "effect": "deny" }
+    ],
     "lsp": {
         "typescript": {
             "command": [
@@ -42,22 +61,24 @@
         }
     },
     "mcp": {
-        "browser-control": {
-            "type": "local",
-            "command": [
-                "browser-control-mcp"
-            ],
-            "enabled": false
-        },
-        "firecrawl": {
-            "type": "remote",
-            "url": "https://mcp.firecrawl.dev/v2/mcp",
-            "enabled": false
-        },
-        "notion": {
-            "type": "remote",
-            "url": "https://mcp.notion.com/mcp",
-            "enabled": false
+        "servers": {
+            "browser-control": {
+                "type": "local",
+                "command": [
+                    "browser-control-mcp"
+                ],
+                "disabled": true
+            },
+            "firecrawl": {
+                "type": "remote",
+                "url": "https://mcp.firecrawl.dev/v2/mcp",
+                "disabled": true
+            },
+            "notion": {
+                "type": "remote",
+                "url": "https://mcp.notion.com/mcp",
+                "disabled": true
+            }
         }
     }
 }
