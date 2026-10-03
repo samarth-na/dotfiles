@@ -62,6 +62,6 @@ with the user before assuming the submodule exists.
 There is no repo-wide build or test harness. Verify changes by loading the
 affected config directly:
 
-- Fish: `fish -c "source <file>; echo ok"` or restart the shell.
+- Fish: `fish -c 'source <file>; and echo ok'` or restart the shell.
 - opencode: reload the config; JSONC must stay valid.
 - Starship, yazi, terminals: run `starship config`, `yazi`, or restart the app.
