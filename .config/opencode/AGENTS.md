@@ -82,6 +82,42 @@ For creative writing unrelated to technical content, you can ignore these writin
 
 - Check which package manager and tools the project uses. Use them instead of defaulting to npm.
 - For a quick database, use SQLite.
+- Inspect the installed API declarations or a minimal runtime probe before using an unfamiliar SDK. Do not guess APIs.
+- One capability error means switch tools, not retry. Prefer `curl` probes and shell rendering. Pin fetched docs to the installed version and extract instead of dumping pages into context.
+- For design work, agree on one representative screen plus a reference before a broad rewrite. Specify density, navigation, typography, and key interactions.
+
+# Shell
+
+- The shell tool runs fish, not POSIX sh.
+- Use `set VAR value`. Never use `VAR=value`, `<()`, or `[[ ]]`.
+- After one exit 127, stop and rewrite the command for fish.
+- Run checks unpiped. If a pipeline is needed, run it as `bash -c 'set -o pipefail; ...'` and quote the summary line. A zero exit from a filter is not a pass.
+- Write probe and scratch scripts to `/tmp/opencode`, never into the repo. Delete them after use.
+
+# Verification
+
+- Define one observable acceptance result per task, with its failure state when it matters.
+- Match the check to the claim: typecheck for types, tests for behavior, screenshots for UI, two clients for isolation.
+- A build is not proof the user flow works. Test the full browser-to-server-to-provider flow and check the effective request URL. Keep provider credentials on a server route, never in `VITE_*` client vars.
+- Re-run every subtask check at the integration point. Never accept a subagent self-report as evidence. A runner that reports `0 pass, 0 fail` verified nothing.
+- Give editing agents disjoint file sets. Keep one integration owner for the combined diff.
+- For framework-specific review findings, give a reproduction or version-matched reference. A severity label is not evidence.
+- For visual tasks, capture a screenshot before and after the change. Prefer `firefox --headless --screenshot`.
+- Close with the check ran, the result, the check boundary, and the remaining gap.
+
+# Editing and retries
+
+- Search with `grep`/`glob` before reading. Read the target block with offset/limit. Extract fields from large schemas or logs instead of reading them whole.
+- Read the exact block before every edit.
+- After one old-string mismatch, re-read the file and shrink the patch. Never retry the same replacement.
+- After two failures with the same cause, state the failed assumption and run a different diagnostic before editing again.
+- Ask 1-3 blocking questions before implementing vague or destructive requests.
+- Check references before deletion. Distinguish generated-artifact failures from source failures.
+- When the goal changes, start a new conversation. Carry the accepted result, relevant paths, unresolved issue, and next step.
+
+# Secrets
+
+- Never read `service*.json`, `conf.d/secrets.fish`, or `.env` contents into a prompt. Never commit them.
 
 # Git
 
