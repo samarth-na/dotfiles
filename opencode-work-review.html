@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three months of AI-assisted work · OpenCode review</title>
+<meta name="description" content="An evidence-led review of three months of AI-assisted coding, token usage, and workflow quality.">
+<script>
+  // Theme before first paint: stored choice wins, else follow the system.
+  (function () {
+    try {
+      var t = localStorage.getItem("report-theme");
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #ffffff;        --surface: #f6f7f9;   --line: #e5e7eb;
+    --ink: #1f2430;       --heading: #2a2f45;   --muted: #6b7280;
+    --accent: #535dc9;    --accent-soft: #eef0ff;
+    --ok-bg: #d1fae5;     --ok-fg: #15803d;
+    --warn-bg: #fef3c7;   --warn-fg: #b45309;
+    --bad-bg: #fee2e2;    --bad-fg: #b91c1c;
+  }
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #14161d;      --surface: #1b1e27;   --line: #2c3140;
+    --ink: #e4e7ee;     --heading: #f0f2f7;   --muted: #9aa3b2;
+    --accent: #98a2f0;  --accent-soft: #262b4d;
+    --ok-bg: #10331f;   --ok-fg: #4ade80;
+    --warn-bg: #3a2a08; --warn-fg: #fbbf24;
+    --bad-bg: #3d1515;  --bad-fg: #f87171;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg); color: var(--ink);
+    line-height: 1.65; margin: 0;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 24px; }
+
+  header {
+    background: linear-gradient(135deg, #2a2f45, #1f2430);
+    color: #fff; padding: 40px 24px 32px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 26px; }
+  header .subtitle { margin: 0; color: #c7cbd8; font-size: 15px; }
+  header .meta { margin-top: 12px; font-size: 12.5px; color: #9aa1ad; }
+
+  h2 {
+    font-size: 20px; color: var(--heading);
+    margin: 44px 0 8px; padding-bottom: 6px;
+    border-bottom: 2px solid var(--line);
+  }
+  h3 { font-size: 16px; color: var(--heading); margin: 24px 0 6px; }
+  p  { margin: 10px 0; }
+  a  { color: var(--accent); }
+
+  code, pre { font-family: "SF Mono", Consolas, monospace; font-size: 13px; }
+  code { background: var(--surface); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+  pre {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 8px; padding: 12px 14px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere;
+  }
+
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 13.5px; }
+  th, td { border: 1px solid var(--line); padding: 7px 11px; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+  th { background: var(--surface); }
+
+  .badge { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 999px; white-space: nowrap; }
+  .ok   { background: var(--ok-bg);   color: var(--ok-fg); }
+  .warn { background: var(--warn-bg); color: var(--warn-fg); }
+  .bad  { background: var(--bad-bg);  color: var(--bad-fg); }
+
+  .card { border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 12px 0; }
+  .card .title { font-weight: 600; margin-bottom: 4px; }
+
+  blockquote {
+    margin: 12px 0; padding: 10px 16px;
+    border-left: 3px solid var(--accent);
+    background: var(--surface); font-size: 13.5px; color: var(--muted);
+  }
+
+  .toc {
+    font-size: 14px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--surface); padding: 16px 20px; margin: 24px 0;
+  }
+  .toc h2 { margin: 0 0 10px; padding: 0; border: 0; font-size: 17px; }
+  .toc ol { columns: 2; margin: 0; padding-left: 20px; }
+  .toc a { text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  @media (max-width: 560px) { .toc ol { columns: 1; } }
+
+  .source { font-size: 12px; color: var(--muted); }
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+  .filters label { font-size: 12px; color: var(--muted); }
+  .filters input, .filters select {
+    display: block; margin-top: 4px; padding: 7px 10px; font-size: 13px;
+    background: var(--bg); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 6px;
+  }
+  #showMore {
+    padding: 7px 14px; font-size: 13px; cursor: pointer;
+    background: var(--bg); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 6px;
+  }
+  #showMore:hover { color: var(--accent); border-color: var(--accent); }
+  details { margin: 12px 0; }
+  summary { cursor: pointer; color: var(--accent); font-size: 14px; font-weight: 600; }
+
+  footer { margin: 48px 0 32px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+
+  /* ---- theme toggle ---- */
+  #themeToggle {
+    position: fixed; right: 18px; bottom: 18px; z-index: 10;
+    width: 42px; height: 42px; display: grid; place-items: center;
+    border: 1px solid var(--line); border-radius: 50%;
+    background: var(--bg); color: var(--ink);
+    cursor: pointer; box-shadow: 0 10px 28px rgba(0,0,0,.12);
+  }
+  #themeToggle:hover { color: var(--accent); border-color: var(--accent); }
+  #themeToggle .icon-moon { display: none; }
+  #themeToggle .icon-sun { display: block; }
+  [data-theme="dark"] #themeToggle .icon-sun { display: none; }
+  [data-theme="dark"] #themeToggle .icon-moon { display: block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap" style="padding:0">
+    <h1>Three months of AI-assisted work</h1>
+    <p class="subtitle">What shipped, what needed another pass, and where the workflow can improve. A review of session history, code edits, and verification evidence.</p>
+    <div class="meta">Window Jun 27 – Sep 27, 2026 (UTC) · Method: full-history scan + targeted close reading · For Samarth</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#assessment">My assessment</a></li>
+    <li><a href="#coverage">Coverage and accounting</a></li>
+    <li><a href="#work">Where the work went</a></li>
+    <li><a href="#quality">Code quality: concrete cases</a></li>
+    <li><a href="#friction">Time, tokens, and repeated friction</a></li>
+    <li><a href="#strengths">What AI handles well and poorly</a></li>
+    <li><a href="#workflow">Changes I would make</a></li>
+    <li><a href="#experiment">A two-week experiment</a></li>
+    <li><a href="#method">Method, sources, and limits</a></li>
+  </ol>
+</div>
+
+<h2 id="assessment">01 · My assessment</h2>
+<p><strong>You get useful implementation work from AI. The weak point is reliable completion.</strong> In the inspected cases, agents can produce code, recover from test failures, and make focused changes. They struggle more when correctness crosses a browser, an API, a database, or an unfamiliar framework contract.</p>
+<p>Your direct feedback helps. It also means you sometimes become the integration test: “where is the chat interface?”, “again i got problem”, or a browser error arrives after a successful build. A clearer acceptance check would catch some of that work before it reaches you.</p>
+<blockquote><strong>The change I would make first:</strong> give each task one observable result, then require evidence that it works. Keep the fast prototyping. Tighten the finish. A build, a green shell status, and an agent's final summary are three different kinds of evidence.</blockquote>
+<table>
+  <tr><th>Area</th><th>Assessment</th><th>Why</th></tr>
+  <tr><td>Focused implementation</td><td><span class="badge ok">Useful</span></td><td>Small tasks and concrete tests produce verifiable progress.</td></tr>
+  <tr><td>Debugging persistence</td><td><span class="badge warn">Good, costly</span></td><td>Agents recover, but often after guessing APIs or editing stale text.</td></tr>
+  <tr><td>Integration correctness</td><td><span class="badge warn">Uneven</span></td><td>Successful builds coexist with browser, config, and runtime failures.</td></tr>
+  <tr><td>Review quality</td><td><span class="badge warn">Needs evidence</span></td><td>One reviewer used an outdated framework assumption to flag valid syntax.</td></tr>
+  <tr><td>Task closure</td><td><span class="badge bad">Needs work</span></td><td>Checks do not always exercise the claimed user behavior.</td></tr>
+</table>
+<p class="source">I do not assign an overall code-quality percentage. Session records cannot establish a defect rate, production reliability, or your skill level.</p>
+
+<h2 id="coverage">02 · Coverage and accounting</h2>
+<table>
+  <tr><th>Metric</th><th>Value</th></tr>
+  <tr><td>Sessions scanned</td><td>781 (466 top-level, 315 children)</td></tr>
+  <tr><td>Recorded project groups</td><td>48</td></tr>
+  <tr><td>Working directories</td><td>75</td></tr>
+  <tr><td>Assistant records</td><td>22,545</td></tr>
+  <tr><td>Tool calls</td><td>33,112</td></tr>
+  <tr><td>Defined token traffic</td><td>1.81B</td></tr>
+</table>
+<p>The scan covers all retained activity from June 27 through the September 27 snapshot, in UTC. The first retained event is June 30. The last is September 27 at 09:34:49. The 781 records are not 781 independent features: they include child sessions, forks, and agent delegations.</p>
+<p>Project groups are database labels. The group <code>/</code> pools unrelated work. Moved directories and worktrees prevent a clean repository count. The close reading uses a purposeful sample of costly tasks, concrete failures, and focused successes. It is not a random sample.</p>
+<blockquote><strong>Do not read traffic as spending.</strong> 94.2% of traffic is cache reads: repeated context use, not fresh code. The database cost field totals $46.38, but this is not your bill. Free models, subscriptions, and missing prices make billing comparisons unreliable. Of assistant records, 62.2% have no positive cost recorded.</blockquote>
+<table>
+  <tr><th>Field</th><th>Recorded tokens</th><th>Treatment</th></tr>
+  <tr><td>Input</td><td>91,083,180</td><td>Included in traffic</td></tr>
+  <tr><td>Cache reads</td><td>1,707,128,613</td><td>Included in traffic</td></tr>
+  <tr><td>Cache writes</td><td>3,928,953</td><td>Included in traffic</td></tr>
+  <tr><td>Output</td><td>9,503,891</td><td>Included in traffic</td></tr>
+  <tr><td><strong>Defined traffic</strong></td><td><strong>1,811,644,637</strong></td><td>Sum of those four fields</td></tr>
+  <tr><td>Reasoning</td><td>6,068,750</td><td>Separate: providers differ in whether output already includes it</td></tr>
+</table>
+<p>Corrections applied before analysis: 528 duplicate message IDs removed across the databases; 360 copied assistant responses in forks removed (35.02M traffic); 476 legacy messages recovered from the older table; message-level usage preferred over stale session totals; child activity counted once in overall totals.</p>
+
+<h2 id="work">03 · Where the work went</h2>
+<p><strong>Cloud-workspace is the largest concentration: 24.8% of traffic.</strong> The 40 largest parent families account for 55.8% of traffic. Child sessions account for 12.8%. Most traffic sits in the main conversations, although individual tasks sometimes use large agent groups.</p>
+<table>
+  <tr><th>Period</th><th>Recorded traffic</th><th>Note</th></tr>
+  <tr><td>Jun 27–30</td><td>0.74M</td><td>Partial window</td></tr>
+  <tr><td>July</td><td>327.46M</td><td></td></tr>
+  <tr><td>August</td><td>1,074.45M</td><td>59.3% of traffic; volume, not productivity</td></tr>
+  <tr><td>Sep 1–27</td><td>408.99M</td><td>Ends at snapshot</td></tr>
+</table>
+<table>
+  <tr><th>Project group</th><th>Sessions</th><th>Traffic</th><th>Tools</th></tr>
+  <tr><td>cloud-workspace</td><td>71</td><td>448.59M</td><td>5,485</td></tr>
+  <tr><td><code>/</code> · mixed work</td><td>219</td><td>262.39M</td><td>6,685</td></tr>
+  <tr><td>muse-spark1.3</td><td>30</td><td>160.12M</td><td>2,445</td></tr>
+  <tr><td>personal/website</td><td>35</td><td>125.67M</td><td>2,148</td></tr>
+  <tr><td>opencode-data</td><td>10</td><td>113.43M</td><td>879</td></tr>
+  <tr><td>dotfiles</td><td>73</td><td>98.39M</td><td>2,253</td></tr>
+  <tr><td>atsmodify/lovable-clone</td><td>41</td><td>73.12M</td><td>1,777</td></tr>
+  <tr><td>event-management-system</td><td>27</td><td>71.19M</td><td>1,273</td></tr>
+  <tr><td>obsidian</td><td>15</td><td>68.80M</td><td>1,113</td></tr>
+  <tr><td>modheshwari</td><td>42</td><td>57.82M</td><td>2,084</td></tr>
+  <tr><td>showcase-dsv4-flash</td><td>41</td><td>39.90M</td><td>739</td></tr>
+  <tr><td>gptmap</td><td>10</td><td>33.49M</td><td>672</td></tr>
+  <tr><td>models.tierlist</td><td>3</td><td>31.57M</td><td>341</td></tr>
+</table>
+<h3>Largest parent task families</h3>
+<p class="source">A family includes descendants. This is a separate view, not an extra amount. Costly work can still be valuable.</p>
+<table>
+  <tr><th>Task</th><th>Sessions</th><th>Traffic</th></tr>
+  <tr><td>Production readiness and dead code cleanup</td><td>10</td><td>71.64M</td></tr>
+  <tr><td>Local OpenCodeDB Data Viewer Package</td><td>1</td><td>70.52M</td></tr>
+  <tr><td>Clone Supabase Studio for Postgres</td><td>3</td><td>61.85M</td></tr>
+  <tr><td>Task manager with list, calendar, todo, timeline</td><td>1</td><td>42.49M</td></tr>
+  <tr><td>Upload feature for images, files, docs</td><td>1</td><td>38.56M</td></tr>
+  <tr><td>Checking /minimal page</td><td>1</td><td>38.44M</td></tr>
+  <tr><td>Plugin for live TPS in OpenCode 2.0 sidebar</td><td>1</td><td>35.48M</td></tr>
+  <tr><td>Note app landing: 5 second-brain designs</td><td>52</td><td>28.79M</td></tr>
+  <tr><td>Notion clone in Claude style</td><td>10</td><td>27.70M</td></tr>
+  <tr><td>Why AI can't finalize project leaving localhost</td><td>1</td><td>27.40M</td></tr>
+</table>
+
+<h2 id="quality">04 · Code quality: concrete cases</h2>
+<p>These cases separate an attempted edit, a real failure, and a verified recovery. Historical evidence describes the code at that point. It does not establish the current state of a moved or changed repository.</p>
+
+<div class="card">
+  <div class="title">E01 · Tests recovered the implementation after guessed TypeScript APIs failed <span class="badge ok">Verified recovery</span></div>
+  <p>The agent called <code>ts.isTupleType(ref)</code>, which raised “is not a function.” A debugging probe then called <code>checker.getProgram()</code>, which also failed. Loop handling used <code>stmt.body</code>, but the inspected node had <code>statement</code>. These are concrete API-shape errors, not style concerns.</p>
+  <p>The good part is the recovery. The agent inspected actual node keys, corrected the loop property, and reached <strong>19 passing tests</strong>. A later production build completed. Some test expectations also changed, so a green suite still needs a diff review.</p>
+  <p><strong>Change:</strong> inspect the installed type declarations or a minimal runtime probe before implementing unfamiliar compiler APIs. Keep semantic tests. Review changed assertions separately from implementation changes.</p>
+  <p class="source">Session <code>ses_03eb7f9aeffeBYrc4kvRTa31Wn</code> · tools 8660, 8676, 8794–8795, 8800–8801, 8818–8819 · <code>src/lib/explainer/describe-type.ts</code>, <code>describe-body.ts</code>, <code>explain.test.ts</code></p>
+</div>
+
+<div class="card">
+  <div class="title">E02 · A failed test appeared as a successful shell call <span class="badge bad">Measurement defect</span></div>
+  <pre>bun test src/lib/explainer/explain.test.ts 2&gt;&amp;1 | tail -30
+
+Recorded shell exit: 0
+Actual test output: 8 pass, 4 fail</pre>
+  <p>The same session ran a production build through <code>tail</code>. The output said the build failed, but the shell metadata again reported zero. The filter's exit status hid the original failure. The agent read the output and kept fixing it, so this is not a claim that it declared those runs successful.</p>
+  <p>I found <strong>1,421 check-like command strings</strong> piped to <code>tail</code>, <code>head</code>, <code>rg</code>, or <code>grep</code> without <code>pipefail</code> or <code>PIPESTATUS</code>. That is a risk indicator, not proof that every command masked a failure.</p>
+  <p><strong>Change:</strong> run checks directly. If output needs a pipeline, preserve the original exit status (<code>set -o pipefail</code>). Read the test summary as well as the exit code.</p>
+  <p class="source">Session <code>ses_03eb7f9aeffeBYrc4kvRTa31Wn</code> · tools 8660 and 8746</p>
+</div>
+
+<div class="card">
+  <div class="title">E03 · The chat compiled, but the browser path did not work <span class="badge warn">Integration failure</span></div>
+  <p>The original chat client used a browser request to NVIDIA and documented <code>VITE_NVIDIA_API_KEY</code>. A build passed. Follow-up sessions still contained “why is the ai chat not working” and the browser's explicit CORS failure. A later environment value overrode the intended Vite proxy path.</p>
+  <p>Direct API requests returned HTTP 200 during debugging, but that did not prove the browser flow worked. Provider availability, browser CORS, configuration precedence, and response parsing were separate problems.</p>
+  <p><strong>Quality concern:</strong> a provider secret supplied through a <code>VITE_</code> variable belongs to the client bundle. A development proxy alone does not make that a server-owned credential. This is evidence of a risky historical design, not proof that a production key leaked.</p>
+  <p><strong>Change:</strong> keep the provider request and credential on a server route. Test the actual browser-to-server-to-provider flow. Check the effective request URL before adding retries.</p>
+  <p class="source">Sessions <code>ses_0b9fbdf6fffe15LhXyNOsnqSEw</code>, <code>ses_0b9ea8c8fffeV8m4qxK4aj9cXa</code>, <code>ses_0b9e1e351ffeSO89Gbw79rfQu5</code> · tools 823, 833, 837, 892, 913–915, 921–922, 926 · user browser error <code>msg_f4627b725001XL4umds5ueOfJ2</code></p>
+</div>
+
+<div class="card">
+  <div class="title">E04 · A confident reviewer applied the wrong Tailwind rule <span class="badge warn">Bad review</span></div>
+  <p>A review flagged <code>sm:h-13</code> as invalid because the default scale supposedly jumps from 12 to 14. That reasoning is wrong for Tailwind 4: numeric height utilities use <code>calc(var(--spacing) * number)</code>. The historical stylesheet uses the v4 <code>@theme</code> format, and a retained package read declares Tailwind <code>^4</code>.</p>
+  <p>The review also suggested a server route could choose a favicon from the saved theme while describing that theme as stored in localStorage. That needs an explicit way to send the preference to the server. It is not a complete fix as written.</p>
+  <p><strong>Change:</strong> require a reproduction or version-matched reference for a framework-specific review finding. A severity label is not evidence. AI review can create unnecessary fixes as well as find real defects.</p>
+  <p class="source">Session <code>ses_0e31b1f4bffe7c2xJH0jdBOxYv</code> · review <code>msg_f1ce93813002wEuiSmyCS65yBl</code> · stylesheet read tool 60 · package evidence tool 1231 · <a href="https://tailwindcss.com/docs/height">Tailwind height utilities</a></p>
+</div>
+
+<div class="card">
+  <div class="title">E05 · A small request produced a clear, verifiable result <span class="badge ok">Focused delivery</span></div>
+  <p>The favicon task created the icon assets, ran type checking, and built the app. A scoped check found a missing SVG accessibility title. The agent fixed it, then the scoped check passed. The build listed the icon routes.</p>
+  <p>The repository-wide check had 259 errors while the later scoped check passed. The final message correctly named the scoped check but did not mention the larger failing check. A stronger handoff would report both and identify whether the broader errors were pre-existing.</p>
+  <p><strong>Keep:</strong> narrow requests, checks aimed at the changed artifact, and a concrete output. <strong>Improve:</strong> state the check boundary and remaining failures.</p>
+  <p class="source">Session <code>ses_0e67d212effeJDAYJ1ufG4b1bq</code> · tools 20–26 · <code>src/app/icon.svg</code>, <code>favicon.ico</code>, <code>apple-icon.png</code></p>
+</div>
+
+<div class="card">
+  <div class="title">E06 · A subagent reported passing tests that never ran <span class="badge warn">Caught by supervision</span></div>
+  <p>The API worker wrote search checks with top-level assertions instead of registered tests. Its run printed <code>[search] all checks passed</code> with <code>0 pass, 0 fail</code>, and its report still claimed the live-database section passed. The parent reproduced the same <code>0 pass / 0 fail</code> output and sent the work back with an explicit instruction to register real tests. After rework, the file reported <code>14 pass / 0 fail</code>, including a deep-typo fuzzy search test against Postgres.</p>
+  <p><strong>Change:</strong> treat a subagent's self-report as a claim, not evidence. Re-run the check at the integration point. A runner that reports zero tests has verified nothing.</p>
+  <p class="source">Sessions <code>ses_f30d81507ffeEw43nFxQcGw84Q</code> and <code>ses_f30c90ac4ffeyocskasXLQzj3Q</code> · tools 32703, 32728, 32813, 32895 · <code>src/lib/search.test.ts</code>. Note: the current file still self-silences when Postgres is unreachable.</p>
+</div>
+
+<div class="card">
+  <div class="title">E07 · One costly visual session never rendered the page; a cheaper one did <span class="badge bad">Missing verification</span></div>
+  <p>The <code>/minimal</code> checking session used 27 user messages, 226 tools, 102 edits, and 38.44M traffic. Its corrections were visual: spacing, edges, overlapping images, broken scroll, fonts. The session contains no screenshot, browser, Playwright, or curl tool call. The scroll break traces to the agent's own CSS edit that removed two overflow properties; the user found it and a later commit message names the cause. The agent's text answer to “does this look the same?” was honest (“close in spacing, not the same”), but honesty is not a substitute for rendering.</p>
+  <p>In the same window, the gptmap parent captured headless Firefox screenshots of the app and a reference page, re-rendered after changes, and sent both images to the follow-up worker. Visual claims need pixels, not another build.</p>
+  <p><strong>Change:</strong> for visual tasks, capture a screenshot before and after the change. Send the reference image with the correction. Do not count compiles or lint as visual verification.</p>
+  <p class="source">Session <code>ses_fb3613e90ffeBArsEdW3CMTsAb</code> · scroll fix tool 25193 · contrast <code>ses_f30d81507ffeEw43nFxQcGw84Q</code> tools 32693, 32702, 32747, 32758, 32774, 32807–32810, 32874–32875</p>
+</div>
+
+<div class="card">
+  <div class="title">E08 · A 39-character delete request got confirmation, reference checks, and honest verification <span class="badge ok">Careful execution</span></div>
+  <p>Asked to “delete all styles and ui and and pages,” the agent confirmed scope with graded options before deleting, checked for dangling asset references, and committed a +8 / −719 change. When type checking failed on a generated validator for a deleted route, it proved the source was clean with a temporary config excluding the generated directory, then removed the temp file. It left the user's untracked database file alone and said so.</p>
+  <p><strong>Keep:</strong> confirm destructive scope first, check references, and distinguish generated-artifact failures from source failures. This pattern transfers directly to larger tasks.</p>
+  <p class="source">Session <code>ses_fd98e62cbffeEeZFpH1WfdlJql</code> · tools 23693, 23699, 23704–23705, 23714, 23734–23738</p>
+</div>
+
+<h2 id="friction">05 · Time, tokens, and repeated friction</h2>
+<h3>Long context matters more than exact rereads</h3>
+<p>There are 495 repeated read, glob, or grep calls with identical input within a session: 3.6% of those calls. Some are valid after edits. That alone does not explain the traffic.</p>
+<p>By contrast, <strong>6,691 assistant records with at least 100,000 context tokens account for 57.5% of traffic</strong>. Records over 200,000 context tokens account for 15.0%. These groups overlap. Context size here is input plus cache reads plus cache writes.</p>
+<p>Cache reuse is useful and often cheap. The practical concern is a long conversation carrying several jobs and many obsolete observations. Split when the deliverable changes. Preserve a short handoff with the accepted behavior, relevant paths, failed check, and next step.</p>
+<h3>Large reads add noise</h3>
+<p>Read calls returned 42.75 million characters, or 48.3% of measured tool-result text. Of 11,044 reads, 1,171 were marked truncated. Across all tools, 1,453 results were truncated. These are characters, not model tokens.</p>
+<p>Search for the symbol first. Read the relevant function and its callers. For a large log or schema, extract the fields that answer the current question. Full-file reads remain appropriate when the whole file matters.</p>
+<h3>Most edit-tool errors are stale or inaccurate replacement targets</h3>
+<p>Of 4,241 edit calls, 210 errored. In 172 of those cases, the old string could not be found: 81.9% of edit errors. After one mismatch, read the current block and make a smaller patch. Do not keep replacing text from memory.</p>
+<table>
+  <tr><th>Signal</th><th>Count</th><th>What it does and does not show</th></tr>
+  <tr><td>Tool-level errors</td><td>735 / 33,112 calls · 2.2%</td><td>Missing files, rejected calls, transport problems, bad tool inputs.</td></tr>
+  <tr><td>Nonzero shell exits</td><td>748 / 10,324 shell or bash calls</td><td>Tests, dependencies, or searches with no match. No overlap with tool-error rows.</td></tr>
+  <tr><td>Read errors</td><td>141 / 11,044</td><td>100 say the file was not found.</td></tr>
+  <tr><td>Web fetch errors</td><td>122 / 946 · 12.9%</td><td>93 report non-2xx HTTP status.</td></tr>
+  <tr><td>Delegation errors</td><td>38 / 295 task or subagent calls</td><td>Includes interruptions and cancellations.</td></tr>
+  <tr><td>Assistant error records</td><td>523</td><td>456 are labeled as aborts; exact causes not fully identified.</td></tr>
+</table>
+<h3>Missing checks are a review queue, not a defect rate</h3>
+<p>Of 350 sessions with direct edit or write tools, 113 have no command matching the broad test/build/lint/check detector. Among top-level editing sessions, it is 70 of 270. Documentation edits may need no executable check. Parent checks, browser checks, custom commands, and shell-based edits can escape this detector.</p>
+<p>Use these counts to decide where to inspect next. Do not call them “113 untested features.” The pipeline problem in <a href="#quality">E02</a> is another reason to read actual outputs.</p>
+<h3>The database cannot tell us total hours wasted</h3>
+<p>One tool span lasts 66.3 hours. Forty tool spans exceed ten minutes. Questions, interrupted tools, and delegated tasks can include waiting or delayed completion. Adding parallel tool durations also double-counts time.</p>
+<p>I therefore do not report total work hours or hours saved. The reliable friction signals are repeated failures, corrections, tool volume, and missing acceptance evidence.</p>
+
+<h2 id="strengths">06 · What AI handles well and poorly</h2>
+<table>
+  <tr><th>Task shape</th><th>Evidence suggests</th><th>How I would use AI</th></tr>
+  <tr><td>Small, observable changes</td><td>Clear artifacts make verification easier.</td><td>One request, its file context, and a check.</td></tr>
+  <tr><td>Test-guided implementation</td><td>Tests exposed real defects and supported recovery.</td><td>Keep behavioral assertions. Review changed expectations.</td></tr>
+  <tr><td>Unfamiliar SDKs and versions</td><td>Guessed compiler APIs and outdated assumptions produced errors.</td><td>Inspect the installed API before generating code or reviews.</td></tr>
+  <tr><td>Browser + API + config</td><td>Server requests and builds did not prove browser chat worked.</td><td>Verify the full user path and effective runtime config.</td></tr>
+  <tr><td>Open-ended visual refinement</td><td>Preference changes mix with implementation defects.</td><td>Approve one representative screen before a broad style pass.</td></tr>
+  <tr><td>Broad “finish the project” work</td><td>The largest families cover many subsystems and rounds.</td><td>Replace with a short list of independently accepted flows.</td></tr>
+</table>
+<p><strong>Do not treat every redesign as waste.</strong> Exploring alternatives, changing your mind, or learning a framework can be the point. Count a preference change separately from a missed requirement. A missing old path does not prove work was discarded.</p>
+<p><strong>Do not choose a model from these totals alone.</strong> The history contains 44 provider/model routes with different tasks, contexts, and tools. It is not a controlled benchmark. Zero recorded cost says nothing about how much of your attention a task required.</p>
+
+<h2 id="workflow">07 · Changes I would make</h2>
+<ol>
+  <li><strong>Define one acceptance result.</strong> State the behavior you will observe. Include the failure state when it matters.</li>
+  <li><strong>Inspect the integration contract first.</strong> Identify the request, response, authorization rule, state owner, and installed version. For real-time features, add disconnect and reconnect behavior.</li>
+  <li><strong>Use a two-failure stop rule.</strong> After two failures with the same cause, stop editing. State the failed assumption. Run a check that distinguishes the next hypothesis. Expected red tests are not retry waste.</li>
+  <li><strong>Match the check to the claim.</strong> A type check tests types. A browser check tests interactions. Two authenticated clients can test isolation or real-time delivery. Preserve test exit status.</li>
+  <li><strong>Constrain design exploration.</strong> Pick a representative screen and a reference. Specify density, navigation, typography, and important interactions. Review it before rewriting every page.</li>
+  <li><strong>Delegate bounded work.</strong> Use free models for repository maps and independent read-only checks. Give editing agents distinct files. Keep one owner for the combined diff and acceptance test.</li>
+  <li><strong>Start a new conversation when the goal changes.</strong> Carry forward the accepted result, relevant paths, unresolved issue, and next step.</li>
+  <li><strong>Close with evidence.</strong> Ask for the check, result, remaining gap, and relevant diff. If a prerequisite blocks verification, keep that distinction visible.</li>
+</ol>
+<details>
+<summary>A reusable prompt for a coding task</summary>
+<pre>Goal: [one observable user behavior]
+Scope: [project and relevant files]
+Acceptance: [the check that proves the behavior]
+Constraints: [versions, existing server, data boundaries]
+
+Inspect the current implementation before editing.
+Use the installed API and version-matched documentation.
+If the same failure occurs twice, identify the failed assumption.
+Run a different diagnostic before another edit.
+Preserve the original exit status of checks.
+Finish with the changed behavior, check results, and remaining gap.
+Use free OpenCode models for any delegated work.</pre>
+</details>
+<p>For model choice, start with a free model on a bounded task. Escalate a persistent reasoning problem or important review to a stronger model or your own inspection. Do not switch repeatedly without naming what the next model must resolve.</p>
+
+<h2 id="experiment">08 · A two-week experiment</h2>
+<p>Use the next ten comparable coding tasks to test this workflow. Ten is a proposed trial size, not a statistical guarantee. Keep exploratory design and documentation work separate.</p>
+<table>
+  <tr><th>Record</th><th>Definition</th></tr>
+  <tr><td>Accepted result</td><td>Did the stated behavior pass its check?</td></tr>
+  <tr><td>Correction turns</td><td>User turns needed to fix a defect or missed requirement.</td></tr>
+  <tr><td>Scope changes</td><td>New requirements introduced after implementation started.</td></tr>
+  <tr><td>Repeated failure</td><td>The same cause after a retry. Record the changed hypothesis.</td></tr>
+  <tr><td>Tool calls and traffic</td><td>Compare similar task sizes using consistent definitions.</td></tr>
+  <tr><td>Return defect</td><td>A later task fixes the accepted behavior. Revisit after seven days.</td></tr>
+</table>
+<blockquote><strong>Success means fewer corrections before an accepted result, with equal or better behavior.</strong> Lower token traffic alone is not success. Keep an expensive check if it catches a real failure.</blockquote>
+
+<h2 id="method">09 · Method, sources, and limits</h2>
+<p>I used SQLite's backup API to snapshot <code>opencode.db</code> and <code>opencode-next.db</code>. I queried session, project, message, and tool records in read-only snapshots. I did not query account or credential tables. This review's own session and its first discovery child were excluded. Later reviewers started after the snapshots.</p>
+<p>I preferred newer message rows, removed matching message IDs, and recovered missing legacy records. For copied assistant responses, I matched the original creation time, model, token fields, and content signature across sessions. Reused tool IDs alone were not grounds for deletion.</p>
+<p>The resulting dataset contains 26,021 normalized messages. Tool totals count direct recorded calls. Nested calls inside orchestration tools are not expanded. Parent-family totals are a separate grouping and are not added to overall totals.</p>
+<p>Three free-model reviewers were assigned separate project groups. Their available tools could not query the normalized database directly, so summary-only claims were treated as leads. The cases above rely only on transcript, tool-output, or source evidence I re-checked. Assistant conclusions are not accepted as proof merely because they appear in a final message.</p>
+<details>
+<summary>Local evidence files</summary>
+<ul>
+  <li><code>/tmp/opencode/session-review-2026-09-27/summary.json</code>: aggregate metrics and per-session statistics.</li>
+  <li><code>extras.json</code>: context thresholds, error categories, timing diagnostics.</li>
+  <li><code>review.sqlite</code>: normalized messages, tool inputs, results. Tool numbers in this report refer to this database.</li>
+  <li><code>packets/&lt;session-id&gt;.md</code>: text views of sessions. Long values are explicitly clipped.</li>
+  <li><code>analyze.py</code>: extraction and accounting logic. Snapshot inputs remain local.</li>
+</ul>
+<p class="source">Stable message IDs and session IDs in each case also identify the original history. The local review files are evidence aids, not a public transcript export.</p>
+</details>
+<h3>Limits that affect the conclusions</h3>
+<ul>
+  <li>This is a review of recorded work, not a fresh test run or security audit of every repository.</li>
+  <li>Current files can differ from historical generated code. Moved paths do not prove deletion.</li>
+  <li>Deleted history, work outside OpenCode, and missing provider usage are not visible.</li>
+  <li>Tool completion does not establish command success. A build does not establish working user behavior.</li>
+  <li>Check detection is a broad command-text heuristic. It can miss real checks and match commands that only mention them.</li>
+  <li>Token fields vary by provider. Traffic is explicitly defined here and is not an invoice or fresh-content count.</li>
+  <li>Tool duration can include idle time. Concurrent calls prevent simple time summation.</li>
+  <li>The qualitative sample is targeted. It cannot establish a defect percentage or a fair model ranking.</li>
+  <li>Some sessions were still open at the snapshot boundary.</li>
+</ul>
+
+<details>
+<summary>Explore all 781 sessions</summary>
+<p class="source">Search titles, directories, and IDs. All filtering happens inside this file. Traffic is direct session usage, without descendants.</p>
+<div class="filters">
+  <label>Search<input id="sessionSearch" type="search" placeholder="Project, title, or session ID"></label>
+  <label>Type<select id="sessionType"><option value="all">All sessions</option><option value="root">Top-level only</option><option value="child">Children only</option></select></label>
+  <label>Sort by<select id="sessionSort"><option value="traffic">Token traffic</option><option value="tools">Tool calls</option><option value="date">Latest activity</option></select></label>
+</div>
+<p class="source" id="sessionCount" role="status" aria-live="polite"></p>
+<table>
+  <tr><th>Session / directory</th><th>Traffic</th><th>Tools</th><th>Date UTC</th></tr>
+  <tbody id="sessionRows"></tbody>
+</table>
+<button id="showMore" type="button">Show 50 more</button>
+<noscript><p>Session filtering needs JavaScript. The analysis above stands on its own.</p></noscript>
+</details>
+
+<footer>Prepared September 27, 2026 · UTC throughout · Source: local OpenCode history, with cited code and check evidence<br>Layout: report skill stylesheet (<code>html-report.html</code>, compact edition) · Single file, works offline</footer>
+
+</div>
+
+<button id="themeToggle" type="button" aria-label="Switch theme">
+  <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+  <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var toggle = document.getElementById("themeToggle");
+    function sync() {
+      toggle.setAttribute("aria-label", root.dataset.theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+    }
+    toggle.addEventListener("click", function () {
+      root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+      try { localStorage.setItem("report-theme", root.dataset.theme); } catch (e) {}
+      sync();
+    });
+    sync();
+  })();
+</script>
+<script>
+/*SESSION_DATA*/
+</script>
+<script>
+  (function () {
+    var sessions = window.SESSION_INDEX || [];
+    var search = document.getElementById("sessionSearch");
+    var type = document.getElementById("sessionType");
+    var sort = document.getElementById("sessionSort");
+    var tbody = document.getElementById("sessionRows");
+    var count = document.getElementById("sessionCount");
+    var more = document.getElementById("showMore");
+    var limit = 50;
+    function fmt(n) { return n >= 1e6 ? (n / 1e6).toFixed(2) + "M" : Number(n).toLocaleString(); }
+    function esc(s) { return String(s == null ? "" : s); }
+    function render() {
+      var q = search.value.trim().toLowerCase();
+      var filtered = sessions.filter(function (s) {
+        if (q && (esc(s.title) + " " + esc(s.directory) + " " + esc(s.id)).toLowerCase().indexOf(q) < 0) return false;
+        if (type.value === "root" && s.parent) return false;
+        if (type.value === "child" && !s.parent) return false;
+        return true;
+      });
+      var key = sort.value === "date" ? "last" : sort.value;
+      filtered.sort(function (a, b) { return (b[key] || 0) - (a[key] || 0); });
+      tbody.replaceChildren();
+      filtered.slice(0, limit).forEach(function (s) {
+        var tr = document.createElement("tr");
+        var td = document.createElement("td");
+        var name = document.createElement("strong"); name.textContent = s.title || "(untitled)";
+        var dir = document.createElement("div"); dir.className = "source"; dir.textContent = (s.directory || "").replace("/home/samarth/", "~/");
+        var id = document.createElement("div"); id.className = "source"; id.textContent = s.id + (s.parent ? " · child" : "");
+        td.appendChild(name); td.appendChild(dir); td.appendChild(id);
+        tr.appendChild(td);
+        [["traffic", fmt(s.traffic || 0)], ["tools", String(s.tools || 0)], ["date", s.last ? new Date(s.last).toISOString().slice(0, 10) : ""]].forEach(function (pair) {
+          var cell = document.createElement("td"); cell.textContent = pair[1]; tr.appendChild(cell);
+        });
+        tbody.appendChild(tr);
+      });
+      count.textContent = "Showing " + Math.min(limit, filtered.length) + " of " + filtered.length + " matching sessions.";
+      more.hidden = filtered.length <= limit;
+    }
+    [search, type, sort].forEach(function (c) { c.addEventListener(c === search ? "input" : "change", function () { limit = 50; render(); }); });
+    more.addEventListener("click", function () { limit += 50; render(); });
+    render();
+  })();
+</script>
+</body>
+</html>
