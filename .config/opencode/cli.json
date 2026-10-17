@@ -23,13 +23,20 @@
     ],
     "diffs": {
         "wrap": "word",
-        "view": "unified"
+        "view": "unified",
+        "tree": true,
+        "single": true
     },
     "session": {
         "sidebar": "auto",
-        "scrollbar": true,
-        "thinking": "show",
-        "grouping": "none"
+        "scrollbar": false,
+        "thinking": "hide",
+        "grouping": "auto",
+        "markdown": "rendered",
+        "verbosity": "high",
+        "image_preview": true,
+        "tps": true,
+        "permissions": "prompt"
     },
     "animations": true,
     "debug": {
@@ -41,9 +48,15 @@
         "sound": true
     },
     "terminal": {
-        "title": true
+        "title": true,
+        "copy": "select"
     },
     "tabs": {
-        "layout": "horizontal"
+        "layout": "horizontal",
+        "mode": "on",
+        "indicators": "status"
+    },
+    "prompt": {
+      "image_preview": false
     }
 }
