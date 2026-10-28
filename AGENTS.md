@@ -19,12 +19,8 @@ cross-contaminating.
   `etc.config.fish`, `paths.fish`, `conf.d/`, and `scripts/`.
 - `.config/opencode/` — opencode config, agents, commands, and MCP servers. It
   has its own `AGENTS.md`.
-- `.config/git/`, `.config/starship.toml`, `.tmux.conf`, `.tmux.conf.local`,
-  `.wezterm.lua`, `.config/ghostty/`, `.config/alacritty/`, `.config/atuin/`,
-  `.config/yazi/`, `.config/lazygit/`, `.config/lazydocker/` — secondary tool
-  configs.
-- `.github/`, `docs/`, `env-configs/`, `.zsh/` — workflows, notes, and shared
-  editor tooling.
+- Every other config and root dotfile — secondary tool configs. Read them in
+  place instead of listing them here.
 
 Neovim is not checked in as a git submodule. `.gitmodules` is empty. Confirm
 with the user before assuming the submodule exists.
@@ -32,14 +28,12 @@ with the user before assuming the submodule exists.
 ## Gotchas
 
 - `config.fish` contains machine-specific paths: `/home/samarth`,
-  `/home/linuxbrew/.linuxbrew`, `/opt/nvim`, `~/.deno/env`, `$HOME/.turso/env`,
-  `~/.opencode/bin`, `~/.lmstudio/bin`.
-- `config.fish` runs `gsettings set org.gnome.desktop.input-sources xkb-options
-  "['ctrl:nocaps']"` on startup. This is GNOME-specific and is a no-op on other
-  desktops.
-- Fish PATH setup is split across `config.fish`, `etc.config.fish`,
-  `paths.fish`, and `conf.d/*.fish`. Check all of them before you change PATH
-  behavior.
+  `/home/linuxbrew/.linuxbrew`, `/opt/nvim`, `~/.deno/bin`, `~/.opencode/bin`,
+  `~/.lmstudio/bin`. Turso is added in `conf.d/turso.fish`, not here.
+- Fish PATH setup lives in `config.fish` and `conf.d/*.fish`, and
+  `fish_variables` stores `fish_user_paths`. `paths.fish` is commented out in
+  `config.fish`, and nothing sources `etc.config.fish`. Check these before you
+  change PATH behavior.
 - `conf.d/secrets.fish` exists but is gitignored. Never read its contents into
   a prompt or commit it.
 - This repo expects a Nerd Font, especially JetBrains Mono Nerd Font, for
