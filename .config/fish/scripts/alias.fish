@@ -27,7 +27,7 @@ alias obs="cd ~/obsidian/ && nvim "
 # dnf
 alias sdi='sudo dnf install'
 alias sdr='sudo dnf remove'
-alias upd='sudo dnf update'
+alias upd='sudo dnf update -y '
 alias ref='sudo dnf upgrade --refresh'
 alias upg='sudo dnf upgrade '
 
