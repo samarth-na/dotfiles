@@ -4,7 +4,7 @@ description: Review the last commit for security vulnerabilities using the curre
 
 Review the following git diff of the last commit for security vulnerabilities.
 
-!`git diff HEAD~1..HEAD`
+!`git show --format= HEAD`
 
 Focus ONLY on genuine CRITICAL or HIGH severity issues:
 - Hardcoded secrets (API keys, passwords, tokens, private keys)

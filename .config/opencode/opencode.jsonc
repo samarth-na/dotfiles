@@ -1,13 +1,13 @@
 {
     "$schema": "https://opencode.ai/config.json",
     "plugins": ["/home/samarth/Desktop/opencode-context-bar", "-context-bar"],
-    "model": "opencode/deepseek-v4-flash-free",
     "compaction": {
         "auto": true,
         "buffer": 10000,
         "keep": { "tokens": 15000 }
     },
-    // Shell tools run fish. Agents must write fish syntax (see AGENTS.md).
+    // Shell tools run fish. Agents use Bash for commands and wrap it with
+    // `bash -c '...'` under fish (see AGENTS.md).
     "shell": "/usr/bin/fish",
     // Last match wins. Inherited base policy allows everything first; these
     // global rules are appended after it, then agent rules after these.
@@ -22,13 +22,17 @@
         { "action": "shell", "resource": "git add -A", "effect": "deny" },
         { "action": "shell", "resource": "git add -A *", "effect": "deny" },
         { "action": "shell", "resource": "git add --all *", "effect": "deny" },
+        { "action": "shell", "resource": "git add --all", "effect": "deny" },
+        { "action": "shell", "resource": "git add -u", "effect": "deny" },
+        { "action": "shell", "resource": "git add -u *", "effect": "deny" },
         // Destructive shell shapes. Must hold under --auto.
         { "action": "shell", "resource": "rm -rf *", "effect": "deny" },
         { "action": "shell", "resource": "sudo *", "effect": "deny" },
         { "action": "shell", "resource": "git push --force *", "effect": "deny" },
         { "action": "shell", "resource": "git push * --force *", "effect": "deny" },
         // Credential-bearing files. Never read into context or commit.
-        // AGENTS.md forbids `.env`; deny it so `--auto` cannot approve it.
+        // AGENTS.md forbids reading secrets. Deny known paths so `--auto`
+        // cannot approve them.
         { "action": "read", "resource": "*.env", "effect": "deny" },
         { "action": "read", "resource": "*.env.*", "effect": "deny" },
         { "action": "read", "resource": "*opencode/service*.json", "effect": "deny" },
