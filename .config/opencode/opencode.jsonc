@@ -1,10 +1,11 @@
 {
     "$schema": "https://opencode.ai/config.json",
-    "plugins": ["/home/samarth/Desktop/opencode-context-bar", "-context-bar"],
     "compaction": {
         "auto": true,
         "buffer": 10000,
-        "keep": { "tokens": 15000 }
+        "keep": {
+            "tokens": 15000
+        }
     },
     // Shell tools run fish. Agents use Bash for commands and wrap it with
     // `bash -c '...'` under fish (see AGENTS.md).
@@ -13,30 +14,153 @@
     // global rules are appended after it, then agent rules after these.
     "permissions": [
         // Frictionless read-only git inspection.
-        { "action": "shell", "resource": "git status *", "effect": "allow" },
-        { "action": "shell", "resource": "git diff *", "effect": "allow" },
-        { "action": "shell", "resource": "git log *", "effect": "allow" },
+        {
+            "action": "shell",
+            "resource": "git status *",
+            "effect": "allow"
+        },
+        {
+            "action": "shell",
+            "resource": "git diff *",
+            "effect": "allow"
+        },
+        {
+            "action": "shell",
+            "resource": "git log *",
+            "effect": "allow"
+        },
         // AGENTS.md forbids staging everything. Enforce it at the tool layer.
-        { "action": "shell", "resource": "git add .", "effect": "deny" },
-        { "action": "shell", "resource": "git add . *", "effect": "deny" },
-        { "action": "shell", "resource": "git add -A", "effect": "deny" },
-        { "action": "shell", "resource": "git add -A *", "effect": "deny" },
-        { "action": "shell", "resource": "git add --all *", "effect": "deny" },
-        { "action": "shell", "resource": "git add --all", "effect": "deny" },
-        { "action": "shell", "resource": "git add -u", "effect": "deny" },
-        { "action": "shell", "resource": "git add -u *", "effect": "deny" },
+        {
+            "action": "shell",
+            "resource": "git add .",
+            "effect": "deny"
+        },
+        {
+            "action": "shell",
+            "resource": "git add . *",
+            "effect": "deny"
+        },
+        {
+            "action": "shell",
+            "resource": "git add -A",
+            "effect": "deny"
+        },
+        {
+            "action": "shell",
+            "resource": "git add -A *",
+            "effect": "deny"
+        },
+        {
+            "action": "shell",
+            "resource": "git add --all *",
+            "effect": "deny"
+        },
+        {
+            "action": "shell",
+            "resource": "git add --all",
+            "effect": "deny"
+        },
+        {
+            "action": "shell",
+            "resource": "git add -u",
+            "effect": "deny"
+        },
+        {
+            "action": "shell",
+            "resource": "git add -u *",
+            "effect": "deny"
+        },
         // Destructive shell shapes. Must hold under --auto.
-        { "action": "shell", "resource": "rm -rf *", "effect": "deny" },
-        { "action": "shell", "resource": "sudo *", "effect": "deny" },
-        { "action": "shell", "resource": "git push --force *", "effect": "deny" },
-        { "action": "shell", "resource": "git push * --force *", "effect": "deny" },
+        {
+            "action": "shell",
+            "resource": "rm -rf *",
+            "effect": "deny"
+        },
+        {
+            "action": "shell",
+            "resource": "sudo *",
+            "effect": "deny"
+        },
+        {
+            "action": "shell",
+            "resource": "git push --force *",
+            "effect": "deny"
+        },
+        {
+            "action": "shell",
+            "resource": "git push * --force *",
+            "effect": "deny"
+        },
         // Credential-bearing files. Never read into context or commit.
         // AGENTS.md forbids reading secrets. Deny known paths so `--auto`
         // cannot approve them.
-        { "action": "read", "resource": "*.env", "effect": "deny" },
-        { "action": "read", "resource": "*.env.*", "effect": "deny" },
-        { "action": "read", "resource": "*opencode/service*.json", "effect": "deny" },
-        { "action": "read", "resource": "*conf.d/secrets.fish", "effect": "deny" }
+        {
+            "action": "read",
+            "resource": "*.env",
+            "effect": "deny"
+        },
+        {
+            "action": "read",
+            "resource": "*.env.*",
+            "effect": "deny"
+        },
+        {
+            "action": "read",
+            "resource": "*opencode/service*.json",
+            "effect": "deny"
+        },
+        {
+            "action": "read",
+            "resource": "*conf.d/secrets.fish",
+            "effect": "deny"
+        },
+        // Block every directory outside the active Location and worktree.
+        // The exceptions below are the only external paths agents may enter.
+        {
+            "action": "external_directory",
+            "resource": "*",
+            "effect": "deny"
+        },
+        {
+            "action": "external_directory",
+            "resource": "/tmp/opencode",
+            "effect": "allow"
+        },
+        {
+            "action": "external_directory",
+            "resource": "/tmp/opencode/*",
+            "effect": "allow"
+        },
+        {
+            "action": "external_directory",
+            "resource": "~/.opencode",
+            "effect": "allow"
+        },
+        {
+            "action": "external_directory",
+            "resource": "~/.opencode/*",
+            "effect": "allow"
+        },
+        {
+            "action": "external_directory",
+            "resource": "~/.agents",
+            "effect": "allow"
+        },
+        {
+            "action": "external_directory",
+            "resource": "~/.agents/*",
+            "effect": "allow"
+        },
+        {
+            "action": "external_directory",
+            "resource": "~/.config/opencode",
+            "effect": "allow"
+        },
+        {
+            "action": "external_directory",
+            "resource": "~/.config/opencode/*",
+            "effect": "allow"
+        }
     ],
     "mcp": {
         "servers": {
@@ -59,17 +183,17 @@
                 "disabled": true
             },
             "browse": {
-              "type": "local",
-              "command": [
-                "/home/samarth/.local/bin/browse",
-                "mcp"
-              ],
-              "cwd": "/home/samarth",
-              "pool": true,
-              "environment": {
-                "OPENCODE_BROWSER_RUNTIME": "auto-update"
-              },
-              "disabled": true
+                "type": "local",
+                "command": [
+                    "/home/samarth/.local/bin/browse",
+                    "mcp"
+                ],
+                "cwd": "/home/samarth",
+                "pool": true,
+                "environment": {
+                    "OPENCODE_BROWSER_RUNTIME": "auto-update"
+                },
+                "disabled": true
             }
         }
     }

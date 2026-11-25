@@ -1,6 +1,6 @@
 {
     "theme": {
-        "name": "one-dark",
+        "name": "system",
         "mode": "system"
     },
     "keybinds": {
@@ -58,5 +58,15 @@
     },
     "prompt": {
       "image_preview": false
+    },
+    "mini": {
+      "mono": false,
+      "splash": "show",
+      "footer": "show",
+      "turn_summary": "hide",
+      "shell_output": "show",
+      "thinking": "show",
+      "tools": "hide",
+      "work_spinner": "block-soft-slide"
     }
 }

@@ -82,11 +82,11 @@ style = "light"
 
 [window]
 decorations = "none"
-opacity = 0.97
+opacity = 0.95
 startup_mode = "Maximized"
 
 [scrolling]
-history = 10000
+history = 100
 
 [window.padding]
 x = 2
